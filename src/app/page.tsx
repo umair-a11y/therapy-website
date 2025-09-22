@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Heart, Shield, Users, Clock, CheckCircle, Calendar } from "lucide-react";
+import { Shield, Clock, CheckCircle, Calendar } from "lucide-react";
 
 export default function Home() {
   return (
@@ -8,7 +7,7 @@ export default function Home() {
       <nav className="border-b bg-white/95 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="font-dm-sans text-2xl font-bold therapeutic-text-gradient">
+            <div className="font-sans text-2xl font-bold therapeutic-text-gradient">
               MentalWell Therapy
             </div>
             <div className="hidden md:flex space-x-8">
@@ -32,7 +31,7 @@ export default function Home() {
               <div className="space-y-4">
                 <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
                   Professional{" "}
-                  <span className="therapeutic-text-gradient">Men's Therapy</span>{" "}
+                  <span className="therapeutic-text-gradient">Men&apos;s Therapy</span>{" "}
                   That Works
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
