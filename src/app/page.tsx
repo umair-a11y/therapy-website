@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
+import { TherapyButton } from "@/components/ui/therapy-button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
@@ -52,112 +53,143 @@ export default function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-therapeutic-primary/5 to-white py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            <p className="text-therapeutic-primary font-semibold text-lg mb-4">
+      <section className="relative bg-gradient-to-b from-slate-50 to-white py-20 lg:py-32">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center">
+            {/* Overline text */}
+            <p className="mb-6 text-sm font-medium tracking-wide text-slate-600 uppercase">
               RESOLVE MEN'S THERAPY
             </p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              Men's Mental Health Support
-              <span className="block text-therapeutic-primary mt-2">Across Ontario</span>
+
+            {/* Main headline - Much larger and more impactful */}
+            <h1 className="mb-8 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl text-balance">
+              Men's Mental Health Support{" "}
+              <span className="text-therapeutic-primary">Across Ontario</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
+
+            {/* Subheading with better spacing */}
+            <p className="mb-12 text-lg leading-relaxed text-slate-600 sm:text-xl lg:text-2xl max-w-3xl mx-auto">
               Supporting men through evidence-based therapy and professional guidance
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+            {/* CTA buttons with consistent styling */}
+            <div className="flex flex-col gap-4 sm:flex-row sm:justify-center sm:gap-6">
               <Link href="/book-consultation">
-                <Button size="lg" className="bg-therapeutic-primary hover:bg-therapeutic-primary/90 text-white px-8">
+                <TherapyButton
+                  variant="primary"
+                  size="lg"
+                  className="therapy-shadow-lg"
+                >
+                  <Calendar className="mr-2 h-5 w-5" />
                   Book Free Consultation
-                </Button>
+                </TherapyButton>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="border-2">
+                <TherapyButton
+                  variant="outline"
+                  size="lg"
+                >
                   Request Information
-                </Button>
+                </TherapyButton>
               </Link>
             </div>
           </div>
 
-          {/* Service Badges */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16">
-            <div className="flex items-center justify-center space-x-3 p-4 bg-white rounded-lg shadow-sm">
-              <Laptop className="h-8 w-8 text-therapeutic-primary" />
-              <div>
-                <p className="font-semibold text-gray-900">Services Available</p>
-                <p className="text-sm text-gray-600">Across Ontario</p>
-              </div>
+          {/* Feature cards with better spacing */}
+          <div className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-200 hover:therapy-shadow-lg">
+              <div className="mb-3 text-2xl">🏥</div>
+              <h3 className="mb-1 font-semibold text-slate-900">Services Available</h3>
+              <p className="text-sm text-slate-600">Across Ontario</p>
             </div>
-            <div className="flex items-center justify-center space-x-3 p-4 bg-white rounded-lg shadow-sm">
-              <Building className="h-8 w-8 text-therapeutic-primary" />
-              <div>
-                <p className="font-semibold text-gray-900">Online & In-Person</p>
-                <p className="text-sm text-gray-600">Flexible Options</p>
-              </div>
+            <div className="rounded-xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-200 hover:therapy-shadow-lg">
+              <div className="mb-3 text-2xl">👤</div>
+              <h3 className="mb-1 font-semibold text-slate-900">Online & In-Person</h3>
+              <p className="text-sm text-slate-600">Flexible Options</p>
             </div>
-            <div className="flex items-center justify-center space-x-3 p-4 bg-white rounded-lg shadow-sm">
-              <Shield className="h-8 w-8 text-therapeutic-primary" />
-              <div>
-                <p className="font-semibold text-gray-900">Insurance Coverage</p>
-                <p className="text-sm text-gray-600">Direct Billing Available</p>
-              </div>
+            <div className="rounded-xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-200 hover:therapy-shadow-lg">
+              <div className="mb-3 text-2xl">🛡️</div>
+              <h3 className="mb-1 font-semibold text-slate-900">Insurance Coverage</h3>
+              <p className="text-sm text-slate-600">Direct Billing Available</p>
             </div>
-            <div className="flex items-center justify-center space-x-3 p-4 bg-white rounded-lg shadow-sm">
-              <Users className="h-8 w-8 text-therapeutic-primary" />
-              <div>
-                <p className="font-semibold text-gray-900">Expert Team</p>
-                <p className="text-sm text-gray-600">CRPO Registered</p>
-              </div>
+            <div className="rounded-xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-200 hover:therapy-shadow-lg">
+              <div className="mb-3 text-2xl">👥</div>
+              <h3 className="mb-1 font-semibold text-slate-900">Expert Team</h3>
+              <p className="text-sm text-slate-600">CRPO Registered</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Emotional States Section - CRPO Compliant */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
-                If you find yourself feeling...
-              </h2>
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                {emotionalStates.map((state, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <CheckCircle className="h-5 w-5 text-therapeutic-accent" />
-                    <span className="text-gray-700">{state}</span>
-                  </div>
-                ))}
+      {/* Emotional States Section - Enhanced Design */}
+      <section className="bg-slate-50 py-20">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
+              {/* Left column - Feelings checklist */}
+              <div>
+                <h2 className="mb-8 text-3xl font-bold text-slate-900 lg:text-4xl">
+                  If you find yourself feeling...
+                </h2>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {emotionalStates.map((state, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <div className="h-2 w-2 rounded-full bg-amber-400"></div>
+                      <span className="text-slate-700">{state}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 rounded-lg bg-white p-6 therapy-shadow ring-1 ring-slate-200">
+                  <p className="text-slate-600 leading-relaxed">
+                    Men often wait until crisis to seek support.
+                    Professional support is available when you're ready.
+                  </p>
+                </div>
               </div>
-              <p className="text-lg text-gray-600 mb-4">
-                Men often wait until crisis to seek support.
-              </p>
-              <p className="text-lg font-semibold text-therapeutic-primary">
-                Professional support is available when you're ready.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                We provide evidence-based support to help men:
-              </h3>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-gray-700">Understand themselves and develop healthier coping strategies</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-gray-700">Build stronger relationships with partners, family, and friends</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-gray-700">Process and heal from past experiences and trauma</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-gray-700">Navigate life transitions and challenges with confidence</span>
-                </li>
-              </ul>
+
+              {/* Right column - Support info */}
+              <div>
+                <h3 className="mb-6 text-2xl font-bold text-slate-900">
+                  We provide evidence-based support to help men:
+                </h3>
+
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1 h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                      <div className="h-2 w-2 rounded-full bg-emerald-600"></div>
+                    </div>
+                    <p className="text-slate-700 leading-relaxed">Understand themselves and develop healthier coping strategies</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1 h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                      <div className="h-2 w-2 rounded-full bg-emerald-600"></div>
+                    </div>
+                    <p className="text-slate-700 leading-relaxed">Build stronger relationships with partners, family, and friends</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1 h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                      <div className="h-2 w-2 rounded-full bg-emerald-600"></div>
+                    </div>
+                    <p className="text-slate-700 leading-relaxed">Process and heal from past experiences and trauma</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1 h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                      <div className="h-2 w-2 rounded-full bg-emerald-600"></div>
+                    </div>
+                    <p className="text-slate-700 leading-relaxed">Navigate life transitions and challenges with confidence</p>
+                  </div>
+                </div>
+
+                <div className="mt-8">
+                  <Link href="/book-consultation">
+                    <TherapyButton variant="primary" size="lg">
+                      Start Your Journey Today
+                    </TherapyButton>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -165,23 +197,23 @@ export default function Home() {
 
       {/* About Section - CRPO Compliant */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center mb-16">
+            <h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">
               Professional Mental Health Support for Men
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
               We are CRPO registered psychotherapists providing evidence-based therapy services
               designed specifically for men's mental health needs across Ontario.
             </p>
           </div>
 
-          <div className="bg-therapeutic-primary/5 rounded-2xl p-8 lg:p-12">
-            <div className="max-w-3xl mx-auto">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+          <div className="bg-emerald-50 rounded-2xl p-8 lg:p-12 therapy-shadow ring-1 ring-emerald-100">
+            <div className="mx-auto max-w-3xl">
+              <h3 className="mb-8 text-2xl font-bold text-slate-900 lg:text-3xl">
                 Welcome — taking the first step requires courage
               </h3>
-              <div className="space-y-4 text-gray-700">
+              <div className="space-y-6 text-slate-700 leading-relaxed">
                 <p>
                   Resolve Men's Therapy was founded on the belief that men deserve specialized,
                   understanding mental health support. Many men struggle with seeking help due to
@@ -197,16 +229,16 @@ export default function Home() {
                   our evidence-based approach is tailored to help you develop practical strategies and
                   achieve meaningful change.
                 </p>
-                <p className="font-semibold text-therapeutic-primary">
+                <p className="font-semibold text-emerald-700 text-lg">
                   Reaching out is a sign of strength, not weakness.
                 </p>
               </div>
-              <div className="mt-8">
+              <div className="mt-10">
                 <Link href="/about">
-                  <Button className="bg-therapeutic-primary hover:bg-therapeutic-primary/90 text-white">
+                  <TherapyButton variant="primary" size="lg">
                     Learn More About Our Approach
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  </TherapyButton>
                 </Link>
               </div>
             </div>
@@ -215,137 +247,199 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us - CRPO Compliant */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center mb-16">
+            <h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">
               Why Choose Resolve Men's Therapy
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
               Our practice focuses on providing professional, evidence-based mental health support
               specifically designed for men's unique needs and experiences.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <Brain className="h-12 w-12 text-therapeutic-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-3">Specialized Focus</h3>
-              <p className="text-gray-600">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
+              <Brain className="mb-4 h-12 w-12 text-emerald-600" />
+              <h3 className="mb-3 text-xl font-semibold text-slate-900">Specialized Focus</h3>
+              <p className="text-slate-600 leading-relaxed">
                 We exclusively focus on men's mental health, with training and expertise
                 in addressing men's specific psychological needs.
               </p>
-            </Card>
+            </div>
 
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <UserCheck className="h-12 w-12 text-therapeutic-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-3">Registered Professionals</h3>
-              <p className="text-gray-600">
+            <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
+              <UserCheck className="mb-4 h-12 w-12 text-emerald-600" />
+              <h3 className="mb-3 text-xl font-semibold text-slate-900">Registered Professionals</h3>
+              <p className="text-slate-600 leading-relaxed">
                 Our team consists of CRPO registered psychotherapists committed to
                 professional standards and ethical practice.
               </p>
-            </Card>
+            </div>
 
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <Award className="h-12 w-12 text-therapeutic-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-3">Evidence-Based Methods</h3>
-              <p className="text-gray-600">
+            <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
+              <Award className="mb-4 h-12 w-12 text-emerald-600" />
+              <h3 className="mb-3 text-xl font-semibold text-slate-900">Evidence-Based Methods</h3>
+              <p className="text-slate-600 leading-relaxed">
                 We utilize proven therapeutic approaches including CBT, DBT, EMDR,
                 and trauma-informed care tailored to your needs.
               </p>
-            </Card>
+            </div>
 
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <Heart className="h-12 w-12 text-therapeutic-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-3">Flexible Options</h3>
-              <p className="text-gray-600">
+            <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
+              <Heart className="mb-4 h-12 w-12 text-emerald-600" />
+              <h3 className="mb-3 text-xl font-semibold text-slate-900">Flexible Options</h3>
+              <p className="text-slate-600 leading-relaxed">
                 Choose between in-person sessions in our offices or convenient
                 virtual therapy sessions from anywhere in Ontario.
               </p>
-            </Card>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Therapy Services */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+      {/* Therapy Services - Enhanced Design */}
+      <section className="py-20">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center mb-16">
+            <h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">
               Therapy Services
             </h2>
+            <p className="text-lg text-slate-600 leading-relaxed">
+              Choose the approach that feels right for your healing journey
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="h-48 bg-therapeutic-primary/10 flex items-center justify-center">
-                <Users className="h-24 w-24 text-therapeutic-primary" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-3">Individual Therapy</h3>
-                <p className="text-gray-600 mb-4">
-                  One-on-one sessions focused on your personal growth and healing
-                </p>
-                <Link href="/individual-therapy">
-                  <Button variant="outline" className="w-full">
-                    Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-            </Card>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="group rounded-2xl bg-white p-8 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg hover:ring-slate-300">
+              <div className="mb-6 text-4xl">👤</div>
 
-            <Card className="overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="h-48 bg-therapeutic-primary/10 flex items-center justify-center">
-                <Heart className="h-24 w-24 text-therapeutic-primary" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-3">Couples Therapy</h3>
-                <p className="text-gray-600 mb-4">
-                  Strengthen your relationship with professional guidance
-                </p>
-                <Link href="/couples-therapy">
-                  <Button variant="outline" className="w-full">
-                    Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-            </Card>
+              <h3 className="mb-4 text-xl font-bold text-slate-900">
+                Individual Therapy
+              </h3>
 
-            <Card className="overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="h-48 bg-therapeutic-primary/10 flex items-center justify-center">
-                <Users className="h-24 w-24 text-therapeutic-primary" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-3">Group Therapy</h3>
-                <p className="text-gray-600 mb-4">
-                  Connect with other men facing similar challenges
-                </p>
-                <Link href="/group-therapy">
-                  <Button variant="outline" className="w-full">
-                    Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-            </Card>
+              <p className="mb-6 text-slate-600 leading-relaxed">
+                One-on-one sessions focused on your personal growth and healing
+              </p>
+
+              <ul className="mb-8 space-y-2">
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  Personalized approach
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  Flexible scheduling
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  Evidence-based methods
+                </li>
+              </ul>
+
+              <Link href="/individual-therapy">
+                <TherapyButton
+                  variant="outline"
+                  className="w-full group-hover:border-emerald-300 group-hover:text-emerald-700"
+                >
+                  Learn More
+                </TherapyButton>
+              </Link>
+            </div>
+
+            <div className="group rounded-2xl bg-white p-8 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg hover:ring-slate-300">
+              <div className="mb-6 text-4xl">💕</div>
+
+              <h3 className="mb-4 text-xl font-bold text-slate-900">
+                Couples Therapy
+              </h3>
+
+              <p className="mb-6 text-slate-600 leading-relaxed">
+                Strengthen your relationship with professional guidance
+              </p>
+
+              <ul className="mb-8 space-y-2">
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  Communication skills
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  Conflict resolution
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  Intimacy building
+                </li>
+              </ul>
+
+              <Link href="/couples-therapy">
+                <TherapyButton
+                  variant="outline"
+                  className="w-full group-hover:border-emerald-300 group-hover:text-emerald-700"
+                >
+                  Learn More
+                </TherapyButton>
+              </Link>
+            </div>
+
+            <div className="group rounded-2xl bg-white p-8 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg hover:ring-slate-300">
+              <div className="mb-6 text-4xl">👥</div>
+
+              <h3 className="mb-4 text-xl font-bold text-slate-900">
+                Group Therapy
+              </h3>
+
+              <p className="mb-6 text-slate-600 leading-relaxed">
+                Connect with other men facing similar challenges
+              </p>
+
+              <ul className="mb-8 space-y-2">
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  Peer support
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  Shared experiences
+                </li>
+                <li className="flex items-center gap-2 text-sm text-slate-600">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  Cost-effective
+                </li>
+              </ul>
+
+              <Link href="/group-therapy">
+                <TherapyButton
+                  variant="outline"
+                  className="w-full group-hover:border-emerald-300 group-hover:text-emerald-700"
+                >
+                  Learn More
+                </TherapyButton>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Areas of Support */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center mb-16">
+            <h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">
               Areas of Support We Specialize In
             </h2>
-            <p className="text-gray-600">Click to learn more about each area</p>
+            <p className="text-lg text-slate-600">Click to learn more about each area</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
             {specializations.map((spec, index) => (
               <Link key={index} href={spec.link}>
-                <div className="bg-white p-4 rounded-lg text-center hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer">
-                  <p className="font-medium text-gray-900">{spec.name}</p>
+                <div className="group rounded-xl bg-white p-4 text-center therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg hover:-translate-y-1 cursor-pointer">
+                  <p className="font-medium text-slate-900 group-hover:text-emerald-700 transition-colors">
+                    {spec.name}
+                  </p>
                 </div>
               </Link>
             ))}
@@ -355,12 +449,12 @@ export default function Home() {
 
       {/* Team Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center mb-16">
+            <h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">
               Find a therapist that's right for you
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-lg text-slate-600">
               Our team of registered professionals is here to support you
             </p>
           </div>
@@ -369,24 +463,24 @@ export default function Home() {
             <div className="flex space-x-6 overflow-x-auto pb-4">
               {teamMembers.map((member, index) => (
                 <div key={index} className="flex-shrink-0 w-64">
-                  <Card className="overflow-hidden">
-                    <div className="h-64 bg-gray-200 flex items-center justify-center">
-                      <UserCheck className="h-32 w-32 text-gray-400" />
+                  <div className="overflow-hidden rounded-2xl therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
+                    <div className="h-64 bg-slate-100 flex items-center justify-center">
+                      <UserCheck className="h-32 w-32 text-slate-400" />
                     </div>
                     <div className="p-4">
-                      <h3 className="font-semibold text-lg">{member.name}</h3>
-                      <p className="text-sm text-gray-600">{member.role}</p>
+                      <h3 className="font-semibold text-lg text-slate-900">{member.name}</h3>
+                      <p className="text-sm text-slate-600">{member.role}</p>
                     </div>
-                  </Card>
+                  </div>
                 </div>
               ))}
             </div>
 
-            <div className="text-center mt-8">
+            <div className="text-center mt-12">
               <Link href="/team">
-                <Button className="bg-therapeutic-primary hover:bg-therapeutic-primary/90 text-white">
+                <TherapyButton variant="primary" size="lg">
                   Meet Our Full Team
-                </Button>
+                </TherapyButton>
               </Link>
             </div>
           </div>
@@ -394,103 +488,107 @@ export default function Home() {
       </section>
 
       {/* Email Signup */}
-      <section className="py-20 bg-therapeutic-primary/5">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Mail className="h-12 w-12 text-therapeutic-primary mx-auto mb-4" />
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Stay Connected
-          </h2>
-          <p className="text-gray-600 mb-8">
-            Receive educational content about men's mental health and wellness
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Input
-              type="email"
-              placeholder="Your email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="flex-1"
-            />
-            <Button className="bg-therapeutic-primary hover:bg-therapeutic-primary/90 text-white">
-              Subscribe
-            </Button>
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <Mail className="mx-auto mb-6 h-12 w-12 text-emerald-600" />
+            <h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">
+              Stay Connected
+            </h2>
+            <p className="mb-8 text-lg text-slate-600">
+              Receive educational content about men's mental health and wellness
+            </p>
+            <div className="mx-auto flex max-w-md flex-col gap-4 sm:flex-row">
+              <Input
+                type="email"
+                placeholder="Your email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1"
+              />
+              <TherapyButton variant="primary">
+                Subscribe
+              </TherapyButton>
+            </div>
+            <p className="mt-6 text-sm text-slate-500">
+              We respect your privacy. Unsubscribe anytime.
+            </p>
           </div>
-          <p className="text-sm text-gray-500 mt-4">
-            We respect your privacy. Unsubscribe anytime.
-          </p>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-therapeutic-primary to-therapeutic-primary/80">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
-            Take Your First Step Today
-          </h2>
-          <p className="text-xl text-white/90 mb-8">
-            Whether it's your first time seeking therapy or you're looking for a new approach,
-            we're here to support your journey. Taking the first step requires courage,
-            and we're ready to walk alongside you.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/book-consultation">
-              <Button size="lg" className="bg-white text-therapeutic-primary hover:bg-gray-100">
-                Book a Free Consultation
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                Ask Us a Question
-              </Button>
-            </Link>
+      <section className="py-20 bg-gradient-to-r from-emerald-700 to-emerald-600">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="mb-6 text-3xl font-bold text-white lg:text-4xl">
+              Take Your First Step Today
+            </h2>
+            <p className="mb-10 text-lg text-white/90 leading-relaxed">
+              Whether it's your first time seeking therapy or you're looking for a new approach,
+              we're here to support your journey. Taking the first step requires courage,
+              and we're ready to walk alongside you.
+            </p>
+            <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+              <Link href="/book-consultation">
+                <TherapyButton size="lg" className="bg-white text-emerald-700 hover:bg-slate-100">
+                  Book a Free Consultation
+                </TherapyButton>
+              </Link>
+              <Link href="/contact">
+                <TherapyButton size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                  Ask Us a Question
+                </TherapyButton>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Locations */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <MapPin className="h-12 w-12 text-therapeutic-primary mx-auto mb-4" />
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center mb-16">
+            <MapPin className="mx-auto mb-6 h-12 w-12 text-emerald-600" />
+            <h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">
               Our Locations
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
               We offer in-person sessions in Toronto, Ottawa, and surrounding areas,
               plus virtual services across Ontario.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="p-6">
-              <h3 className="text-xl font-semibold mb-3">Toronto Office</h3>
-              <p className="text-gray-600 mb-2">Downtown Toronto Location</p>
-              <p className="text-sm text-gray-500 mb-4">Available by appointment</p>
+          <div className="grid gap-8 md:grid-cols-2">
+            <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
+              <h3 className="mb-3 text-xl font-semibold text-slate-900">Toronto Office</h3>
+              <p className="mb-2 text-slate-600">Downtown Toronto Location</p>
+              <p className="mb-6 text-sm text-slate-500">Available by appointment</p>
               <Link href="/contact">
-                <Button variant="outline" className="w-full">
+                <TherapyButton variant="outline" className="w-full">
                   Get Directions
-                </Button>
+                </TherapyButton>
               </Link>
-            </Card>
+            </div>
 
-            <Card className="p-6">
-              <h3 className="text-xl font-semibold mb-3">Ottawa Office</h3>
-              <p className="text-gray-600 mb-2">Central Ottawa Location</p>
-              <p className="text-sm text-gray-500 mb-4">Available by appointment</p>
+            <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
+              <h3 className="mb-3 text-xl font-semibold text-slate-900">Ottawa Office</h3>
+              <p className="mb-2 text-slate-600">Central Ottawa Location</p>
+              <p className="mb-6 text-sm text-slate-500">Available by appointment</p>
               <Link href="/contact">
-                <Button variant="outline" className="w-full">
+                <TherapyButton variant="outline" className="w-full">
                   Get Directions
-                </Button>
+                </TherapyButton>
               </Link>
-            </Card>
+            </div>
           </div>
 
-          <div className="mt-8 p-6 bg-white rounded-lg shadow-sm">
-            <div className="flex items-start space-x-3">
-              <Laptop className="h-6 w-6 text-therapeutic-primary mt-1" />
+          <div className="mt-12 rounded-2xl bg-white p-8 therapy-shadow ring-1 ring-slate-200">
+            <div className="flex items-start space-x-4">
+              <Laptop className="mt-1 h-6 w-6 text-emerald-600" />
               <div>
-                <h3 className="font-semibold text-lg mb-2">Virtual Therapy Available</h3>
-                <p className="text-gray-600">
+                <h3 className="mb-3 text-lg font-semibold text-slate-900">Virtual Therapy Available</h3>
+                <p className="text-slate-600 leading-relaxed">
                   Can't make it to our offices? We offer secure video therapy sessions
                   for clients anywhere in Ontario. Same professional support, from the
                   comfort of your own space.

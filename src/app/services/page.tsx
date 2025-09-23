@@ -1,5 +1,6 @@
 "use client";
 
+import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Calendar, CheckCircle, Users, Award, AlertCircle, Clock, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -10,27 +11,7 @@ export default function ServicesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <Link href="/" className="flex items-center">
-              <div className="text-2xl lg:text-3xl font-bold text-gray-900">
-                <span className="text-therapeutic-primary">Resolve</span>
-                <span className="text-gray-700 ml-2">Men's Therapy</span>
-              </div>
-            </Link>
-            <nav className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Home</Link>
-              <Link href="/about" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">About</Link>
-              <Link href="/services" className="text-therapeutic-primary font-medium">Services</Link>
-              <Link href="/contact" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Contact</Link>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+    <Layout>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-gray-50 to-white py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -285,45 +266,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="md:col-span-2">
-              <div className="text-2xl font-bold mb-4">
-                <span className="text-therapeutic-accent">Resolve</span>
-                <span className="text-gray-300 ml-2">Men's Therapy</span>
-              </div>
-              <p className="text-gray-300">
-                Evidence-based therapy for men with systematic progress tracking and continuous support.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Services</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li><Link href="/services/individual-therapy" className="hover:text-therapeutic-accent transition-colors">Individual Therapy</Link></li>
-                <li><Link href="/services/adhd-therapy" className="hover:text-therapeutic-accent transition-colors">ADHD Therapy</Link></li>
-                <li><Link href="/services/crisis-support" className="hover:text-therapeutic-accent transition-colors">Crisis Support</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Assessments</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li><Link href="/assessment/depression" className="hover:text-therapeutic-accent transition-colors">Mood Check-In</Link></li>
-                <li><Link href="/assessment/anxiety" className="hover:text-therapeutic-accent transition-colors">Anxiety Check-In</Link></li>
-                <li><Link href="/assessment/adhd" className="hover:text-therapeutic-accent transition-colors">ADHD Check-In</Link></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
-            © {new Date().getFullYear()} Resolve Men's Therapy. All rights reserved.
-          </div>
-        </div>
-      </footer>
-    </div>
+    </Layout>
   );
 }

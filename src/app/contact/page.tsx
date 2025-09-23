@@ -1,5 +1,6 @@
 "use client";
 
+import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Calendar, Mail, Phone, MapPin, Clock, AlertCircle, CheckCircle, Shield } from "lucide-react";
 
@@ -16,27 +17,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center">
-              <div className="text-2xl lg:text-3xl font-bold text-gray-900">
-                <span className="text-therapeutic-primary">Resolve</span>
-                <span className="text-gray-700 ml-2">Men's Therapy</span>
-              </div>
-            </div>
-            <nav className="hidden lg:flex items-center space-x-8">
-              <a href="/" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Home</a>
-              <a href="/#services" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Services</a>
-              <a href="/#assessments" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Assessments</a>
-              <a href="/contact" className="text-therapeutic-primary font-medium">Contact</a>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+    <Layout>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-gray-50 to-white py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -207,26 +188,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="text-2xl font-bold mb-4">
-            <span className="text-therapeutic-accent">Resolve</span>
-            <span className="text-gray-300 ml-2">Men's Therapy</span>
-          </div>
-          <p className="text-gray-300 mb-6">
-            Professional mental health support for men across Ontario
-          </p>
-          <div className="flex items-center justify-center space-x-3 mb-6">
-            <Shield className="w-5 h-5 text-therapeutic-accent" />
-            <span className="text-gray-300">CRPO Registered • Professional Liability Insurance • PIPEDA Compliant</span>
-          </div>
-          <div className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Resolve Men's Therapy. All rights reserved.
-          </div>
-        </div>
-      </footer>
-    </div>
+    </Layout>
   );
 }

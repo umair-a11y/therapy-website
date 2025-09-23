@@ -1,30 +1,11 @@
-"use client";
-
+import Layout from "@/components/Layout";
+import { Button } from "@/components/ui/button";
 import { AlertTriangle } from "lucide-react";
 import Link from "next/link";
 
 export default function DisclaimerPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <Link href="/" className="flex items-center">
-              <div className="text-2xl lg:text-3xl font-bold text-gray-900">
-                <span className="text-therapeutic-primary">Resolve</span>
-                <span className="text-gray-700 ml-2">Men's Therapy</span>
-              </div>
-            </Link>
-            <nav className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Home</Link>
-              <Link href="/about" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">About</Link>
-              <Link href="/services" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Services</Link>
-              <Link href="/contact" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Contact</Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+    <Layout>
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -152,25 +133,12 @@ export default function DisclaimerPage() {
 
         <div className="mt-12 text-center">
           <Link href="/contact">
-            <button className="bg-therapeutic-primary text-white px-6 py-3 rounded-lg hover:bg-therapeutic-primary/90 transition-colors">
+            <Button size="lg" className="bg-therapeutic-primary hover:bg-therapeutic-primary/90">
               Contact Us with Questions
-            </button>
+            </Button>
           </Link>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 mt-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="text-2xl font-bold mb-4">
-            <span className="text-therapeutic-accent">Resolve</span>
-            <span className="text-gray-300 ml-2">Men's Therapy</span>
-          </div>
-          <div className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Resolve Men's Therapy. All rights reserved.
-          </div>
-        </div>
-      </footer>
-    </div>
+    </Layout>
   );
 }

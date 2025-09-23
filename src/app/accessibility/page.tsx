@@ -1,5 +1,4 @@
-"use client";
-
+import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, CheckCircle, Mail, Phone, MessageSquare } from "lucide-react";
@@ -7,26 +6,7 @@ import Link from "next/link";
 
 export default function AccessibilityPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <Link href="/" className="flex items-center">
-              <div className="text-2xl lg:text-3xl font-bold text-gray-900">
-                <span className="text-therapeutic-primary">Resolve</span>
-                <span className="text-gray-700 ml-2">Men's Therapy</span>
-              </div>
-            </Link>
-            <nav className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Home</Link>
-              <Link href="/about" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">About</Link>
-              <Link href="/services" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Services</Link>
-              <Link href="/contact" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Contact</Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+    <Layout>
 
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
@@ -232,19 +212,6 @@ export default function AccessibilityPage() {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 mt-12">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="text-2xl font-bold mb-4">
-            <span className="text-therapeutic-accent">Resolve</span>
-            <span className="text-gray-300 ml-2">Men's Therapy</span>
-          </div>
-          <div className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Resolve Men's Therapy. All rights reserved.
-          </div>
-        </div>
-      </footer>
-    </div>
+    </Layout>
   );
 }

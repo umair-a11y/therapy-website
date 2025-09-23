@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Layout from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Lock, FileText, Phone } from "lucide-react";
 
@@ -9,7 +10,8 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-muted/30 py-12">
+    <Layout>
+      <div className="bg-gradient-to-b from-white to-muted/30 py-12">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
@@ -131,6 +133,7 @@ export default function PrivacyPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </Layout>
   );
 }
