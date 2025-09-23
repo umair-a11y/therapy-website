@@ -1,0 +1,83 @@
+name: CRPO Compliance Check
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  crpo-compliance:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: 🏥 Run CRPO Compliance Check
+      run: |
+        echo "🔍 Scanning for CRPO compliance violations..."
+        node scripts/crpo-compliance-check.js
+      continue-on-error: false
+
+    - name: 📊 Generate Compliance Report
+      if: always()
+      run: |
+        echo "Generating detailed compliance report..."
+        node scripts/crpo-compliance-check.js > compliance-report.txt 2>&1
+
+    - name: 📤 Upload Compliance Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: crpo-compliance-report
+        path: compliance-report.txt
+
+    - name: 🚨 Fail on Violations
+      run: |
+        if [ $? -ne 0 ]; then
+          echo "❌ CRPO compliance violations detected!"
+          echo "::error::CRPO compliance check failed. Review the compliance report for details."
+          echo "::error::Prohibited content detected that violates CRPO advertising guidelines."
+          echo "::error::See: https://crpo.ca/practice-standards/business-practices/advertising/"
+          exit 1
+        fi
+        echo "✅ CRPO compliance verified!"
+
+  code-quality:
+    runs-on: ubuntu-latest
+    needs: crpo-compliance
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run TypeScript check
+      run: npm run type-check
+
+    - name: Run ESLint
+      run: npm run lint
+
+    - name: Run tests
+      run: npm run test
+
+    - name: Build project
+      run: npm run build

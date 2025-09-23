@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🏥 Running CRPO Compliance Check..."
+
+# Run CRPO compliance check on staged files
+node scripts/crpo-compliance-check.js
+
+# Check exit code from compliance check
+if [ $? -ne 0 ]; then
+  echo "❌ CRPO compliance violations detected!"
+  echo "🚨 Commit blocked to prevent CRPO violations."
+  echo ""
+  echo "Please fix all violations before committing:"
+  echo "1. Review the compliance report above"
+  echo "2. Remove or modify prohibited content"
+  echo "3. Run 'node scripts/crpo-compliance-check.js' to verify fixes"
+  echo "4. Try committing again"
+  echo ""
+  echo "For CRPO guidelines: https://crpo.ca/practice-standards/business-practices/advertising/"
+  exit 1
+fi
+
+echo "✅ CRPO compliance check passed!"
+
+# Run other checks (lint, type-check, tests)
+npm run lint
+npm run type-check
+npm run test

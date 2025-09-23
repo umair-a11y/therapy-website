@@ -142,7 +142,7 @@ export default function GAD7Assessment() {
 
             <div className="text-xs text-gray-500 text-center">
               <p>This assessment is for informational purposes only and does not constitute medical advice.</p>
-              <p>If you&apos;re experiencing a mental health crisis, please contact 988 immediately.</p>
+              <p>If you're experiencing a mental health crisis, please contact 988 immediately.</p>
             </div>
           </CardContent>
         </Card>
