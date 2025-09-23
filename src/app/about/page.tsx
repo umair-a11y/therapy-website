@@ -70,7 +70,7 @@ export default function About() {
               About Resolve Men's Therapy
             </h1>
             <p className="text-xl text-gray-600">
-              Professional mental health support designed specifically for men's unique needs and experiences
+              Therapy designed for men, by someone who understands what you're going through
             </p>
           </div>
         </div>
@@ -86,16 +86,9 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-gray-700">
                 <p>
-                  At Resolve Men's Therapy, we believe that every man deserves access to
-                  professional, understanding mental health support. Our mission is to break
-                  down the barriers that prevent men from seeking help and provide a safe,
-                  confidential space for healing and growth.
-                </p>
-                <p>
-                  We understand that men face unique challenges when it comes to mental health.
-                  Societal expectations, stigma, and traditional masculine norms often make it
-                  difficult for men to express vulnerability or seek support. We're here to
-                  change that narrative.
+                  Resolve Men's Therapy was founded to provide a therapeutic environment tailored to the specific needs of men.
+                  We understand that men process emotions differently, need practical solutions,
+                  and require ongoing support - not just during sessions, but every day.
                 </p>
                 <p>
                   Our team of CRPO registered psychotherapists specializes in men's mental health,
@@ -131,8 +124,71 @@ export default function About() {
         </div>
       </section>
 
-      {/* Our Values */}
+      {/* Founder Profile */}
       <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                Meet Your Therapist
+              </h2>
+              <div className="space-y-4 text-gray-700">
+                <p>
+                  As a CRPO Registered Psychotherapist (Qualifying) specializing in men's mental health,
+                  I understand the unique challenges men face when seeking therapy. My approach combines
+                  evidence-based techniques with a deep understanding of male communication styles and
+                  the practical solutions men need.
+                </p>
+                <p>
+                  I focus on building a practice that provides systematic approaches to men's mental health
+                  with measurable outcomes. My specialization in ADHD therapy for men comes from advanced
+                  training and experience working with men who struggle with attention, focus, and
+                  organization challenges.
+                </p>
+                <p>
+                  My therapeutic approach is designed specifically for men who want practical solutions,
+                  not just talk. I use evidence-based techniques combined with continuous engagement
+                  systems to ensure you get the support you need, when you need it.
+                </p>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Credentials & Specializations
+              </h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">CRPO Registered Psychotherapist (Qualifying)</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">ADHD Specialist with Advanced Training</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">Crisis Support Available</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">Professional Liability Insurance</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">Ongoing Supervision and Quality Assurance</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
+                  <span className="text-gray-700">Evidence-Based Training and Methods</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Values */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -155,48 +211,84 @@ export default function About() {
         </div>
       </section>
 
-      {/* Our Approach */}
-      <section className="py-16 bg-white">
+      {/* Our Unique Approach */}
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Our Therapeutic Approach
+              Our Approach
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We use evidence-based methods proven to help men achieve meaningful change
+              Our approach emphasizes continuous engagement, providing support between sessions to keep you moving forward
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {approaches.map((approach, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg p-6">
-                <h3 className="font-semibold text-lg mb-2">{approach.name}</h3>
-                <p className="text-gray-600">{approach.description}</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-white rounded-lg p-6 text-center">
+              <div className="w-16 h-16 bg-therapeutic-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Users className="h-8 w-8 text-therapeutic-primary" />
               </div>
-            ))}
-          </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Continuous Engagement</h3>
+              <p className="text-gray-600">
+                Regular check-ins, progress tracking, and support between sessions to keep you moving forward.
+              </p>
+            </div>
 
-          <div className="mt-12 bg-therapeutic-primary/5 rounded-lg p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Tailored to Your Needs
-            </h3>
-            <p className="text-gray-700 mb-4">
-              We understand that every person is unique. During your initial consultation,
-              we'll work together to understand your specific needs, goals, and preferences.
-              Based on this assessment, we'll develop a personalized treatment plan that
-              combines the most appropriate therapeutic approaches for your situation.
-            </p>
-            <p className="text-gray-700">
-              Our flexible approach means we can adapt our methods as you progress,
-              ensuring you always receive the most effective support for where you are
-              in your journey.
-            </p>
+            <div className="bg-white rounded-lg p-6 text-center">
+              <div className="w-16 h-16 bg-therapeutic-secondary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Target className="h-8 w-8 text-therapeutic-secondary" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Male-Specific Approach</h3>
+              <p className="text-gray-600">
+                Therapy designed for how men think and communicate, with practical solutions that work in real life.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 text-center">
+              <div className="w-16 h-16 bg-therapeutic-accent/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Brain className="h-8 w-8 text-therapeutic-accent" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">ADHD Expertise</h3>
+              <p className="text-gray-600">
+                Specialized support for men with ADHD challenges, understanding the unique ways ADHD affects work, relationships, and daily life.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 text-center">
+              <div className="w-16 h-16 bg-red-50 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Shield className="h-8 w-8 text-red-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Crisis Readiness</h3>
+              <p className="text-gray-600">
+                Immediate support when you need it most, with same-day consultations and 24/7 crisis resources.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 text-center">
+              <div className="w-16 h-16 bg-therapeutic-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Lightbulb className="h-8 w-8 text-therapeutic-primary" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Technology Integration</h3>
+              <p className="text-gray-600">
+                Seamless communication, progress tracking, and access to resources whenever you need them.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 text-center">
+              <div className="w-16 h-16 bg-therapeutic-secondary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <BookOpen className="h-8 w-8 text-therapeutic-secondary" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Evidence-Based Methods</h3>
+              <p className="text-gray-600">
+                Proven therapeutic techniques combined with innovative approaches specifically designed for men's needs.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* What to Expect */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
             What to Expect
