@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import CompassLogo from "@/components/CompassLogo";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,16 +12,13 @@ export default function Header() {
     <header className="bg-white shadow-sm border-b sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center group">
-            <CompassLogo className="mr-3 transition-transform group-hover:rotate-12" size={48} />
-            <div>
-              <div className="text-2xl lg:text-3xl font-bold">
-                <span className="text-resolve-forest">Resolve</span>
-                <span className="text-resolve-forest-dark ml-2">Men's Therapy</span>
-              </div>
-              <div className="text-xs text-resolve-sage italic">Navigate your path forward</div>
-            </div>
+          {/* Brand (logo reverted to text-only) */}
+          <Link href="/" className="flex flex-col justify-center" aria-label="Resolve Men's Therapy Home">
+            <span className="text-2xl lg:text-3xl font-bold tracking-tight">
+              <span className="text-resolve-forest">Resolve</span>{' '}
+              <span className="text-resolve-forest-dark">Men&apos;s Therapy</span>
+            </span>
+            <span className="text-xs text-resolve-sage italic">Navigate your path forward</span>
           </Link>
 
           {/* Desktop Navigation */}
