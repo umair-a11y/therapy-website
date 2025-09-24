@@ -194,7 +194,7 @@ export default function IndividualTherapyPage() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-700 mb-6">
-              Individual therapy is a powerful tool for personal and professional growth. Your free, 15-minute consultation is a confidential, no-pressure opportunity to see if we're the right fit.
+              Individual therapy is a powerful tool for personal and professional growth. Your free, 30-minute consultation is a confidential, no-pressure opportunity to see if we're the right fit.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/book-consultation">

@@ -166,7 +166,7 @@ export default function ServicesPage() {
             <div className="text-center">
               <div className="w-12 h-12 bg-therapeutic-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">Free Consultation</h3>
-              <p className="text-gray-600 text-sm">15-minute discussion of your needs and goals</p>
+              <p className="text-gray-600 text-sm">30-minute discussion of your needs and goals</p>
             </div>
 
             <div className="text-center">

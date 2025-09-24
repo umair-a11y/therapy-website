@@ -58,7 +58,7 @@ export default function ContactPage() {
       {/* Contact Options */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
 
             {/* Booking */}
             <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 text-center">
@@ -93,23 +93,6 @@ export default function ContactPage() {
               >
                 Send Message
               </Button>
-            </div>
-
-            {/* Phone */}
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 text-center md:col-span-2 lg:col-span-1">
-              <div className="w-16 h-16 bg-therapeutic-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Phone className="h-8 w-8 text-therapeutic-accent" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Call Us</h3>
-              <p className="text-gray-600 mb-4">
-                For urgent matters or immediate support needs.
-              </p>
-              <p className="text-lg font-semibold text-therapeutic-primary mb-6">
-                (416) XXX-XXXX
-              </p>
-              <p className="text-sm text-gray-500">
-                Response within 24-48 hours
-              </p>
             </div>
           </div>
         </div>

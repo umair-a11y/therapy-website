@@ -172,7 +172,7 @@ export default function BookConsultationPage() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Calendar className="h-6 w-6 text-therapeutic-primary mr-3" />
-                  Schedule Your Free 15-Minute Consultation
+                  Schedule Your Free 30-Minute Consultation
                 </CardTitle>
                 <p className="text-gray-600">
                   This consultation is completely free and confidential. We'll discuss your needs and determine if our approach is right for you.
@@ -342,7 +342,7 @@ export default function BookConsultationPage() {
                     1
                   </div>
                   <div>
-                    <h4 className="font-semibold">15-minute phone or video consultation</h4>
+                    <h4 className="font-semibold">30-minute phone or video consultation</h4>
                     <p className="text-gray-600 text-sm">A brief, comfortable conversation to get acquainted</p>
                   </div>
                 </div>

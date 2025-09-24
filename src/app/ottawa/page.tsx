@@ -314,7 +314,7 @@ export default function OttawaPage() {
           <div className="bg-therapeutic-primary/5 rounded-lg p-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Take the First Step</h2>
             <p className="text-gray-700 mb-6">
-              Schedule a free, confidential 15-minute consultation to see how our specialized support for men in Ottawa can help you.
+              Schedule a free, confidential 30-minute consultation to see how our specialized support for men in Ottawa can help you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/book-consultation">

@@ -63,13 +63,13 @@ export default function Home() {
 
             {/* Main headline - Much larger and more impactful */}
             <h1 className="mb-8 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl text-balance">
-              Men's Mental Health Support{" "}
-              <span className="text-therapeutic-primary">Across Ontario</span>
+              Stop Feeling Lost.{" "}
+              <span className="text-therapeutic-primary">Start Feeling Found.</span>
             </h1>
 
             {/* Subheading with better spacing */}
             <p className="mb-12 text-lg leading-relaxed text-slate-600 sm:text-xl lg:text-2xl max-w-3xl mx-auto">
-              Supporting men through evidence-based therapy and professional guidance
+              Therapy designed specifically for men across Ontario
             </p>
 
             {/* CTA buttons with consistent styling */}

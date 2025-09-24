@@ -21,7 +21,7 @@ const faqData = [
   },
   {
     question: "How quickly can I get an appointment?",
-    answer: "We offer same-day consultations for crisis situations and flexible scheduling for regular appointments. Our free 15-minute consultation is typically available within 1-2 business days."
+    answer: "We offer same-day consultations for crisis situations and flexible scheduling for regular appointments. Our free 30-minute consultation is typically available within 1-2 business days."
   },
   {
     question: "Is online therapy as effective as in-person?",
@@ -29,7 +29,7 @@ const faqData = [
   },
   {
     question: "What if I'm not sure if therapy is right for me?",
-    answer: "That's why we offer a free 15-minute consultation - no obligation, just a chance to see if we're the right fit. This allows you to ask questions and understand our approach before making any commitment."
+    answer: "That's why we offer a free 30-minute consultation - no obligation, just a chance to see if we're the right fit. This allows you to ask questions and understand our approach before making any commitment."
   },
   {
     question: "What if my insurance doesn't cover therapy?",

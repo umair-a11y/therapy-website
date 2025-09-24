@@ -47,7 +47,7 @@ export default function PricingPage() {
             <CardHeader className="text-center pt-8">
               <CardTitle className="text-2xl text-green-600">Free Consultation</CardTitle>
               <div className="text-4xl font-bold text-gray-900 mt-2">$0</div>
-              <p className="text-gray-600">15-Minute Phone Call</p>
+              <p className="text-gray-600">30-Minute Phone Call</p>
             </CardHeader>
             <CardContent className="space-y-4">
               <ul className="space-y-3">

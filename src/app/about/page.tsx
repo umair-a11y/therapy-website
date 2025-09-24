@@ -305,7 +305,7 @@ export default function About() {
               <ul className="space-y-2 text-sm text-gray-600">
                 <li className="flex items-start">
                   <CheckCircle className="h-4 w-4 text-therapeutic-primary mt-0.5 mr-2 flex-shrink-0" />
-                  <span>15-minute free consultation available</span>
+                  <span>30-minute free consultation available</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="h-4 w-4 text-therapeutic-primary mt-0.5 mr-2 flex-shrink-0" />
