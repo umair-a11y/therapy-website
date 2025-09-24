@@ -62,11 +62,12 @@ export default function Home() {
             </p>
 
             {/* Main headline - Much larger and more impactful */}
-            {/* Cache bust: Blueprint update deployed */}
+            {/* Cache bust: 2025-01-16 Force refresh */}
             <h1 className="mb-8 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl text-balance">
               Stop Feeling Lost.{" "}
               <span className="text-therapeutic-primary">Start Feeling Found.</span>
             </h1>
+            {/* Force cache invalidation - timestamp: {new Date().toISOString()} */}
 
             {/* Subheading with better spacing */}
             <p className="mb-12 text-lg leading-relaxed text-slate-600 sm:text-xl lg:text-2xl max-w-3xl mx-auto">
