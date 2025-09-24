@@ -5,12 +5,21 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "no-store, max-age=0"
+          "value": "no-cache, no-store, must-revalidate, proxy-revalidate, max-age=0, s-maxage=0"
+        },
+        {
+          "key": "Pragma",
+          "value": "no-cache"
+        },
+        {
+          "key": "Expires",
+          "value": "0"
         }
       ]
     }
   ],
   "env": {
-    "VERCEL_FORCE_NO_BUILD_CACHE": "1"
+    "VERCEL_FORCE_NO_BUILD_CACHE": "1",
+    "VERCEL_FORCE_NO_DATA_CACHE": "1"
   }
 }
