@@ -62,6 +62,7 @@ export default function Home() {
             </p>
 
             {/* Main headline - Much larger and more impactful */}
+            {/* Cache bust: Blueprint update deployed */}
             <h1 className="mb-8 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl text-balance">
               Stop Feeling Lost.{" "}
               <span className="text-therapeutic-primary">Start Feeling Found.</span>
