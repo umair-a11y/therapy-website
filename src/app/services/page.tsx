@@ -29,66 +29,92 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Core Services</h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {/* Individual Therapy */}
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+            <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
               <div className="w-16 h-16 bg-therapeutic-primary/10 rounded-lg flex items-center justify-center mx-auto mb-6">
                 <Users className="h-8 w-8 text-therapeutic-primary" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Individual Therapy</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Individual Therapy</h3>
               <p className="text-gray-600 text-center mb-6">
-                One-on-one sessions designed specifically for men who want practical solutions, not just talk.
+                One-on-one sessions focused on your personal growth and healing
               </p>
-              <Link href="/services/individual-therapy">
-                <Button variant="outline" className="w-full border-therapeutic-primary text-therapeutic-primary hover:bg-therapeutic-primary hover:text-white">
+              <ul className="text-gray-600 text-sm space-y-2 mb-6">
+                <li className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-therapeutic-primary mr-2" />
+                  Personalized approach
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-therapeutic-primary mr-2" />
+                  Flexible scheduling
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-therapeutic-primary mr-2" />
+                  Evidence-based methods
+                </li>
+              </ul>
+              <Link href="/individual-therapy">
+                <Button className="w-full bg-therapeutic-primary hover:bg-therapeutic-primary/90">
                   Learn More
                 </Button>
               </Link>
             </div>
 
-            {/* ADHD Specialization */}
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+            {/* Couples Therapy */}
+            <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
               <div className="w-16 h-16 bg-therapeutic-secondary/10 rounded-lg flex items-center justify-center mx-auto mb-6">
-                <Award className="h-8 w-8 text-therapeutic-secondary" />
+                <Users className="h-8 w-8 text-therapeutic-secondary" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">ADHD Therapy</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Couples Therapy</h3>
               <p className="text-gray-600 text-center mb-6">
-                Expert support for men with ADHD challenges - work, relationships, and life management.
+                Strengthen your relationship with professional guidance
               </p>
-              <Link href="/services/adhd-therapy">
-                <Button variant="outline" className="w-full border-therapeutic-secondary text-therapeutic-secondary hover:bg-therapeutic-secondary hover:text-white">
+              <ul className="text-gray-600 text-sm space-y-2 mb-6">
+                <li className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-therapeutic-secondary mr-2" />
+                  Communication skills
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-therapeutic-secondary mr-2" />
+                  Conflict resolution
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-therapeutic-secondary mr-2" />
+                  Intimacy building
+                </li>
+              </ul>
+              <Link href="/couples-therapy">
+                <Button className="w-full bg-therapeutic-secondary hover:bg-therapeutic-secondary/90">
                   Learn More
                 </Button>
               </Link>
             </div>
 
-            {/* Crisis Support */}
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-red-50 rounded-lg flex items-center justify-center mx-auto mb-6">
-                <AlertCircle className="h-8 w-8 text-red-600" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Crisis Support</h3>
-              <p className="text-gray-600 text-center mb-6">
-                Immediate availability when possible and connection to government crisis resources.
-              </p>
-              <Link href="/services/crisis-support">
-                <Button variant="outline" className="w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white">
-                  Learn More
-                </Button>
-              </Link>
-            </div>
-
-            {/* Continuous Engagement */}
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+            {/* Group Therapy */}
+            <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
               <div className="w-16 h-16 bg-therapeutic-accent/10 rounded-lg flex items-center justify-center mx-auto mb-6">
-                <Clock className="h-8 w-8 text-therapeutic-accent" />
+                <Users className="h-8 w-8 text-therapeutic-accent" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Continuous Support</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Group Therapy</h3>
               <p className="text-gray-600 text-center mb-6">
-                Support between sessions, progress tracking, and resources to keep you moving forward.
+                Connect with other men facing similar challenges
               </p>
-              <Link href="/services/continuous-support">
-                <Button variant="outline" className="w-full border-therapeutic-accent text-therapeutic-accent hover:bg-therapeutic-accent hover:text-white">
+              <ul className="text-gray-600 text-sm space-y-2 mb-6">
+                <li className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-therapeutic-accent mr-2" />
+                  Peer support
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-therapeutic-accent mr-2" />
+                  Shared experiences
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-4 w-4 text-therapeutic-accent mr-2" />
+                  Cost-effective
+                </li>
+              </ul>
+              <Link href="/group-therapy">
+                <Button className="w-full bg-therapeutic-accent hover:bg-therapeutic-accent/90">
                   Learn More
                 </Button>
               </Link>
