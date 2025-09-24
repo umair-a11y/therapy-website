@@ -206,7 +206,7 @@ export default function EMDRTherapy() {
               Ready to Begin Your Healing Journey?
             </h2>
             <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
-              EMDR therapy can help you move past trauma and reclaim your life. Our certified EMDR therapists provide a safe, supportive environment for healing.
+              EMDR therapy can help you move past trauma and reclaim your life. Our EMDR-trained therapists provide a safe, supportive environment for healing.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/book-consultation">

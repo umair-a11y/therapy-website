@@ -89,7 +89,7 @@ export default function HabitsAssessmentPage() {
     if (percentage >= 75) {
       return {
         level: "High self-control",
-        description: "You demonstrate strong self-discipline and healthy habit formation. Keep up the excellent work!",
+        description: "You demonstrate strong self-discipline and healthy habit formation. Keep up the good work!",
         color: "text-green-600",
         bgColor: "bg-green-50",
         borderColor: "border-green-200"
