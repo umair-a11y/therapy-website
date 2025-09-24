@@ -31,9 +31,26 @@ export default function PricingPage() {
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Your Investment in Yourself</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            We believe in transparent pricing and making mental health care accessible.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+            Quality mental health support is one of the most valuable investments you can make. Consider the cost of staying stuck versus the value of moving forward with professional guidance.
           </p>
+          <div className="bg-emerald-50 rounded-lg p-6 max-w-4xl mx-auto">
+            <h3 className="text-lg font-semibold text-emerald-800 mb-3">Compare Your Options</h3>
+            <div className="grid md:grid-cols-3 gap-4 text-sm">
+              <div className="text-center">
+                <div className="text-emerald-600 font-medium">Professional Therapy</div>
+                <div className="text-gray-600">$125/session - Personalized, evidence-based support</div>
+              </div>
+              <div className="text-center">
+                <div className="text-gray-500">Monthly Gym Membership</div>
+                <div className="text-gray-500">$60-120/month - Physical health focus only</div>
+              </div>
+              <div className="text-center">
+                <div className="text-gray-500">Self-Help Books</div>
+                <div className="text-gray-500">$15-30 each - Generic, no personalized guidance</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -189,6 +206,42 @@ export default function PricingPage() {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Value Investment Section */}
+        <div className="bg-gray-50 rounded-lg p-8 mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 text-center mb-6">Why This Investment Makes Sense</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-lg font-semibold text-therapeutic-primary mb-3">Long-Term Value</h3>
+              <p className="text-gray-700 mb-4">
+                Mental health support is a skill-building investment. The coping strategies, emotional regulation techniques, and self-awareness you develop continue benefiting you long after therapy ends.
+              </p>
+              <ul className="text-gray-700 space-y-2">
+                <li>• Tools you can use for life</li>
+                <li>• Better relationships and communication</li>
+                <li>• Improved work performance and satisfaction</li>
+                <li>• Enhanced overall quality of life</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-therapeutic-primary mb-3">Cost of Waiting</h3>
+              <p className="text-gray-700 mb-4">
+                Unaddressed mental health challenges often compound over time, potentially affecting your career, relationships, and overall well-being. Early intervention can prevent larger issues.
+              </p>
+              <ul className="text-gray-700 space-y-2">
+                <li>• Relationship strain and potential breakdown</li>
+                <li>• Career stagnation or workplace conflicts</li>
+                <li>• Physical health impacts from chronic stress</li>
+                <li>• Missed opportunities for growth and connection</li>
+              </ul>
+            </div>
+          </div>
+          <div className="text-center mt-8">
+            <p className="text-gray-600 italic">
+              "The best time to plant a tree was 20 years ago. The second best time is now."
+            </p>
+          </div>
         </div>
 
         {/* CTA Section */}
