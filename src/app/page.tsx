@@ -385,48 +385,47 @@ export default function Home() {
         <div className="container mx-auto px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center mb-16">
             <h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">
-              Why Choose Resolve Men's Therapy
+              What You Can Expect
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
-              Our practice focuses on providing professional, evidence-based mental health support
-              specifically designed for men's unique needs and experiences.
+              When you work with us, you get more than just therapy sessions. You get a partnership focused on helping you achieve real, lasting change in your life.
             </p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
               <Brain className="mb-4 h-12 w-12 text-emerald-600" />
-              <h3 className="mb-3 text-xl font-semibold text-slate-900">Specialized Focus</h3>
+              <h3 className="mb-3 text-xl font-semibold text-slate-900">You Feel Understood</h3>
               <p className="text-slate-600 leading-relaxed">
-                We exclusively focus on men's mental health, with training and expertise
-                in addressing men's specific psychological needs.
+                Finally work with someone who truly gets what you're going through as a man.
+                No judgment, just genuine understanding and support.
               </p>
             </div>
 
             <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
               <UserCheck className="mb-4 h-12 w-12 text-emerald-600" />
-              <h3 className="mb-3 text-xl font-semibold text-slate-900">Registered Professionals</h3>
+              <h3 className="mb-3 text-xl font-semibold text-slate-900">You Can Trust the Process</h3>
               <p className="text-slate-600 leading-relaxed">
-                Our team consists of CRPO registered psychotherapists committed to
-                professional standards and ethical practice.
+                Rest assured you're getting professional, ethical care from CRPO registered
+                therapists who maintain the highest standards.
               </p>
             </div>
 
             <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
               <Award className="mb-4 h-12 w-12 text-emerald-600" />
-              <h3 className="mb-3 text-xl font-semibold text-slate-900">Evidence-Based Methods</h3>
+              <h3 className="mb-3 text-xl font-semibold text-slate-900">You See Real Progress</h3>
               <p className="text-slate-600 leading-relaxed">
-                We utilize proven therapeutic approaches including CBT, DBT, EMDR,
-                and trauma-informed care tailored to your needs.
+                Experience meaningful change through proven methods like CBT, DBT, and EMDR
+                that are tailored specifically to your goals and needs.
               </p>
             </div>
 
             <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
               <Heart className="mb-4 h-12 w-12 text-emerald-600" />
-              <h3 className="mb-3 text-xl font-semibold text-slate-900">Flexible Options</h3>
+              <h3 className="mb-3 text-xl font-semibold text-slate-900">You Get Convenience</h3>
               <p className="text-slate-600 leading-relaxed">
-                Choose between in-person sessions in our offices or convenient
-                virtual therapy sessions from anywhere in Ontario.
+                Receive support on your terms - whether that's in our comfortable offices
+                or through secure virtual sessions from anywhere in Ontario.
               </p>
             </div>
           </div>
