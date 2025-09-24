@@ -197,6 +197,138 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Who We Help Section */}
+      <section className="py-20 bg-emerald-50">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center mb-16">
+            <h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">
+              Who We Help
+            </h2>
+            <p className="text-lg text-slate-600 leading-relaxed">
+              Our therapy services are designed for men who are ready to take control of their mental health and make positive changes in their lives.
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+            {/* Working Professionals */}
+            <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
+              <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                <div className="text-2xl">💼</div>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Working Professionals</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                Managing work stress, career transitions, burnout, and work-life balance challenges.
+              </p>
+              <ul className="space-y-1 text-sm text-slate-600">
+                <li>• High-stress careers</li>
+                <li>• Leadership challenges</li>
+                <li>• Career transitions</li>
+              </ul>
+            </div>
+
+            {/* Relationship Challenges */}
+            <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
+              <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                <div className="text-2xl">💕</div>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Relationship Issues</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                Improving communication, resolving conflicts, and strengthening intimate relationships.
+              </p>
+              <ul className="space-y-1 text-sm text-slate-600">
+                <li>• Communication difficulties</li>
+                <li>• Intimacy concerns</li>
+                <li>• Separation/divorce</li>
+              </ul>
+            </div>
+
+            {/* Life Transitions */}
+            <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
+              <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                <div className="text-2xl">🔄</div>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Life Transitions</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                Navigating major life changes, new responsibilities, and identity shifts.
+              </p>
+              <ul className="space-y-1 text-sm text-slate-600">
+                <li>• Becoming a father</li>
+                <li>• Career changes</li>
+                <li>• Life restructuring</li>
+              </ul>
+            </div>
+
+            {/* Mental Health Concerns */}
+            <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
+              <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                <div className="text-2xl">🧠</div>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Mental Health</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                Managing anxiety, depression, ADHD, and other mental health challenges.
+              </p>
+              <ul className="space-y-1 text-sm text-slate-600">
+                <li>• Anxiety & depression</li>
+                <li>• ADHD support</li>
+                <li>• Anger management</li>
+              </ul>
+            </div>
+
+            {/* Trauma & Recovery */}
+            <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
+              <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                <div className="text-2xl">🛡️</div>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Trauma & Recovery</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                Processing past experiences, PTSD, and building resilience and coping strategies.
+              </p>
+              <ul className="space-y-1 text-sm text-slate-600">
+                <li>• Childhood trauma</li>
+                <li>• PTSD support</li>
+                <li>• Addiction recovery</li>
+              </ul>
+            </div>
+
+            {/* Personal Growth */}
+            <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
+              <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                <div className="text-2xl">📈</div>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Personal Growth</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                Building self-awareness, confidence, and developing healthier life patterns.
+              </p>
+              <ul className="space-y-1 text-sm text-slate-600">
+                <li>• Self-confidence</li>
+                <li>• Emotional regulation</li>
+                <li>• Goal achievement</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-16 text-center">
+            <p className="text-slate-600 mb-8 max-w-2xl mx-auto">
+              Whether you're dealing with specific challenges or simply want to improve your overall well-being,
+              our approach is tailored to meet you where you are in your journey.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/book-consultation">
+                <TherapyButton size="lg" className="bg-emerald-600 hover:bg-emerald-700">
+                  <Calendar className="mr-2 h-5 w-5" />
+                  Book Free Consultation
+                </TherapyButton>
+              </Link>
+              <Link href="/assessment/depression">
+                <TherapyButton size="lg" variant="outline" className="border-emerald-600 text-emerald-600 hover:bg-emerald-50">
+                  Take Self-Assessment
+                </TherapyButton>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Section - CRPO Compliant */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6 lg:px-8">
