@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Inter, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-// Force dynamic rendering to prevent aggressive caching issues
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// Use ISR (Incremental Static Regeneration) for better performance
+// Pages will be cached and revalidated every 60 seconds
+export const revalidate = 60;
 
 const inter = Inter({
   variable: "--font-inter",

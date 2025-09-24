@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+playwright-report/**/*.md
+test-results/**/*.md
 
 # next.js
 /.next/
@@ -42,3 +44,6 @@ next-env.d.ts
 
 .vercel
 .env*.local
+
+# Windows phantom file artifact (avoid git add errors)
+nul
