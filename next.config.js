@@ -1,3 +1,5 @@
+const path = require('path')
+
 const isProd = process.env.NODE_ENV === 'production'
 
 const cspDirectives = [
@@ -33,6 +35,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  outputFileTracingRoot: path.join(__dirname),
   // Force cache invalidation: 2025-01-16T19:45:00Z
   generateBuildId: () => {
     return `build-${Date.now()}`
