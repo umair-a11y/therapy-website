@@ -3,32 +3,31 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Heart, CheckCircle, Clock, Calendar, AlertTriangle } from "lucide-react";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { customProfessionalServiceJsonLd } from "@/lib/jsonld";
+import { SITE_URL } from "@/lib/seo";
+import { HeroWithImage } from "@/components/sections/hero-with-image";
+import { THERAPY_IMAGES } from "@/lib/therapy-images";
 
 export default function AnxietySupportPage() {
   return (
     <Layout>
+      <JsonLd data={customProfessionalServiceJsonLd({ serviceType: "Anxiety Therapy for Men", url: `${SITE_URL}/anxiety-support` })} />
+      {/* Hero Section with Image */}
+      <HeroWithImage
+        title="Anxiety Support for Men"
+        subtitle="Evidence-Based Treatment"
+        description="Learn practical strategies to manage worry, panic, and social anxiety in a way that fits your life"
+        imageUrl={THERAPY_IMAGES.services.anxiety}
+        imageAlt="Anxiety management and stress relief"
+        primaryButtonText="Book Free Consultation"
+        primaryButtonHref="/book-consultation"
+        secondaryButtonText="Take Anxiety Assessment"
+        secondaryButtonHref="/assessment/anxiety"
+        height="medium"
+      />
+
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <div className="w-16 h-16 bg-therapeutic-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Shield className="h-8 w-8 text-therapeutic-primary" />
-          </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Anxiety Support for Men</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Practical, evidence-based support for men dealing with anxiety. Learn concrete skills to manage worry, panic, and social anxiety in a way that fits your life.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-            <Link href="/book-consultation">
-              <Button size="lg" className="bg-therapeutic-primary hover:bg-therapeutic-primary/90">
-                Book a Free Consultation
-              </Button>
-            </Link>
-            <Link href="/assessment/anxiety">
-              <Button size="lg" variant="outline">
-                Take Anxiety Assessment
-              </Button>
-            </Link>
-          </div>
-        </div>
 
         {/* How Anxiety Shows Up in Men */}
         <Card className="mb-8">

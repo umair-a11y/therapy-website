@@ -5,55 +5,57 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL } from "@/lib/seo";
 
 const faqData = [
   {
-    question: "How is your approach different from traditional therapy?",
-    answer: "We provide continuous support between sessions, not just during scheduled appointments. This keeps you engaged and moving forward every day. Our approach is designed specifically for men, focusing on practical solutions and goal-oriented strategies."
+    question: "What are your fees?",
+    answer: "Our session fee is $160 for a 50-minute virtual session. We provide a receipt that you can use for reimbursement from most extended health benefits plans."
   },
   {
-    question: "Do you accept insurance?",
-    answer: "Most extended health insurance plans cover our services. We provide detailed receipts that you can submit to your insurance provider for reimbursement. We also have sliding scale options for those in need."
+    question: "Do you offer direct billing?",
+    answer: "We do not offer direct billing at this time. You can submit your receipt to your insurance provider for reimbursement according to your plan's coverage for Registered Psychotherapists."
   },
   {
-    question: "How does insurance reimbursement work?",
-    answer: "After each session, you'll receive a detailed receipt with all necessary information. You submit this to your insurance provider for reimbursement according to your plan's benefits. We'll help you understand your coverage and the claims process."
-  },
-  {
-    question: "How quickly can I get an appointment?",
-    answer: "We offer same-day consultations for crisis situations and flexible scheduling for regular appointments. Our free 30-minute consultation is typically available within 1-2 business days."
+    question: "What technology do you use for sessions?",
+    answer: "We use a secure, PHIPA-compliant video platform designed for healthcare. You will receive a private link before each session."
   },
   {
     question: "Is online therapy as effective as in-person?",
-    answer: "Yes, research shows online therapy is just as effective as in-person therapy, with the added benefit of convenience and accessibility. Our secure platform ensures your privacy and comfort."
+    answer: "For many issues, research shows that online therapy is just as effective as traditional in-person therapy. It offers the same expert support with added convenience and accessibility from anywhere in Ontario."
   },
   {
-    question: "What if I'm not sure if therapy is right for me?",
-    answer: "That's why we offer a free 30-minute consultation - no obligation, just a chance to see if we're the right fit. This allows you to ask questions and understand our approach before making any commitment."
+    question: "How do I know if we're a good fit?",
+    answer: "The free 30-minute consult is for exactly that. It's a chance for you to ask questions, share what's on your mind, and get a feel for my approach. There is no pressure to continue if it doesn't feel right."
   },
   {
-    question: "What if my insurance doesn't cover therapy?",
-    answer: "We offer sliding scale rates for clients with financial need, ensuring therapy remains accessible regardless of insurance coverage. We believe everyone deserves access to quality mental health care."
+    question: "What if I'm in crisis?",
+    answer: "This practice is not equipped for crisis support. If you are in immediate distress or having thoughts of harming yourself, please contact 9-8-8 (call or text) or go to your nearest emergency room. For non-urgent mental health support, you can contact ConnexOntario at 1-866-531-2600."
   },
   {
-    question: "How long does therapy usually take?",
-    answer: "The duration varies based on your goals and needs. Some men need a few sessions for specific goals, while others engage in longer-term therapy. We regularly review progress and adjust our approach as needed."
+    question: "Does my insurance plan cover services from a Registered Psychotherapist?",
+    answer: "Therapy with a Registered Psychotherapist is covered by many, but not all, extended health benefits plans in Ontario. We recommend you ask your insurance provider if your plan covers services from a 'Registered Psychotherapist' or 'RP'."
   },
   {
-    question: "What if I don't know what to talk about?",
-    answer: "That's completely normal and we'll help guide the conversation. We often start by checking in on your week, reviewing progress toward your goals, and discussing any challenges or successes you've experienced."
+    question: "What is my total coverage amount per year for mental health services?",
+    answer: "Coverage amounts vary by plan. Check with your insurance provider about your specific annual limits for mental health services or psychotherapy."
   },
   {
-    question: "How is your approach different for men?",
-    answer: "We tailor our approach to be more goal-oriented, practical, and skills-based, which often resonates well with men. We understand male communication styles and focus on actionable strategies rather than just talking."
+    question: "Is there a per-session maximum that my plan will reimburse?",
+    answer: "Many plans have per-session maximums. Contact your insurance provider to confirm if there are limits on what they'll reimburse per session."
   },
   {
-    question: "Is everything I say confidential?",
-    answer: "Yes, everything you discuss in therapy is strictly confidential and protected by law. We only share information in rare circumstances: when required by law, to protect your safety or others' safety, or with your written consent."
+    question: "Do I need a doctor's referral to be covered?",
+    answer: "Some insurance plans require a doctor's referral for coverage. Check with your provider about whether a referral is needed for your specific plan."
   },
   {
-    question: "What should I expect in my first session?",
-    answer: "The first session is an assessment where we'll discuss your goals, challenges, and background. We'll explain our approach and work together to create a personalized treatment plan. You'll leave with clear next steps and actionable strategies."
+    question: "What is your cancellation policy?",
+    answer: "Please provide at least 24 hours' notice to avoid being charged for the session. Life happens, and we understand that sometimes you need to reschedule."
+  },
+  {
+    question: "How long are sessions?",
+    answer: "Individual therapy sessions are 50 minutes long. The initial consultation is 30 minutes and free of charge."
   }
 ];
 
@@ -70,6 +72,22 @@ export default function FAQPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* FAQPage JSON-LD */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqData.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
+          url: `${SITE_URL}/faq`,
+        }}
+      />
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -5,37 +5,58 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Award, Users, Phone, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import { HeroWithImage } from "@/components/sections/hero-with-image";
+import { THERAPY_IMAGES, getUnsplashImage } from "@/lib/therapy-images";
+import Image from "next/image";
 
 export default function TeamPage() {
   return (
     <Layout>
+      {/* Hero Section with Image */}
+      <HeroWithImage
+        title="Meet Our Team"
+        description="Our team of experienced mental health professionals is dedicated to supporting men's mental health across Ontario."
+        imageUrl={THERAPY_IMAGES.team.main}
+        imageAlt="Professional therapy team"
+        primaryButtonText="Book Consultation"
+        primaryButtonHref="/book-consultation"
+        height="small"
+        overlayOpacity={0.5}
+      />
 
       <div className="max-w-6xl mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Meet Our Team</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Our team of experienced mental health professionals is dedicated to supporting men's mental health across Ontario.
-          </p>
-        </div>
 
         {/* Founder Profile */}
         <div className="mb-16">
-          <Card className="border-2 border-therapeutic-primary/20">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle className="text-2xl text-therapeutic-primary">Umair, RP(Q)</CardTitle>
-                  <p className="text-gray-600 font-medium">Founder & Registered Psychotherapist (Qualifying)</p>
-                </div>
-                <div className="text-right">
-                  <div className="inline-flex items-center px-4 py-2 bg-therapeutic-primary/10 rounded-full text-sm font-medium text-therapeutic-primary">
-                    <Shield className="w-4 h-4 mr-2" />
-                    CRPO Registered
-                  </div>
-                </div>
+          <Card className="border-2 border-therapeutic-primary/20 overflow-hidden">
+            <div className="md:flex">
+              {/* Profile Image */}
+              <div className="md:w-1/3 relative h-64 md:h-auto">
+                <Image
+                  src={getUnsplashImage(THERAPY_IMAGES.team.therapist1, { w: 400, h: 500 })}
+                  alt="Umair - Founder & Registered Psychotherapist"
+                  fill
+                  className="object-cover"
+                />
               </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
+
+              {/* Content */}
+              <div className="md:w-2/3">
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <CardTitle className="text-2xl text-therapeutic-primary">Umair, RP(Q)</CardTitle>
+                      <p className="text-gray-600 font-medium">Founder & Registered Psychotherapist (Qualifying)</p>
+                    </div>
+                    <div className="text-right">
+                      <div className="inline-flex items-center px-4 py-2 bg-therapeutic-primary/10 rounded-full text-sm font-medium text-therapeutic-primary">
+                        <Shield className="w-4 h-4 mr-2" />
+                        CRPO Registered
+                      </div>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-6">
               <p className="text-gray-700 leading-relaxed">
                 Umair founded Resolve Men's Therapy to provide therapeutic support tailored specifically for men. My approach is direct, curious, and practical. We'll set clear goals and adjust as you learn what works.
               </p>
@@ -79,7 +100,9 @@ export default function TeamPage() {
                   My style is direct, curious, and practical. I believe in setting clear goals and adjusting our approach as you learn what works. I'm available for weekday daytime sessions and limited evening appointments, all conducted online for convenience.
                 </p>
               </div>
-            </CardContent>
+                </CardContent>
+              </div>
+            </div>
           </Card>
         </div>
 

@@ -38,13 +38,13 @@ test.describe('Individual Page Tests', () => {
   allPages.forEach(({ path, name, expectedHeading }) => {
     test(`${name} loads correctly`, async ({ page }) => {
       // Navigate to the page
-      await page.goto(`https://therapy-website.vercel.app${path}`);
+      await page.goto(path);
 
       // Wait for page to load
       await page.waitForLoadState('networkidle');
 
       // Check if page loaded without errors (not 404)
-      const response = await page.goto(`https://therapy-website.vercel.app${path}`);
+      const response = await page.goto(path);
       expect(response?.status()).toBeLessThan(400);
 
       // Check page has a title
@@ -111,7 +111,7 @@ test.describe('Individual Page Tests', () => {
     ];
 
     for (const servicePage of servicePages) {
-      await page.goto(`https://therapy-website.vercel.app${servicePage}`);
+      await page.goto(servicePage);
       await page.waitForLoadState('networkidle');
 
       // Check for consistent service page elements
@@ -138,7 +138,7 @@ test.describe('Individual Page Tests', () => {
     const importantPages = ['/', '/about', '/services', '/individual-therapy', '/contact'];
 
     for (const pagePath of importantPages) {
-      await page.goto(`https://therapy-website.vercel.app${pagePath}`);
+      await page.goto(pagePath);
       await page.waitForLoadState('networkidle');
 
       // Check meta description

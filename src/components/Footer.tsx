@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Shield, Phone, Mail, MapPin, Clock } from "lucide-react";
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_DISPLAY } from "@/lib/site-config";
 
 export default function Footer() {
   return (
@@ -9,14 +10,14 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="mb-6 text-2xl font-bold lg:text-3xl">
-              <span className="text-emerald-400">Resolve</span>
+              <span className="text-therapeutic-primary">Resolve</span>
               <span className="ml-2 text-slate-200">Men's Therapy</span>
             </div>
             <p className="mb-6 text-slate-400 leading-relaxed">
               Professional mental health support for men across Ontario
             </p>
             <div className="flex items-start space-x-3">
-              <Shield className="mt-1 h-5 w-5 text-emerald-400 flex-shrink-0" />
+              <Shield className="mt-1 h-5 w-5 text-therapeutic-primary flex-shrink-0" />
               <div className="text-sm text-slate-400">
                 <p className="font-medium text-slate-300">CRPO Registered</p>
                 <p>Psychotherapist (Qualifying)</p>
@@ -29,32 +30,37 @@ export default function Footer() {
             <h3 className="mb-6 text-lg font-semibold text-slate-200">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/about" className="text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+                <Link href="/about" className="text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+                <Link href="/services" className="text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                   Services
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+                <Link href="/self-check" className="text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
+                  Self-Assessments
+                </Link>
+              </li>
+              <li>
+                <Link href="/pricing" className="text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                   Pricing
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+                <Link href="/faq" className="text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/articles" className="text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+                <Link href="/articles" className="text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                   Resources
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+                <Link href="/contact" className="text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                   Contact
                 </Link>
               </li>
@@ -66,32 +72,32 @@ export default function Footer() {
             <h3 className="mb-6 text-lg font-semibold text-slate-200">Our Services</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/individual-therapy" className="text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+                <Link href="/individual-therapy" className="text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                   Individual Therapy
                 </Link>
               </li>
               <li>
-                <Link href="/adhd-support" className="text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+                <Link href="/adhd-support" className="text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                   ADHD Support
                 </Link>
               </li>
               <li>
-                <Link href="/anxiety-support" className="text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+                <Link href="/anxiety-support" className="text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                   Anxiety Support
                 </Link>
               </li>
               <li>
-                <Link href="/depression-support" className="text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+                <Link href="/depression-support" className="text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                   Depression Support
                 </Link>
               </li>
               <li>
-                <Link href="/anger-management" className="text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+                <Link href="/anger-management" className="text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                   Anger Management
                 </Link>
               </li>
               <li>
-                <Link href="/trauma-therapy" className="text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+                <Link href="/trauma-therapy" className="text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                   Trauma Therapy
                 </Link>
               </li>
@@ -103,26 +109,30 @@ export default function Footer() {
             <h3 className="mb-6 text-lg font-semibold text-slate-200">Get in Touch</h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <Mail className="mt-1 h-5 w-5 text-emerald-400 flex-shrink-0" />
+                <Mail className="mt-1 h-5 w-5 text-therapeutic-primary flex-shrink-0" />
                 <div>
-                  <p className="text-slate-400">info@resolvemenstherapy.com</p>
+                  <a href={`mailto:${CONTACT_EMAIL}`} className="text-slate-400 hover:text-therapeutic-primary transition-colors">
+                    {CONTACT_EMAIL}
+                  </a>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
-                <Phone className="mt-1 h-5 w-5 text-emerald-400 flex-shrink-0" />
+                <Phone className="mt-1 h-5 w-5 text-therapeutic-primary flex-shrink-0" />
                 <div>
-                  <p className="text-slate-400">(416) XXX-XXXX</p>
+                  <a href={`tel:${CONTACT_PHONE}`} className="text-slate-400 hover:text-therapeutic-primary transition-colors">
+                    {CONTACT_PHONE_DISPLAY}
+                  </a>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
-                <MapPin className="mt-1 h-5 w-5 text-emerald-400 flex-shrink-0" />
+                <MapPin className="mt-1 h-5 w-5 text-therapeutic-primary flex-shrink-0" />
                 <div>
                   <p className="text-slate-400">Online Sessions</p>
                   <p className="text-slate-400">Across Ontario</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
-                <Clock className="mt-1 h-5 w-5 text-emerald-400 flex-shrink-0" />
+                <Clock className="mt-1 h-5 w-5 text-therapeutic-primary flex-shrink-0" />
                 <div>
                   <p className="text-slate-400">Mon-Fri: 9AM-7PM</p>
                   <p className="text-slate-400">Sat: 10AM-4PM</p>
@@ -135,11 +145,12 @@ export default function Footer() {
         {/* Crisis Support Banner */}
         <div className="mt-16 pt-12 border-t border-slate-800">
           <div className="bg-red-900/30 border border-red-700/50 rounded-xl p-6 mb-12">
-            <p className="text-red-300 font-semibold mb-3 text-lg">Crisis Support Available 24/7</p>
+            <p className="text-red-300 font-semibold mb-2 text-lg">Crisis Support Available 24/7</p>
+            <p className="text-slate-300 text-sm mb-4">This is not an emergency service. If you are in immediate danger, call 911.</p>
             <div className="flex flex-wrap gap-8 text-sm">
               <span className="text-slate-300">Emergency: <strong className="text-red-300">911</strong></span>
-              <span className="text-slate-300">Crisis Line: <strong className="text-red-300">9-8-8</strong></span>
-              <span className="text-slate-300">Talk Suicide Canada: <strong className="text-red-300">1-833-456-4566</strong></span>
+              <span className="text-slate-300">Crisis Line: <a className="text-red-300 underline" href="tel:988">9-8-8</a></span>
+              <span className="text-slate-300">Talk Suicide Canada: <a className="text-red-300 underline" href="tel:1-833-456-4566">1-833-456-4566</a></span>
             </div>
           </div>
         </div>
@@ -151,16 +162,16 @@ export default function Footer() {
               © {new Date().getFullYear()} Resolve Men's Therapy. All rights reserved.
             </div>
             <div className="flex flex-wrap gap-6">
-              <Link href="/privacy" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+              <Link href="/privacy" className="text-sm text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+              <Link href="/terms" className="text-sm text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                 Terms of Service
               </Link>
-              <Link href="/disclaimer" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+              <Link href="/disclaimer" className="text-sm text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                 Disclaimer
               </Link>
-              <Link href="/accessibility" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors duration-200">
+              <Link href="/accessibility" className="text-sm text-slate-400 hover:text-therapeutic-primary transition-colors duration-200">
                 Accessibility
               </Link>
             </div>

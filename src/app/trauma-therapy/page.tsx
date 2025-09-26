@@ -3,10 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Heart, Shield, CheckCircle, Clock, Calendar, AlertTriangle } from "lucide-react";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { customProfessionalServiceJsonLd } from "@/lib/jsonld";
+import { SITE_URL } from "@/lib/seo";
 
 export default function TraumaTherapyPage() {
   return (
     <Layout>
+      <JsonLd data={customProfessionalServiceJsonLd({ serviceType: "Trauma Therapy (PTSD) for Men", url: `${SITE_URL}/trauma-therapy` })} />
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <div className="w-16 h-16 bg-therapeutic-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">

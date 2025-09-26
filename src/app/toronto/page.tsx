@@ -4,55 +4,36 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin, Building, Clock, Calendar, Users, CheckCircle } from "lucide-react";
 import Link from "next/link";
-import StructuredData from "@/components/StructuredData";
 import { useEffect } from "react";
+import { HeroWithImage } from "@/components/sections/hero-with-image";
+import { THERAPY_IMAGES } from "@/lib/therapy-images";
+import Layout from "@/components/Layout";
 
 export default function TorontoPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <StructuredData type="localBusiness" location="toronto" />
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <Link href="/" className="flex items-center">
-              <div className="text-2xl lg:text-3xl font-bold text-gray-900">
-                <span className="text-therapeutic-primary">Resolve</span>
-                <span className="text-gray-700 ml-2">Men's Therapy</span>
-              </div>
-            </Link>
-            <nav className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Home</Link>
-              <Link href="/about" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">About</Link>
-              <Link href="/services" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Services</Link>
-              <Link href="/contact" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Contact</Link>
-            </nav>
-          </div>
+    <Layout>
+      {/* Virtual-only care notice */}
+      <div className="max-w-4xl mx-auto px-4 pt-6">
+        <div className="rounded-md bg-therapeutic-primary/5 border border-therapeutic-primary/20 p-3 text-sm text-slate-700">
+          Virtual-only care across Ontario, including Toronto and the GTA.
         </div>
-      </header>
+      </div>
+
+      {/* Hero Section with Toronto Image */}
+      <HeroWithImage
+        title="Men's Therapy in Toronto (Virtual)"
+        subtitle="Greater Toronto Area"
+        description="Professional mental health support designed specifically for men across Toronto, Mississauga, Brampton, and surrounding areas."
+        imageUrl={THERAPY_IMAGES.locations.toronto}
+        imageAlt="Toronto skyline and men's mental health services"
+        primaryButtonText="Book Free Consultation"
+        primaryButtonHref="/book-consultation"
+        secondaryButtonText="Try Quick Check-In"
+        secondaryButtonHref="/assessment/stress"
+        height="medium"
+      />
 
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <div className="w-16 h-16 bg-therapeutic-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-            <MapPin className="h-8 w-8 text-therapeutic-primary" />
-          </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Men's Therapy in Toronto</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Professional mental health support designed specifically for men across the Greater Toronto Area. Online sessions available throughout Toronto, Mississauga, Brampton, and surrounding areas.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-            <Link href="/book-consultation">
-              <Button size="lg" className="bg-therapeutic-primary hover:bg-therapeutic-primary/90">
-                Book a Free Consultation
-              </Button>
-            </Link>
-            <Link href="/assessment/stress">
-              <Button size="lg" variant="outline">
-                Try a Quick Check-In
-              </Button>
-            </Link>
-          </div>
-        </div>
 
         {/* Why Toronto Men Choose Resolve */}
         <Card className="mb-8">
@@ -64,7 +45,7 @@ export default function TorontoPage() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-700 leading-relaxed mb-6">
-              We understand the unique challenges of living and working in Canada's largest city.
+              We understand the unique challenges of living and working in Canada's largest city. Our virtual-only therapy services are available across Ontario, providing professional mental health support from the convenience of your home or office.
             </p>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
@@ -326,19 +307,6 @@ export default function TorontoPage() {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 mt-12">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="text-2xl font-bold mb-4">
-            <span className="text-therapeutic-accent">Resolve</span>
-            <span className="text-gray-300 ml-2">Men's Therapy</span>
-          </div>
-          <div className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Resolve Men's Therapy. All rights reserved.
-          </div>
-        </div>
-      </footer>
-    </div>
+    </Layout>
   );
 }

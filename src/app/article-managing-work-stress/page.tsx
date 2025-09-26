@@ -4,30 +4,40 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Clock, Calendar, User, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import Layout from "@/components/Layout";
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL } from "@/lib/seo";
+import { THERAPY_IMAGES, getUnsplashImage } from "@/lib/therapy-images";
+import Image from "next/image";
 
 export default function ManagingWorkStressArticle() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <Link href="/" className="flex items-center">
-              <div className="text-2xl lg:text-3xl font-bold text-gray-900">
-                <span className="text-therapeutic-primary">Resolve</span>
-                <span className="text-gray-700 ml-2">Men's Therapy</span>
-              </div>
-            </Link>
-            <nav className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Home</Link>
-              <Link href="/about" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">About</Link>
-              <Link href="/services" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Services</Link>
-              <Link href="/contact" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Contact</Link>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+    <Layout>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: "Navigating High-Pressure Careers: 5 Actionable Strategies for Managing Stress in Ontario",
+          author: { "@type": "Person", name: "Umair Gill" },
+          publisher: { "@type": "Organization", name: "Resolve Men's Therapy" },
+          mainEntityOfPage: `${SITE_URL}/article-managing-work-stress`,
+          datePublished: new Date().toISOString(),
+          dateModified: new Date().toISOString(),
+          image: `${SITE_URL}/api/og?title=${encodeURIComponent("Managing Work Stress")}`,
+          url: `${SITE_URL}/article-managing-work-stress`,
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+            { "@type": "ListItem", position: 2, name: "Articles", item: `${SITE_URL}/articles` },
+            { "@type": "ListItem", position: 3, name: "Managing Work Stress", item: `${SITE_URL}/article-managing-work-stress` },
+          ],
+        }}
+      />
       <article className="max-w-4xl mx-auto px-4 py-12">
         {/* Back to Articles */}
         <div className="mb-8">
@@ -55,9 +65,20 @@ export default function ManagingWorkStressArticle() {
           <h1 className="text-4xl font-bold text-gray-900 mb-6">
             Navigating High-Pressure Careers: 5 Actionable Strategies for Managing Stress in Ontario
           </h1>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-xl text-gray-600 leading-relaxed mb-8">
             This guide offers five practical, evidence-based strategies to help you manage workplace stress, prevent burnout, and reclaim your work-life balance.
           </p>
+
+          {/* Featured Image */}
+          <div className="relative h-64 md:h-80 mb-8 rounded-lg overflow-hidden">
+            <Image
+              src={getUnsplashImage(THERAPY_IMAGES.articles.workStress, { w: 800, h: 400 })}
+              alt="Managing work stress and achieving work-life balance"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </header>
 
         {/* Article Content */}
@@ -235,6 +256,6 @@ export default function ManagingWorkStressArticle() {
           </div>
         </div>
       </footer>
-    </div>
+    </Layout>
   );
 }

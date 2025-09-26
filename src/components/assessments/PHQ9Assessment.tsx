@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Progress } from "@/components/ui/progress";
 import { AlertCircle, CheckCircle2, Calendar } from "lucide-react";
+import { BOOKING_URL } from "@/lib/site-config";
+import ConsentOptIn from "@/components/ConsentOptIn";
 
 interface PHQ9FormData {
   q1: string;
@@ -60,8 +62,8 @@ export default function PHQ9Assessment() {
       level: "Minimal Depression",
       description: "Your responses suggest minimal depression symptoms.",
       recommendation: "Continue healthy lifestyle practices and consider occasional check-ins.",
-      color: "text-green-600",
-      bgColor: "bg-green-50"
+      color: "text-therapeutic-primary",
+      bgColor: "bg-therapeutic-primary/10"
     };
     if (score <= 9) return {
       level: "Mild Depression",
@@ -131,10 +133,13 @@ export default function PHQ9Assessment() {
               </div>
             )}
 
+            {/* CASL-compliant opt-in: on-device only; no network calls */}
+            <ConsentOptIn toolkitName="Mood Reset Toolkit" />
+
             <div className="flex flex-col sm:flex-row gap-3">
               <Button
                 className="therapeutic-gradient text-white hover:opacity-90 transition-opacity flex-1"
-                onClick={() => window.open('https://janeapp.com/', '_blank')}
+                onClick={() => window.open(BOOKING_URL, '_blank')}
               >
                 <Calendar className="mr-2 h-4 w-4" />
                 Book Consultation with JaneApp

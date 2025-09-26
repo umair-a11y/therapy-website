@@ -1,5 +1,6 @@
 "use client";
 
+import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Phone, Calendar, CreditCard } from "lucide-react";
@@ -7,39 +8,23 @@ import Link from "next/link";
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <Link href="/" className="flex items-center">
-              <div className="text-2xl lg:text-3xl font-bold text-gray-900">
-                <span className="text-therapeutic-primary">Resolve</span>
-                <span className="text-gray-700 ml-2">Men's Therapy</span>
-              </div>
-            </Link>
-            <nav className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Home</Link>
-              <Link href="/about" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">About</Link>
-              <Link href="/services" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Services</Link>
-              <Link href="/contact" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Contact</Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+    <Layout>
 
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Your Investment in Yourself</h1>
+          <p className="text-lg text-therapeutic-primary font-medium mb-4">
+            Virtual-only therapy across Ontario
+          </p>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
             Quality mental health support is one of the most valuable investments you can make. Consider the cost of staying stuck versus the value of moving forward with professional guidance.
           </p>
-          <div className="bg-emerald-50 rounded-lg p-6 max-w-4xl mx-auto">
-            <h3 className="text-lg font-semibold text-emerald-800 mb-3">Compare Your Options</h3>
+          <div className="bg-therapeutic-primary/5 rounded-lg p-6 max-w-4xl mx-auto">
+            <h3 className="text-lg font-semibold text-therapeutic-primary mb-3">Compare Your Options</h3>
             <div className="grid md:grid-cols-3 gap-4 text-sm">
               <div className="text-center">
-                <div className="text-emerald-600 font-medium">Professional Therapy</div>
-                <div className="text-gray-600">$125/session - Personalized, evidence-based support</div>
+                <div className="text-therapeutic-primary font-medium">Professional Therapy</div>
+                <div className="text-gray-600">$160/session - Personalized, evidence-based support</div>
               </div>
               <div className="text-center">
                 <div className="text-gray-500">Monthly Gym Membership</div>
@@ -83,7 +68,7 @@ export default function PricingPage() {
               </ul>
               <Link href="/contact" className="block">
                 <Button className="w-full bg-green-600 hover:bg-green-700">
-                  Book Your Free Consultation
+                  Book a 30-minute consult
                 </Button>
               </Link>
             </CardContent>
@@ -98,7 +83,7 @@ export default function PricingPage() {
             </div>
             <CardHeader className="text-center pt-8">
               <CardTitle className="text-2xl text-therapeutic-primary">Individual Therapy</CardTitle>
-              <div className="text-4xl font-bold text-gray-900 mt-2">$125</div>
+              <div className="text-4xl font-bold text-gray-900 mt-2">$160</div>
               <p className="text-gray-600">Per 50-Minute Session</p>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -132,7 +117,7 @@ export default function PricingPage() {
           <Card className="border-2 border-blue-200">
             <CardHeader className="text-center">
               <CardTitle className="text-2xl text-blue-600">Sliding Scale</CardTitle>
-              <div className="text-4xl font-bold text-gray-900 mt-2">$85-$125</div>
+              <div className="text-4xl font-bold text-gray-900 mt-2">$110-$160</div>
               <p className="text-gray-600">Based on Financial Need</p>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -255,7 +240,7 @@ export default function PricingPage() {
               <Link href="/contact">
                 <Button size="lg" className="bg-therapeutic-primary hover:bg-therapeutic-primary/90">
                   <Calendar className="mr-2 h-5 w-5" />
-                  Book Your Free Consultation
+                  Book a 30-minute consult
                 </Button>
               </Link>
               <Link href="/faq">
@@ -268,18 +253,6 @@ export default function PricingPage() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 mt-12">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="text-2xl font-bold mb-4">
-            <span className="text-therapeutic-accent">Resolve</span>
-            <span className="text-gray-300 ml-2">Men's Therapy</span>
-          </div>
-          <div className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Resolve Men's Therapy. All rights reserved.
-          </div>
-        </div>
-      </footer>
-    </div>
+    </Layout>
   );
 }

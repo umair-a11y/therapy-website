@@ -42,3 +42,7 @@ next-env.d.ts
 
 .vercel
 .env*.local
+
+# Playwright & test artifacts
+playwright-report/
+test-results/

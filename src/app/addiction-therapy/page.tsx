@@ -3,10 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LifeBuoy, Shield, CheckCircle, Clock, Calendar, AlertTriangle } from "lucide-react";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { customProfessionalServiceJsonLd } from "@/lib/jsonld";
+import { SITE_URL } from "@/lib/seo";
 
 export default function AddictionTherapyPage() {
   return (
     <Layout>
+      <JsonLd data={customProfessionalServiceJsonLd({ serviceType: "Addiction Support for Men", url: `${SITE_URL}/addiction-therapy` })} />
 
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">

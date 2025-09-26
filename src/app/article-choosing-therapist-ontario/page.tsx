@@ -4,10 +4,37 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Clock, Calendar, User, ArrowLeft, CheckCircle, AlertTriangle } from "lucide-react";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL } from "@/lib/seo";
 
 export default function ChoosingTherapistOntarioArticle() {
   return (
     <div className="min-h-screen bg-white">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: "How to Choose a Therapist in Ontario: A Guide for Men",
+          author: { "@type": "Person", name: "Umair Gill" },
+          publisher: { "@type": "Organization", name: "Resolve Men's Therapy" },
+          mainEntityOfPage: `${SITE_URL}/article-choosing-therapist-ontario`,
+          datePublished: new Date().toISOString(),
+          dateModified: new Date().toISOString(),
+          image: `${SITE_URL}/api/og?title=${encodeURIComponent("Choosing a Therapist in Ontario")}`,
+          url: `${SITE_URL}/article-choosing-therapist-ontario`,
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+            { "@type": "ListItem", position: 2, name: "Articles", item: `${SITE_URL}/articles` },
+            { "@type": "ListItem", position: 3, name: "Choosing a Therapist", item: `${SITE_URL}/article-choosing-therapist-ontario` },
+          ],
+        }}
+      />
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

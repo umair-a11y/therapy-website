@@ -1,0 +1,333 @@
+Resolve Men’s Therapy — Director Addendum: Best Practices, Gaps & GPT-5 Responsibilities (v1.1)
+
+Scope: Next.js App Router (TypeScript) on Vercel. Target: men in Ontario; virtual-only care; 30-minute consult CTA; measurement-minded (Self-Assessments).
+Goal: Beat First Step Men’s Therapy on clarity, engagement, and technical quality without tripping compliance.
+
+1) Non-negotiables (what Google & W3C actually grade you on)
+
+Core Web Vitals (field data): Optimize LCP, INP, CLS and verify in Search Console. INP replaced FID—treat responsiveness seriously. 
+Google for Developers
++1
+
+People-first content: Write for humans first; demonstrate experience, expertise, and usefulness. Use the self-assessment questions from Google’s doc to QA every page. 
+Google for Developers
+
+No intrusive popups: Use small, easily dismissible bottom-sheets for any “Take a Self-Assessment” prompts—avoid full-page interstitials that block content (mobile especially). 
+Google for Developers
+
+Metadata & share cards: Use the Next.js Metadata API per route and generate dynamic OG images for better share CTR. 
+Next.js
+
+Accessibility: Follow WCAG 2.2 (contrast, focus, semantics) and WAI-ARIA Authoring Practices for components like accordions/dialogs. Automate checks in Playwright with axe-core. 
+W3C
++2
+W3C
++2
+
+2) Common website gaps (and exact fixes in this stack)
+A. Performance & CWV
+
+Slow LCP (hero image too heavy): Use next/image with width/height, priority, and modern formats. Defer non-critical JS. Verify LCP in Lighthouse CI. 
+Next.js
+
+Poor INP (long tasks): Trim JS, split code, avoid blocking third-party scripts, use React Server Components and selective hydration. Confirm INP in Search Console. 
+Google for Developers
+
+CLS (layout jumps): Always reserve space for images/fonts. Use next/font to self-host and prevent swaps. 
+Next.js
++1
+
+Over-prefetching: Accept Next’s defaults; if needed, prefetch on intent (router.prefetch)—don’t globally prefetch huge menus. 
+Next.js
+
+B. Technical SEO
+
+Missing/weak metadata: Implement generateMetadata() on every route (title, description, canonical, OG/Twitter). 
+Next.js
+
+Sitemap & robots: Add app/sitemap.ts and app/robots.ts with correct allows. 
+Next.js
+
+Structured data: Add Organization / ProfessionalService JSON-LD with areaServed: "Ontario, CA", plus BlogPosting and breadcrumbs. 
+Schema.org
+
+Popups harming SEO: Keep any promo dialog non-intrusive; don’t cover primary content on load. 
+Google for Developers
+
+C. Accessibility
+
+Headings/landmarks: One H1 per page; use <main>, <nav>, <footer>. WCAG 2.2 reference for quick checks. 
+W3C
+
+Keyboard traps / dialog focus: Follow ARIA patterns for dialogs/accordions; test with Playwright + axe. 
+W3C
++1
+
+Contrast & focus visibility: Meet AA minimum; ensure focus isn’t obscured. 
+W3C
+
+D. Security & Privacy
+
+Security headers: Add CSP (start in Report-Only), X-Content-Type-Options, Referrer-Policy, etc., via Next’s headers guide / Vercel docs. 
+Next.js
++1
+
+Keep Next.js patched: Track security notes (e.g., middleware CVE) and update when advised. 
+Vercel
+
+E. Compliance (Ontario)
+
+CRPO advertising: No client testimonials in any form (including republishing third-party reviews). 
+CRPO
++1
+
+Electronic practice: Follow CRPO electronic practice standards; obtain informed consent for virtual care tech. 
+CRPO
+
+PHIPA: Be explicit about what’s collected; Self-Assessments show on device by default; email opt-ins require clear consent. 
+IPC Ontario
+
+CASL: Every email = consent + sender identification + 1-click unsubscribe. 
+CRTC
+
+3) What GPT-5 will do in this repo (extra responsibilities)
+
+A. Technical SEO & content architecture
+
+Author generateMetadata() for all routes; enforce title/description lengths; add canonicals. 
+Next.js
+
+Implement app/sitemap.ts + app/robots.ts; validate in Search Console. 
+Next.js
+
+Generate JSON-LD (Organization/ProfessionalService with areaServed = Ontario; BlogPosting; BreadcrumbList). 
+Schema.org
+
+Create dynamic OG image endpoint (app/api/og/route.tsx) with brand/title/subtitle overlays. 
+Next.js
+
+B. Performance & stability
+
+Replace hero/media with next/image; add priority; ensure dimensions; audit third-party JS. 
+Next.js
+
+Adopt next/font for zero-layout-shift fonts; preload critical fonts. 
+Next.js
+
+Review prefetch usage; use router.prefetch() on clear user intent only. 
+Next.js
+
+C. Accessibility
+
+Insert skip link; verify landmarks; convert generic <div>s to semantic elements; ensure labels/touch targets meet WCAG 2.2. 
+W3C
+
+Wire Playwright + @axe-core/playwright tests to CI for automated a11y audits. 
+Playwright
+
+D. Security & privacy
+
+Propose CSP in Report-Only first; iterate violations until clean; then enforce. 
+Vercel
+
+Add standard security headers in next.config.ts; document exceptions. 
+Next.js
+
+E. QA automation
+
+Expand Playwright visual snapshots for key pages (desktop & mobile) using toHaveScreenshot({ fullPage: true }). 
+Playwright
+
+Add Lighthouse CI to GitHub Actions with budgets (Perf≥90, Acc≥95, SEO≥95, BP≥95). 
+GitHub
+
+F. Conversion integrity
+
+Enforce one primary CTA per view (“Book a 30-minute consult”); demote all others to secondary/tertiary. 
+v10.carbondesignsystem.com
+
+Keep “Self-Assessments” prompts polite, dismissible, and non-blocking (bottom-sheet). 
+Google for Developers
+
+4) Concrete checklists we’ll run on every PR
+A. SEO pass
+
+ generateMetadata() present & correct on changed routes. 
+Next.js
+
+ Canonical set; no duplicate titles; OG/Twitter tags verified. 
+Next.js
+
+ sitemap.ts includes new routes; robots.ts allows crawl. 
+Next.js
+
+ JSON-LD validates (Org/ProfessionalService with areaServed, BlogPosting, BreadcrumbList). 
+Schema.org
+
+B. Performance pass
+
+ Hero uses next/image with dimensions + priority; fonts via next/font. 
+Next.js
++1
+
+ No unexpected global prefetching; large third-parties deferred. 
+Next.js
+
+ Lighthouse CI meets budgets on preview. 
+GitHub
+
+C. Accessibility pass
+
+ One H1; proper landmarks; logical focus order. 
+W3C
+
+ Dialogs/accordions follow ARIA patterns; esc/overlay click closes; focus trapped and returned. 
+W3C
+
+ Playwright + axe checks pass in CI. 
+Playwright
+
+D. Security & privacy pass
+
+ CSP Report-Only clean; then enforced. 
+Vercel
+
+ Security headers present in next.config.ts. 
+Next.js
+
+ Self-Assessments: results computed client-side; email/toolkit opt-in only; messages CASL-compliant (consent, ID, unsubscribe). 
+CRTC
+
+E. Compliance pass (Ontario)
+
+ No testimonials or review snippets. 
+CRPO
+
+ Virtual-care consent language visible; link to privacy/consent page. 
+CRPO
+
+ PHIPA-aligned privacy statements (collection/use/disclosure explained; on-device scoring noted). 
+IPC Ontario
+
+5) Conversion playbook (lightweight, research-backed)
+
+Hero clarity: H1 says who it’s for + the outcome; subhead trims friction; singular primary CTA; others are secondary text links. 
+v10.carbondesignsystem.com
+
+Reading pattern: Front-load value and key links near the top/left to match F-pattern scanning. 
+didattica.uniroma2.it
+
+CTA copy: Use action + outcome (“Book a 30-minute consult” beats “Get started”). Keep one primary action per view. 
+webcomponents.ucla.edu
++1
+
+Prompts, not popups: Offer “Take a Self-Assessment” as a small, dismissible bottom-sheet; never block content on arrival. 
+Google for Developers
+
+6) Automation we’ll wire (repo-aware)
+
+Playwright visual regression: home.spec.ts, services.spec.ts, assessments.spec.ts, blog.spec.ts, contact.spec.ts; viewports 1280×800 & 390×844; expect(page).toHaveScreenshot({ fullPage: true }). 
+Playwright
+
+Axe in Playwright: add @axe-core/playwright; run await new AxeBuilder({ page }).analyze() on key routes in CI. 
+Playwright
+
+Lighthouse CI: GitHub Action on Vercel preview with thresholds Perf≥90, Acc≥95, SEO≥95, Best Practices≥95. 
+GitHub
+
+7) Where GPT-5 adds outsized value (beyond code)
+
+Proactive issue finder
+
+Scan for: duplicate Next configs, missing next/image sizing, weak metadata, absent JSON-LD, over-prefetching, CLS-prone fonts, intrusive dialogs.
+
+Ship patch PRs with short “why this matters” notes tied to CWV/SEO/a11y docs. 
+Google for Developers
++2
+Next.js
++2
+
+Schema & metadata author
+
+Generate Organization/ProfessionalService JSON-LD with areaServed: Ontario, CA, plus route-level BlogPosting & breadcrumbs. 
+Schema.org
+
+Compliance guard
+
+Redline any testimonial-like copy/assets; ensure virtual-only consent and PHIPA-aligned privacy text. 
+CRPO
++2
+CRPO
++2
+
+Measurement-based care UX
+
+Ensure Self-Assessments compute client-side; add opt-in Toolkit email with CASL-compliant footer. 
+CRTC
+
+Security advisor
+
+Propose CSP (Report-Only → Enforce), add security headers, track Next.js security bulletins. 
+Vercel
++2
+Next.js
++2
+
+Release quality gate
+
+Block merges when Playwright visuals, axe checks, or Lighthouse budgets fail, and attach crisp diffs.
+
+8) “Gaps → Fixes” quick table
+Gap found	Why it hurts	Fix in this stack
+Hero image shifts layout	CLS fails; trust drops	next/image with explicit size + priority; preload. 
+Next.js
+
+Sluggish taps/typing	INP fails	Cut long tasks; defer non-critical JS; RSC where possible; validate in SC. 
+Google for Developers
+
+Popup covers content	Search & UX penalty	Use dismissible bottom-sheet; no full-screen interstitial. 
+Google for Developers
+
+Missing metadata/OG	Poor snippets & CTR	generateMetadata() + dynamic OG via next/og. 
+Next.js
+
+Weak a11y (dialogs)	Keyboard/screen reader blocks	Follow ARIA patterns; axe checks in CI. 
+W3C
++1
+
+No JSON-LD	Less clarity to crawlers	Org/ProfessionalService + areaServed + BlogPosting. 
+Schema.org
+
+Security headers absent	XSS/misconfig risk	Add CSP (Report-Only → Enforce) + standard headers. 
+Next.js
++1
+9) Housekeeping for this repo (actionable)
+
+Consolidate Next config: keep next.config.ts only; remove next.config.js after parity check.
+
+Ignore artifacts: ensure playwright-report/ and test-results/ are in .gitignore.
+
+Husky hooks: pre-commit typecheck/lint/format; pre-push pnpm test:ci (Playwright + axe + Lighthouse CI link step).
+
+10) Definitions we align to (short)
+
+Core Web Vitals: LCP (load), INP (interactivity), CLS (stability). 
+Google for Developers
+
+People-first content: authenticity, usefulness, expertise; not “SEO-first.” 
+Google for Developers
+
+Intrusive interstitials: overlays blocking content at or soon after load—avoid. 
+Google for Developers
+
+Done right, this gives you:
+
+Search-ready pages with strong snippets,
+
+Fast, calm UI that respects how men actually read and act,
+
+A safety net (visual/a11y/perf) that keeps quality from slipping,
+
+Compliance that doesn’t dull the message.
+
+If you want, I can now open a PR checklist tailored to your current branches and drop in the CSP, Metadata, JSON-LD, and Playwright+axe scaffolds in one shot.

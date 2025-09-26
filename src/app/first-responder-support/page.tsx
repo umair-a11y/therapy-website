@@ -4,10 +4,14 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Shield, Calendar } from "lucide-react";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { customProfessionalServiceJsonLd } from "@/lib/jsonld";
+import { SITE_URL } from "@/lib/seo";
 
 export default function FirstResponderSupport() {
   return (
     <Layout>
+      <JsonLd data={customProfessionalServiceJsonLd({ serviceType: "First Responder Support", url: `${SITE_URL}/first-responder-support` })} />
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         <section className="py-16 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

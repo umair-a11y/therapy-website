@@ -3,8 +3,9 @@ import GAD7Assessment from "@/components/assessments/GAD7Assessment";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Anxiety Assessment | GAD-7 Screening | MentalWell Therapy",
-  description: "Take our confidential GAD-7 anxiety screening. Professional mental health assessment for men with immediate results and evidence-based recommendations.",
+  title: "Anxiety Assessment | GAD-7 Screening | Resolve Men's Therapy",
+  description:
+    "Take our confidential GAD-7 anxiety screening. Professional mental health assessment for men with immediate results and evidence-based recommendations.",
 };
 
 export default function AnxietyAssessmentPage() {

@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Resolve Men's Therapy — Next.js App (App Router)
 
 ## Getting Started
 
@@ -20,17 +20,66 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Email Setup (Resend)
 
-To learn more about Next.js, take a look at the following resources:
+This project uses Resend to send consultation notifications and toolkits.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Env vars (set in Vercel → Settings → Environment Variables):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `RESEND_API_KEY` — your Resend API key
+- `EMAIL_FROM` — sender, e.g. `Resolve Men's Therapy <onboarding@resend.dev>`
+- `EMAIL_TO` — practice inbox (defaults to `info@resolvemenstherapy.com`)
+- `NEXT_PUBLIC_SITE_URL` — canonical base URL (e.g. `https://resolvemenstherapy.com`)
 
-## Deploy on Vercel
+Test (after deploy):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+curl -s -X POST "https://<your-domain>/api/consultation" \
+  -H "Content-Type: application/json" \
+  -d '{"fullName":"Test User","email":"you@example.com","consent":true,"privacyPolicy":true}'
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Toolkits (on explicit consent): `/api/toolkit` is called by the results opt‑in component to send a toolkit email.
+
+## SEO & Search Console
+
+- Submit `https://<your-domain>/sitemap.xml` in Google Search Console.
+- Confirm coverage and CWV for key routes (Home, Services, About).
+- Each route uses `buildMetadata()` for title/description/canonicals; service pages and articles include JSON‑LD (ProfessionalService/BlogPosting/Breadcrumbs).
+
+## Security Headers
+
+Security headers are enforced in production via `next.config.ts`:
+
+- `Content-Security-Policy` (Report‑Only in non‑prod)
+- `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: DENY`
+- `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+
+Use DevTools or `curl -I` to verify headers on deployed pages.
+
+## Testing
+
+Playwright E2E + visual regression + axe accessibility tests:
+
+```bash
+npm run test:e2e
+npm run test:e2e:headed     # debug
+npm run test:e2e:ui         # interactive
+npm run test:update-snapshots
+```
+
+Dynamic UI (e.g., self‑assessment prompt) is masked in visuals for stability. Security header checks are included.
+
+## Link Checking
+
+With the dev server running on port 3000, you can crawl internal links to catch broken routes:
+
+```bash
+npm run dev  # in one terminal
+npm run links  # in another terminal; crawls http://localhost:3000
+```
+
+The link checker skips external URLs and recurses through internal pages.

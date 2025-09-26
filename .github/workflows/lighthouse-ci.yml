@@ -1,0 +1,98 @@
+name: Lighthouse CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js app
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL || 'https://resolvemenstherapy.com' }}
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.14.x
+
+      - name: Run Lighthouse CI
+        run: lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: Upload Lighthouse results
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results
+          path: .lighthouseci
+          retention-days: 7
+
+      - name: Comment on PR with results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            // Read the assertion results
+            const assertionResults = JSON.parse(
+              fs.readFileSync('.lighthouseci/assertion-results.json', 'utf8')
+            );
+
+            // Format scores for comment
+            const formatScore = (score) => {
+              const percentage = Math.round(score * 100);
+              if (percentage >= 90) return `✅ ${percentage}`;
+              if (percentage >= 70) return `⚠️ ${percentage}`;
+              return `❌ ${percentage}`;
+            };
+
+            // Extract scores from first run
+            const firstRun = assertionResults[0];
+            const scores = {
+              performance: firstRun.categories?.performance?.score,
+              accessibility: firstRun.categories?.accessibility?.score,
+              'best-practices': firstRun.categories?.['best-practices']?.score,
+              seo: firstRun.categories?.seo?.score,
+            };
+
+            // Build comment body
+            const body = `## Lighthouse CI Results
+
+            | Category | Score | Threshold |
+            |----------|-------|-----------|
+            | Performance | ${formatScore(scores.performance)} | ≥90 |
+            | Accessibility | ${formatScore(scores.accessibility)} | ≥95 |
+            | Best Practices | ${formatScore(scores['best-practices'])} | ≥95 |
+            | SEO | ${formatScore(scores.seo)} | ≥95 |
+
+            ${Object.values(scores).some(s => s < 0.9) ? '⚠️ Some scores are below thresholds. Please review the Lighthouse report.' : '✅ All scores meet thresholds!'}
+            `;
+
+            // Post comment on PR
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+
+      - name: Fail if scores below thresholds
+        run: |
+          lhci assert --preset lighthouse:recommended

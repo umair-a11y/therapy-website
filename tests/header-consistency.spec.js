@@ -21,7 +21,8 @@ const pages = [
 test.describe('Header Consistency Tests', () => {
   pages.forEach(({ path, name }) => {
     test(`Header consistency on ${name}`, async ({ page }) => {
-      await page.goto(`http://localhost:3200${path}`);
+      // Use Playwright baseURL from config
+      await page.goto(path);
 
       // Wait for page to load
       await page.waitForLoadState('networkidle');

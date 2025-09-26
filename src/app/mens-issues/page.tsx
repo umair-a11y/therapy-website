@@ -4,10 +4,14 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { User, Calendar } from "lucide-react";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { customProfessionalServiceJsonLd } from "@/lib/jsonld";
+import { SITE_URL } from "@/lib/seo";
 
 export default function MensIssues() {
   return (
     <Layout>
+      <JsonLd data={customProfessionalServiceJsonLd({ serviceType: "Men's Issues Support", url: `${SITE_URL}/mens-issues` })} />
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         <section className="py-16 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

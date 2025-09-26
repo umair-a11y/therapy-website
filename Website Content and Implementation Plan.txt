@@ -1,0 +1,709 @@
+Resolve Men's Therapy - Website Content & Implementation Plan
+Project State Addendum v1.1a — Repo‑Reconciled (Codex, 2025‑09‑25)
+
+Purpose: Align Gemini’s instructions with the current repo and known details before execution. Claude should follow this addendum where it differs from earlier sections.
+
+Canonical Domain and Contacts
+ - Domain: https://resolvemenstherapy.com (use config, do not hardcode in code samples)
+ - Booking: https://resolve-mens-therapy.janeapp.com
+- Email: info@resolvemenstherapy.com
+- Phone: (437) 494-7115
+- Physical address: none (virtual‑only; do not display)
+
+Compliance and Privacy
+- Use PHIPA (Ontario) terminology across the site (replace any PIPEDA references).
+- CRPO guardrail: absolutely no testimonials or client reviews.
+- Self‑assessments compute client‑side only; do not send responses to server.
+
+Structured Data (Schema.org)
+- Sitewide Organization JSON‑LD:
+  - Use url: https://resolvemenstherapy.com
+  - Include contactPoint.telephone (confirmed above).
+  - sameAs: include Psychology Today listing; omit social profiles if none available.
+- WebSite JSON‑LD:
+  - Use url: https://resolvemenstherapy.com
+  - Only include SearchAction if site search is implemented; otherwise omit.
+- Services (ProfessionalService):
+  - url: https://resolvemenstherapy.com
+  - areaServed: Ontario
+  - serviceType: Online Therapy for Men
+  - provider.name: Umair Gill
+  - Omit telephone/image until confirmed assets and number are provided.
+- FAQPage and BlogPosting JSON‑LD:
+  - Implement FAQPage on /faq per provided Q&A.
+  - Implement BlogPosting + BreadcrumbList on cornerstone articles.
+
+SEO Implementation Notes
+- Each route should export unique title (≤ 60 chars) and description (~150–160 chars).
+- Use Next.js Metadata API and generate OG images via /api/og.
+- Use a single H1 per page and logical heading hierarchy.
+- Internal links as specified in content; avoid intrusive popups.
+
+CASL Opt‑In (Assessments Results)
+- Add an unchecked checkbox with explicit consent text.
+- Include sender identification (Resolve Men’s Therapy, phone and contact email). Note: CASL typically requires a valid mailing address; consider a PO Box if needed. Until provided, do not display an address.
+- Provide an unsubscribe note/link (when email sending is wired).
+- Do not send any request unless consent is checked and email is valid.
+
+Repo‑Aware Guidance for Executors
+- Base URL must come from configuration: use SITE_URL (env: NEXT_PUBLIC_SITE_URL) and avoid hardcoding.
+- Update any remaining legacy brand references (“MentalWell Therapy”) to “Resolve Men’s Therapy.”
+- Replace “PIPEDA” with “PHIPA” where applicable.
+- Robots and sitemap should reference SITE_URL, not hardcoded strings.
+
+Known Legacy Spots To Fix (in code)
+- src/app/privacy/page.tsx: metadata title, privacy contact email/phone show “MentalWell”; update brand, email, and PHIPA mention.
+- src/app/assessment/anxiety/page.tsx and src/app/assessment/depression/page.tsx: update metadata brand to Resolve Men’s Therapy.
+- src/app/contact/page.tsx: replace “PIPEDA‑compliant” with “PHIPA‑compliant”; keep Jane App link.
+
+Linking Guidance
+- Do not add a public, visible link to the Psychology Today listing on the site. Using it in schema.org sameAs only is acceptable.
+
+Open Fields To Confirm With Client
+- Phone number
+- Business address/city for CASL
+- Secure video platform name (e.g., Jane App Video, Doxy.me)
+- Payment methods (Visa/Mastercard/e‑Transfer)
+- Professional title (e.g., Registered Psychotherapist)
+
+Addendum complete. Executors should use this as the authoritative override when implementing metadata and schema.
+To: Codex Development Team
+From: Gemini
+Version: 1.1
+Date: 2025-09-25
+
+This document contains all finalized copy, content, and technical instructions for the Resolve Men’s Therapy website, based on the v1.0 enhancement brief.
+
+1. High-Level Strategy & Guardrails
+Objective: Create a compliant, emotionally resonant, and SEO-optimized website for men in Ontario (ages 25-65) seeking practical, structured therapy.
+
+Core Differentiators:
+
+Systems Thinking: An engineer’s approach to therapy—finding small levers for big change.
+
+Measurement-Based Care: Using regular Self-Assessments to track progress.
+
+Clear Milestones: A formal progress review at week 4–6 to ensure we’re on track.
+
+Primary CTA: Book a 30-minute consult
+
+Voice: Plain talk, Grade 7–8 readability. Empathetic but direct. Lead with the feeling, follow with the plan.
+
+Compliance (Non-Negotiable):
+
+No testimonials or client reviews anywhere on the site (CRPO).
+
+Privacy (PHIPA): All data handling must be transparent. The site uses Jane App for booking and [Name of Secure Video Platform] for sessions, both of which are PHIPA-compliant.
+
+Consent (CASL): All email opt-ins must be explicit (user checks a box), with clear sender ID and an unsubscribe link in every email.
+
+2. SEO & Technical Implementation
+A. On-Page SEO Basics
+Titles & Metas: Each page must have a unique <title> (≤60 chars) and <meta name="description"> (≤160 chars). See page-by-page copy for specifics.
+
+Headings: Use a single <h1> per page. Use <h2>, <h3>, etc., logically.
+
+Keywords: The provided copy naturally incorporates primary keywords like therapy for men in ontario, online therapy ontario, anger management therapy for men ontario, etc. No keyword stuffing is required.
+
+Internal Linking: Implement internal links as specified in the page copy to connect related services, assessments, and blog posts.
+
+B. Structured Data (Schema)
+Please implement the following JSON-LD schemas in the <head> of the relevant pages.
+
+Sitewide (Organization & WebSite):
+
+JSON
+
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Resolve Men’s Therapy",
+  "url": "https://www.resolvetherapy.ca",
+  "logo": "https://www.resolvetherapy.ca/path/to/logo.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-XXX-XXX-XXXX",
+    "contactType": "Customer Service"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/umair-gill-placeholder"
+  ]
+}
+JSON
+
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://www.resolvetherapy.ca",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.resolvetherapy.ca/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+Services Pages (ProfessionalService):
+
+JSON
+
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Resolve Men’s Therapy",
+  "image": "https://www.resolvetherapy.ca/path/to/image.jpg",
+  "url": "https://www.resolvetherapy.ca",
+  "telephone": "+1-XXX-XXX-XXXX",
+  "provider": {
+    "@type": "Person",
+    "name": "Umair Gill"
+  },
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Ontario"
+  },
+  "serviceType": "Online Therapy for Men"
+}
+FAQ Page (FAQPage):
+Use this structure for each question on the FAQs page.
+
+JSON
+
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What are your fees?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Our session fee is [Fee Amount] for a 50-minute virtual session. We provide a receipt that you can use for reimbursement from most extended health benefits plans."
+    }
+  }, {
+    "@type": "Question",
+    "name": "Do you offer direct billing?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We do not offer direct billing at this time. You can submit your receipt to your insurance provider for reimbursement according to your plan’s coverage for Registered Psychotherapists."
+    }
+  }]
+}
+Blog Posts (BlogPosting):
+Implement this schema on all cornerstone content articles.
+
+JSON
+
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Post Title Here",
+  "author": {
+    "@type": "Person",
+    "name": "Umair Gill"
+  },
+  "datePublished": "YYYY-MM-DD",
+  "dateModified": "YYYY-MM-DD",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Resolve Men’s Therapy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.resolvetherapy.ca/path/to/logo.png"
+    }
+  }
+}
+C. Popups & Conversion Layer
+Implementation: Use a non-intrusive bottom-sheet banner on both desktop and mobile.
+
+Trigger: On exit-intent (desktop) or after 15 seconds of inactivity (mobile).
+
+Content:
+
+Headline: Feeling stuck? Find your starting point.
+
+Button 1: Take a free Self-Assessment (links to Self-Assessments page)
+
+Button 2: Book a 30-minute consult (links to Jane App booking)
+
+3. Page-by-Page Content & Copywriting
+1) Home Page
+<title>: Online Therapy for Men in Ontario | Resolve Men's Therapy
+
+<meta name="description">: Practical, system-based online therapy for men in Ontario dealing with anger, anxiety, burnout, and relationship strain. Navigate your path forward.
+
+Hero Image Concepts:
+
+Typographic Hero: Strong, clean typography on a neutral, textured background (e.g., dark grey, deep navy). The focus is entirely on the words. H1: Stop white-knuckling it. H2: A clear plan for moving forward.
+
+Abstract/Metaphorical Image: A high-quality, slightly desaturated photo of a man at a fork in a trail or looking at a map. The tone should be contemplative, not defeated.
+
+[HERO SECTION - ABOVE THE FOLD]
+
+<h1>
+Tired of feeling stuck?
+
+<h2>
+Therapy that gives you a plan, not just a place to talk. We use a clear, system-based approach to help you navigate anger, anxiety, and burnout. Practical online therapy for men across Ontario.
+
+<button (primary cta)>
+Book a 30-minute consult
+
+<sub-text>
+Virtual sessions available province-wide.
+
+[“WHAT’S DIFFERENT” STRIP - BELOW HERO]
+
+<h2>
+A different approach. Clear results.
+
+[Column 1]
+Systems Thinking
+We look at the whole picture—your work, your relationships, your habits—to find the small levers that create the biggest impact. No endless talking without a goal.
+
+[Column 2]
+See Your Progress
+Regular Self-Assessments give us data, not just feelings. We measure what’s working so you know you’re making real, tangible progress.
+
+[Column 3]
+The 4–6 Week Review
+We formally check in early on. We review your progress against your goals and adjust the plan to make sure your investment is paying off.
+
+[“WHAT BRINGS MEN HERE” SECTION]
+
+<h2>
+If this sounds familiar, you’re in the right place.
+
+You’re running on empty, and the smallest thing can set you off.
+
+Anxiety hits you in the middle of the night with a looping list of worries.
+
+You feel distant from your partner or kids, but don’t know how to close the gap.
+
+You’re successful at work but feel like you’re failing everywhere else.
+
+The old way of just “handling it” isn’t working anymore.
+
+<button (secondary cta)>
+See how we can help (Links to Services page)
+
+[“HOW IT WORKS” SECTION]
+
+<h2>
+Your Path Forward in 4 Steps
+
+1. Book
+Schedule a free, 30-minute consultation to see if we’re the right fit. No pressure, no obligation.
+
+2. Plan
+In our first session, we’ll map out your goals and build a clear, practical plan to get you there.
+
+3. Work
+Engage in weekly sessions focused on building skills and making targeted changes. Use Self-Assessments to track your progress.
+
+4. Review
+At weeks 4–6, we’ll review what’s working and fine-tune our approach so you continue to move forward.
+
+<button (primary cta)>
+Book a 30-minute consult
+
+2) About the Clinic
+<title>: Our Approach | Resolve Men's Therapy
+
+<meta name="description">: We use systems thinking and measurement-based care. Learn how our practical, structured approach to men's therapy delivers clear results.
+
+<h1>
+Stop treating the symptoms. Start fixing the system.
+
+<h2>
+You’ve been white-knuckling it for a long time. Pushing through the burnout, managing the anger, containing the anxiety. But that constant effort is exhausting, and it’s not solving the underlying problem.
+
+At Resolve, we believe burnout, anger, and anxiety aren’t just random feelings. They are symptoms of a system under too much strain. Your work demands, family life, sleep patterns, and internal pressures are all connected. Our job is to help you see the whole map.
+
+We use an engineer’s mindset to find the small levers that create the biggest shifts. Instead of just talking about the problem, we identify the feedback loops that keep you stuck and build practical strategies to break them.
+
+How Self-Assessments Steer Your Care
+We use simple, confidential check-ins to track your progress with real data. These on-device tools help us see what’s improving—like sleep quality or focus—and where to adjust our plan. It ensures your therapy is always targeted, efficient, and moving in the right direction.
+
+Therapy here is not a place to drift. It’s a workshop to build a more resilient, intentional life.
+
+<button (primary cta)>
+Book a 30-minute consult
+
+3) Meet the Founder (Umair Gill)
+<title>: Meet Umair Gill | Resolve Men's Therapy
+
+<meta name="description">: From engineer to therapist, Umair Gill brings a systems-based approach to help men in Ontario solve the problems that keep them stuck.
+
+<h1>
+From Engineer to Therapist
+
+For over a decade, I designed complex systems as an engineer. My job was to find the single point of failure that could bring everything crashing down. I learned to see the world in feedback loops, inputs, and outputs—a way of thinking that values clarity and tangible results.
+
+But in my own life, and in the lives of the men around me, I saw a different kind of system failure. Good men—smart, capable, and driven—were burning out, shutting down, or blowing up. They were trying to solve problems of the heart with brute force, and it was breaking them.
+
+I realized the tools I used to diagnose system failures in engineering were missing from the world of mental health. The desire for a clear plan, for measurable progress, and for practical, no-bullshit solutions wasn't being met.
+
+So I went back to school and became a therapist.
+
+I founded Resolve Men’s Therapy to bridge that gap. This practice combines evidence-based therapeutic models like CBT, ACT, and IFS with the practical, systematic approach I honed as an engineer. We find the root cause, build a plan, and execute it.
+
+[CLOSER OPTION 1 - CONCISE]
+
+My goal is to help you get unstuck. If you’re ready for a practical, focused approach to therapy, let’s talk.
+
+[CLOSER OPTION 2 - REFLECTIVE]
+
+I believe every man has the capacity to build a life of purpose and connection. Sometimes, you just need a better blueprint and the right set of tools. If you’re ready to start building, I’m here to help.
+
+4) Services (Hub + Detail Pages)
+Services Hub Page
+
+<h1>
+Tools for the path forward.
+
+<h2>
+We provide practical, evidence-based therapy for men facing common but difficult challenges. Each service is tailored to your specific goals, with our signature focus on systems, self-assessment, and clear progress reviews.
+
+[Service Cards - Link to Detail Pages]
+
+Anger Management: Move from reaction to response.
+
+Anxiety & Stress: Quiet the noise and regain control.
+
+Burnout & Overload: Rebuild your energy and set boundaries.
+
+ADHD & Focus: Create systems that work with your brain.
+
+Relationships & Connection: Repair distance and communicate better.
+
+Depression & Low Mood: Find the motivation to move forward again.
+
+Service Detail Page Template (Example: Anger Management)
+
+<title>: Anger Management Therapy for Men in Ontario
+
+<meta name="description">: Tired of blow-ups and the shame that follows? Our online anger management therapy for men in Ontario helps you understand triggers and respond calmly.
+
+<h1>
+Anger Management: From Reaction to Response
+
+<h2>
+What it feels like:
+
+The pressure builds all day. A missed deadline, traffic, something the kids did. Then, one small thing—a spilled drink, a misplaced comment—and the dam breaks. The anger feels explosive, out of your control. Afterwards comes the shame, the apologies, and the silent fear that you’re becoming that guy.
+
+What we’ll do:
+
+Anger is a signal, not a character flaw. Our work is to decode that signal and give you the tools to manage the energy behind it. We don't aim to eliminate anger, but to control how you express it.
+
+Map Your Triggers: We'll identify the specific situations, thoughts, and even physical states (like exhaustion or hunger) that are your personal tripwires.
+
+Micro-example: We might notice your fuse is shortest around 4 p.m. on days you skip lunch.
+
+Create a Cooldown Plan: You’ll build a practical, in-the-moment script for when you feel the anger rising, giving you the space to choose your response.
+
+Micro-example: This could be a 60-second walk into another room combined with a specific breathing technique.
+
+Build Repair Scripts: Learn exactly what to say after a blow-up to repair the damage with your partner or family, rebuilding trust instead of letting resentment grow.
+
+Micro-example: We’ll craft a simple phrase like, “I was out of line. I’m working on it. Can we talk about it later when I’m calm?”
+
+Separate Anger from Boundaries: Learn to use the energy of anger to set firm, healthy boundaries at work and at home, so problems get solved before they lead to an explosion.
+
+Micro-example: We’ll practice saying “No, I can’t take that on right now” without feeling guilty.
+
+Your Plan Includes:
+
+The Anger Frequency & Recovery Self-Assessment
+
+Your Week 4–6 Progress Review
+
+<button (primary cta)>
+Book a 30-minute consult
+
+(Developer Note: Replicate this "Felt Sense" -> "What We'll Do" structure for all service pages: Anxiety, ADHD, etc., using the same principles.)
+
+5) Self-Assessments (Hub Page)
+<title>: Free Self-Assessments for Men | Resolve Men's Therapy
+
+<meta name="description">: Get a snapshot of your mental health in 90 seconds. Our free, confidential self-assessments help you understand stress, anxiety, mood, and more.
+
+<h1>
+Find Your Starting Point
+
+<h2>
+These free, confidential tools are designed to give you a quick snapshot of where you are right now. Each one takes about 90 seconds to complete.
+
+Important: Your results are for educational purposes only. They are not a diagnosis. Your answers are shown to you on your device and are not stored on our servers.
+
+[Assessment Cards - Link to Individual Tools]
+
+Mood Snapshot: Check in on your overall mood and energy levels.
+
+Anxiety Check: See how worry and stress are impacting you.
+
+Focus & Habits: Explore patterns related to focus and procrastination.
+
+Stress Load & Recovery: Measure the balance between life’s demands and your ability to recharge.
+
+Anger Frequency & Recovery: Understand your personal anger patterns.
+
+Alcohol Use Check-in (AUDIT-C): A quick, 3-question check on your drinking habits.
+
+Sleep Snapshot: Review your sleep hygiene and quality.
+
+Values & Direction Mini: Clarify what truly matters to you.
+
+(Developer Note: Link each card to the corresponding interactive tool described in Section 4 below.)
+
+6) Fees & FAQs
+<title>: Fees & FAQs | Resolve Men's Therapy
+
+<meta name="description">: Find information on session fees, insurance coverage for psychotherapy in Ontario, and answers to common questions about online therapy for men.
+
+<h1>
+Fees & FAQs
+
+<h2>
+Simple, Transparent Pricing
+
+30-Minute Initial Consult: Free
+
+50-Minute Individual Session: $[Session Fee]
+
+Payment: We accept [Payment Methods]. Payment is processed after each session.
+
+Cancellation Policy: Please provide at least [Cancellation Window] hours' notice to avoid being charged for the session.
+
+Insurance & Reimbursement
+
+Therapy with a Registered Psychotherapist is covered by many, but not all, extended health benefits plans in Ontario. We do not offer direct billing. After each session, you will receive a receipt with all the necessary information to submit for reimbursement.
+
+Your Insurance Checklist:
+Before booking, we recommend you ask your insurance provider these questions:
+
+Does my plan cover services from a "Registered Psychotherapist" or "RP"?
+
+What is my total coverage amount per year for mental health services?
+
+Is there a per-session maximum that my plan will reimburse?
+
+Do I need a doctor's referral to be covered?
+
+Frequently Asked Questions
+
+<h3> What technology do you use for sessions? </h3>
+We use [Name of Secure Video Platform], a secure, PHIPA-compliant video platform designed for healthcare. You will receive a private link before each session.
+
+<h3> Is online therapy as effective as in-person? </h3>
+For many issues, research shows that online therapy is just as effective as traditional in-person therapy. It offers the same expert support with added convenience and accessibility from anywhere in Ontario.
+
+<h3> How do I know if we're a good fit? </h3>
+The free 30-minute consult is for exactly that. It's a chance for you to ask questions, share what’s on your mind, and get a feel for my approach. There is no pressure to continue if it doesn't feel right.
+
+<h3> What if I’m in crisis? </h3>
+This practice is not equipped for crisis support. If you are in immediate distress or having thoughts of harming yourself, please contact 9-8-8 (call or text) or go to your nearest emergency room. For non-urgent mental health support, you can contact ConnexOntario at 1-866-531-2600.
+
+(Developer Note: Use the FAQPage schema here.)
+
+7) Contact Page
+<title>: Contact | Resolve Men's Therapy
+
+<meta name="description">: Book your free 30-minute consult for online men's therapy in Ontario.
+
+[ABOVE THE FOLD]
+<h1>
+Take the first step.
+
+<h2>
+The easiest way to get started is to book a free, no-obligation 30-minute consult. Find a time that works for you using the link below.
+
+<button (primary cta)>
+Book a 30-minute consult (Links to Jane App)
+
+For general inquiries (not for booking):
+Email: umair@resolvetherapy.ca
+Phone: (XXX) XXX-XXXX
+
+We are a virtual-only practice serving all of Ontario.
+
+[BELOW THE FOLD - CRISIS BLOCK]
+
+<h2>
+If You Are in Crisis
+
+This clinic is not an emergency service. If you are in immediate danger or need urgent support, please use one of these 24/7 resources:
+
+Call or text 9-8-8 (Suicide Crisis Helpline)
+
+Go to your nearest hospital emergency department
+
+For other mental health services, call ConnexOntario at 1-866-531-2600 or text CONNEX to 247247.
+
+4. Self-Assessment Tools (Content & Logic)
+Developer Instructions:
+
+Each tool should be a simple, multi-step form.
+
+Results must be calculated and displayed on-device only. Do not store answers or scores.
+
+The final results screen for each tool must include the educational disclaimer and the optional Toolkit email opt-in form.
+
+Standard Results Screen Template
+[Top Section - Dynamic Result]
+Your Score: [Score]
+Band: [e.g., Mild, Moderate, Severe]
+
+[2-3 sentence reflection based on the score band. See specific tools below.]
+
+Disclaimer: This is an educational tool, not a diagnosis. Your results are a snapshot based on your answers and can be a helpful starting point for a conversation with a professional.
+
+[Middle Section - Email Opt-in]
+<h4> Get Your Free Toolkit </h4>
+Enter your email to receive the [Toolkit Name] — a PDF with practical steps you can take today.
+
+[Email Input Field]
+[ ] By checking this box, I consent to receive this email from Resolve Men’s Therapy. I understand I can unsubscribe at any time.
+
+<button> Send My Toolkit
+
+(Developer Note: On submission, trigger an email with the appropriate PDF and add the user to the email list. This must be CASL compliant.)
+
+1. Mood (PHQ-9 Style)
+Title: Mood Snapshot
+Intro: Over the last 2 weeks, how often have you been bothered by any of the following problems?
+Scale: 0 (Not at all), 1 (Several days), 2 (More than half the days), 3 (Nearly every day)
+Questions:
+
+Little interest or pleasure in doing things.
+
+Feeling down, depressed, or hopeless.
+
+Trouble falling/staying asleep, or sleeping too much.
+
+Feeling tired or having little energy.
+
+Poor appetite or overeating.
+
+Feeling bad about yourself—or that you are a failure.
+
+Trouble concentrating on things.
+
+Moving or speaking so slowly that other people could have noticed? Or the opposite—being so fidgety or restless that you have been moving around a lot more than usual.
+
+Thoughts that you would be better off dead or of hurting yourself in some way.
+
+Scoring & Results:
+
+0-4 (Minimal): Your responses suggest your mood is generally stable.
+
+5-9 (Mild): It seems like you've been feeling down on some days. Paying attention to stress, sleep, and daily habits could be helpful.
+
+10-14 (Moderate): These feelings are likely interfering with your daily life. It may be a good time to speak with a professional.
+
+15+ (Severe): It sounds like you are struggling significantly. Reaching out for support is a critical next step.
+
+(For brevity, the detailed content for the remaining 7 assessments follows the same structure: Title, Intro, Scale, Questions, Scoring Logic, and tiered Results copy. All are based on publicly available, non-proprietary models like GAD-7, ASRS Part-A, AUDIT-C, etc., framed for educational use.)
+
+5. Email Toolkits & Opt-In
+CASL-Compliant Opt-In Form (On Results Screen)
+Headline: Get Your Free [Toolkit Name].
+
+Body: A PDF with practical exercises to help you [achieve specific outcome].
+
+Email Field: [Enter your email]
+
+Checkbox (unchecked by default): [ ] Yes, please send me the toolkit. I consent to Resolve Men’s Therapy contacting me via email. I know I can unsubscribe at any time.
+
+Button: Send My Toolkit
+
+Footer Text: We respect your privacy. Sender: Resolve Men’s Therapy, [Clinic Address/City], [Contact Email]. Unsubscribe link.
+
+Toolkit Content Outlines (PDFs)
+Anger Cooldowns:
+
+Page 1: The 90-Second Rule: How to pause before you react. A body scan exercise.
+
+Page 2: A fillable "Post-Blowup Log" to identify patterns.
+
+Page 3: Two "Repair Scripts" for what to say to a partner or child after you lose your cool.
+
+2 a.m. Anxiety Loop Breaker:
+
+Page 1: A "Thought-Testing" worksheet (What's the evidence for/against this worry?).
+
+Page 2: A visual guide to Box Breathing (4s in, 4s hold, 4s out, 4s hold).
+
+Page 3: The "Return-to-Bed Ladder": 5 steps to try before looking at your phone.
+
+Focus Sprint Planner (ADHD):
+
+Page 1: How to use the 25/5 Pomodoro technique. A visual timer guide.
+
+Page 2: A fillable worksheet to plan your top 3 tasks for the day and break down the first one.
+
+Page 3: Tips for managing digital distractions (notifications, etc.).
+
+(Content for Sleep, Stress, and Values toolkits to follow a similar practical, worksheet-based format.)
+
+6. Cornerstone Blog Posts (Outlines)
+Structure: Story -> Systems View -> 3-Step Practice
+
+Anger Isn't the Problem. Uncontrolled Reactions Are.
+
+Story: A relatable story of a man snapping over something small.
+
+Systems View: How poor sleep, work stress, and skipping meals create a "low-resource state" where anger is the default.
+
+Practice: 1) Identify your physical warning signs. 2) Implement a "strategic pause." 3) Practice one repair script.
+
+How to Shut Down the 2 a.m. Worry Machine
+
+Story: A man lying awake, mind racing about a work project or family issue.
+
+Systems View: Explaining the role of cortisol and the "unsolved problem loop" when the brain is tired.
+
+Practice: 1) The "Worry Write-Down" exercise. 2) A 5-minute breathing exercise. 3) The rule of not problem-solving after midnight.
+
+Why We Measure Your Progress (And Why It Works)
+
+Story: An analogy of a pilot flying without instruments vs. with them.
+
+Systems View: Explaining "Measurement-Based Care" in simple terms (citing APA). How data helps us be objective and adjust the plan.
+
+Practice: An invitation to try a self-assessment on the site.
+... and so on for the remaining 7 posts.
+
+7. Micro-copy & Final Implementation Notes
+"What brings men here" (Home Page)
+
+Keep the 5 bullets provided. They are symptom-focused and direct.
+
+"What’s different here" (Home Page)
+
+Use the 3 columns provided: Systems Thinking, See Your Progress, The 4–6 Week Review.
+
+"How it works" (Home Page)
+
+Use the 4 steps: Book, Plan, Work, Review. One verb per step.
+
+Footer Crisis Line (Sitewide):
+
+Text: If you are in crisis, call or text 9-8-8. This is not an emergency service. Link "9-8-8" to the official crisis site. Include a link to the Contact page for the full crisis block.
+
+8. Open Fields for Client to Provide
+Please confirm the following details with Umair before the final launch:
+
+Session Fee: $[____]
+
+Cancellation Window: [____] hours
+
+Payment Methods: [e.g., Visa, Mastercard, e-Transfer]
+
+Secure Video Platform Name: [e.g., Jane App Video, Doxy.me, etc.]
+
+Full Business Address/City for CASL: [____]
+
+Contact Phone Number: (XXX) XXX-XXXX
+
+Professional Title for Display: [e.g., Registered Psychotherapist]
+
+LinkedIn Profile URL: [____]

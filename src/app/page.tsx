@@ -13,6 +13,10 @@ import {
   AlertCircle, HelpCircle, Target, Zap
 } from "lucide-react";
 import Link from "next/link";
+import { HeroWithImage } from "@/components/sections/hero-with-image";
+import { THERAPY_IMAGES, getUnsplashImage } from "@/lib/therapy-images";
+import { BOOKING_URL } from "@/lib/site-config";
+import Image from "next/image";
 
 export default function Home() {
   const [currentTeamSlide, setCurrentTeamSlide] = useState(0);
@@ -52,51 +56,24 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-slate-50 to-white py-20 lg:py-32">
+      {/* Hero Section with Image */}
+      <HeroWithImage
+        title="Tired of feeling stuck?"
+        subtitle="Resolve Men's Therapy"
+        description="Therapy that gives you a plan, not just a place to talk. We use a clear, system-based approach to help you navigate anger, anxiety, and burnout. Practical online therapy for men across Ontario."
+        imageUrl={THERAPY_IMAGES.hero.main}
+        imageAlt="Professional men's therapy and mental health support"
+        primaryButtonText="Book a 30-minute consult"
+        primaryButtonHref={BOOKING_URL}
+        secondaryButtonText="Take a free Self-Assessment"
+        secondaryButtonHref="/self-check"
+        height="large"
+        overlayOpacity={0.4}
+      />
+
+      {/* Feature cards section */}
+      <section className="py-12">
         <div className="container mx-auto px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl text-center">
-            {/* Overline text */}
-            <p className="mb-6 text-sm font-medium tracking-wide text-slate-600 uppercase">
-              RESOLVE MEN'S THERAPY
-            </p>
-
-            {/* Main headline - Much larger and more impactful */}
-            {/* Cache bust: 2025-01-16 Force refresh */}
-            <h1 className="mb-8 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl text-balance">
-              Stop Feeling Lost.{" "}
-              <span className="text-therapeutic-primary">Start Feeling Found.</span>
-            </h1>
-            {/* Force cache invalidation - timestamp: {new Date().toISOString()} */}
-
-            {/* Subheading with better spacing */}
-            <p className="mb-12 text-lg leading-relaxed text-slate-600 sm:text-xl lg:text-2xl max-w-3xl mx-auto">
-              Therapy designed specifically for men across Ontario
-            </p>
-
-            {/* CTA buttons with consistent styling */}
-            <div className="flex flex-col gap-4 sm:flex-row sm:justify-center sm:gap-6">
-              <Link href="/book-consultation">
-                <TherapyButton
-                  variant="primary"
-                  size="lg"
-                  className="therapy-shadow-lg"
-                >
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Book Free Consultation
-                </TherapyButton>
-              </Link>
-              <Link href="/contact">
-                <TherapyButton
-                  variant="outline"
-                  size="lg"
-                >
-                  Request Information
-                </TherapyButton>
-              </Link>
-            </div>
-          </div>
-
           {/* Feature cards with better spacing */}
           <div className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div className="rounded-xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-200 hover:therapy-shadow-lg">
@@ -106,99 +83,156 @@ export default function Home() {
             </div>
             <div className="rounded-xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-200 hover:therapy-shadow-lg">
               <div className="mb-3 text-2xl">👤</div>
-              <h3 className="mb-1 font-semibold text-slate-900">Online & In-Person</h3>
-              <p className="text-sm text-slate-600">Flexible Options</p>
+              <h3 className="mb-1 font-semibold text-slate-900">Systems Thinking</h3>
+              <p className="text-sm text-slate-600">Find small levers for big impact</p>
             </div>
             <div className="rounded-xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-200 hover:therapy-shadow-lg">
               <div className="mb-3 text-2xl">🛡️</div>
-              <h3 className="mb-1 font-semibold text-slate-900">Insurance Coverage</h3>
-              <p className="text-sm text-slate-600">Direct Billing Available</p>
+              <h3 className="mb-1 font-semibold text-slate-900">See Your Progress</h3>
+              <p className="text-sm text-slate-600">Regular Self-Assessments give us data</p>
             </div>
             <div className="rounded-xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-200 hover:therapy-shadow-lg">
               <div className="mb-3 text-2xl">👥</div>
-              <h3 className="mb-1 font-semibold text-slate-900">Expert Team</h3>
-              <p className="text-sm text-slate-600">CRPO Registered</p>
+              <h3 className="mb-1 font-semibold text-slate-900">The 4-6 Week Review</h3>
+              <p className="text-sm text-slate-600">Formal check-in to ensure progress</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Emotional States Section - Enhanced Design */}
+      {/* What's Different Section */}
       <section className="bg-slate-50 py-20">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="mx-auto max-w-6xl">
-            <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
-              {/* Left column - Feelings checklist */}
-              <div>
-                <h2 className="mb-8 text-3xl font-bold text-slate-900 lg:text-4xl">
-                  If you find yourself feeling...
-                </h2>
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {emotionalStates.map((state, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <div className="h-2 w-2 rounded-full bg-amber-400"></div>
-                      <span className="text-slate-700">{state}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-8 rounded-lg bg-white p-6 therapy-shadow ring-1 ring-slate-200">
-                  <p className="text-slate-600 leading-relaxed">
-                    Men often wait until crisis to seek support.
-                    Professional support is available when you're ready.
-                  </p>
-                </div>
+            <h2 className="mb-12 text-3xl font-bold text-slate-900 lg:text-4xl text-center">
+              A different approach. Clear results.
+            </h2>
+            <div className="grid gap-8 md:grid-cols-3">
+              <div className="bg-white p-8 rounded-xl therapy-shadow ring-1 ring-slate-200">
+                <h3 className="text-xl font-bold text-slate-900 mb-4">Systems Thinking</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  We look at the whole picture—your work, your relationships, your habits—to find the small levers that create the biggest impact. No endless talking without a goal.
+                </p>
               </div>
-
-              {/* Right column - Support info */}
-              <div>
-                <h3 className="mb-6 text-2xl font-bold text-slate-900">
-                  We provide evidence-based support to help men:
-                </h3>
-
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="mt-1 h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center">
-                      <div className="h-2 w-2 rounded-full bg-emerald-600"></div>
-                    </div>
-                    <p className="text-slate-700 leading-relaxed">Understand themselves and develop healthier coping strategies</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="mt-1 h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center">
-                      <div className="h-2 w-2 rounded-full bg-emerald-600"></div>
-                    </div>
-                    <p className="text-slate-700 leading-relaxed">Build stronger relationships with partners, family, and friends</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="mt-1 h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center">
-                      <div className="h-2 w-2 rounded-full bg-emerald-600"></div>
-                    </div>
-                    <p className="text-slate-700 leading-relaxed">Process and heal from past experiences and trauma</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="mt-1 h-5 w-5 rounded-full bg-emerald-100 flex items-center justify-center">
-                      <div className="h-2 w-2 rounded-full bg-emerald-600"></div>
-                    </div>
-                    <p className="text-slate-700 leading-relaxed">Navigate life transitions and challenges with confidence</p>
-                  </div>
-                </div>
-
-                <div className="mt-8">
-                  <Link href="/book-consultation">
-                    <TherapyButton variant="primary" size="lg">
-                      Start Your Journey Today
-                    </TherapyButton>
-                  </Link>
-                </div>
+              <div className="bg-white p-8 rounded-xl therapy-shadow ring-1 ring-slate-200">
+                <h3 className="text-xl font-bold text-slate-900 mb-4">See Your Progress</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Regular Self-Assessments give us data, not just feelings. We measure what's working so you know you're making real, tangible progress.
+                </p>
               </div>
+              <div className="bg-white p-8 rounded-xl therapy-shadow ring-1 ring-slate-200">
+                <h3 className="text-xl font-bold text-slate-900 mb-4">The 4–6 Week Review</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  We formally check in early on. We review your progress against your goals and adjust the plan to make sure your investment is paying off.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What Brings Men Here Section */}
+      <section className="bg-white py-20">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl">
+            <h2 className="mb-12 text-3xl font-bold text-slate-900 lg:text-4xl text-center">
+              If this sounds familiar, you're in the right place.
+            </h2>
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="mt-2 h-2 w-2 rounded-full bg-therapeutic-primary flex-shrink-0"></div>
+                <p className="text-lg text-slate-700 leading-relaxed">
+                  You're running on empty, and the smallest thing can set you off.
+                </p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="mt-2 h-2 w-2 rounded-full bg-therapeutic-primary flex-shrink-0"></div>
+                <p className="text-lg text-slate-700 leading-relaxed">
+                  Anxiety hits you in the middle of the night with a looping list of worries.
+                </p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="mt-2 h-2 w-2 rounded-full bg-therapeutic-primary flex-shrink-0"></div>
+                <p className="text-lg text-slate-700 leading-relaxed">
+                  You feel distant from your partner or kids, but don't know how to close the gap.
+                </p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="mt-2 h-2 w-2 rounded-full bg-therapeutic-primary flex-shrink-0"></div>
+                <p className="text-lg text-slate-700 leading-relaxed">
+                  You're successful at work but feel like you're failing everywhere else.
+                </p>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="mt-2 h-2 w-2 rounded-full bg-therapeutic-primary flex-shrink-0"></div>
+                <p className="text-lg text-slate-700 leading-relaxed">
+                  The old way of just "handling it" isn't working anymore.
+                </p>
+              </div>
+            </div>
+            <div className="mt-12 text-center">
+              <Link href="/services">
+                <TherapyButton variant="secondary" size="lg">
+                  See how we can help
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </TherapyButton>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="py-20 bg-therapeutic-primary/5">
+        <div className="container mx-auto px-6 lg:px-8">
+          <div className="mx-auto max-w-5xl">
+            <h2 className="mb-12 text-3xl font-bold text-slate-900 lg:text-4xl text-center">
+              Your Path Forward in 4 Steps
+            </h2>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+              <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
+                <div className="text-3xl font-bold text-therapeutic-primary mb-4">1</div>
+                <h3 className="text-lg font-bold text-slate-900 mb-3">Book</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Schedule a free, 30-minute consultation to see if we're the right fit. No pressure, no obligation.
+                </p>
+              </div>
+              <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
+                <div className="text-3xl font-bold text-therapeutic-primary mb-4">2</div>
+                <h3 className="text-lg font-bold text-slate-900 mb-3">Plan</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  In our first session, we'll map out your goals and build a clear, practical plan to get you there.
+                </p>
+              </div>
+              <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
+                <div className="text-3xl font-bold text-therapeutic-primary mb-4">3</div>
+                <h3 className="text-lg font-bold text-slate-900 mb-3">Work</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Engage in weekly sessions focused on building skills and making targeted changes. Use Self-Assessments to track your progress.
+                </p>
+              </div>
+              <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
+                <div className="text-3xl font-bold text-therapeutic-primary mb-4">4</div>
+                <h3 className="text-lg font-bold text-slate-900 mb-3">Review</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  At weeks 4–6, we'll review what's working and fine-tune our approach so you continue to move forward.
+                </p>
+              </div>
+            </div>
+            <div className="mt-12 text-center">
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                <TherapyButton variant="primary" size="lg">
+                  Book a 30-minute consult
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </TherapyButton>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
       {/* Who We Help Section */}
-      <section className="py-20 bg-emerald-50">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center mb-16">
             <h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">
@@ -212,7 +246,7 @@ export default function Home() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
             {/* Working Professionals */}
             <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
-              <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-therapeutic-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <div className="text-2xl">💼</div>
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Working Professionals</h3>
@@ -228,7 +262,7 @@ export default function Home() {
 
             {/* Relationship Challenges */}
             <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
-              <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-therapeutic-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <div className="text-2xl">💕</div>
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Relationship Issues</h3>
@@ -244,7 +278,7 @@ export default function Home() {
 
             {/* Life Transitions */}
             <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
-              <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-therapeutic-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <div className="text-2xl">🔄</div>
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Life Transitions</h3>
@@ -260,7 +294,7 @@ export default function Home() {
 
             {/* Mental Health Concerns */}
             <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
-              <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-therapeutic-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <div className="text-2xl">🧠</div>
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Mental Health</h3>
@@ -276,7 +310,7 @@ export default function Home() {
 
             {/* Trauma & Recovery */}
             <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
-              <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-therapeutic-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <div className="text-2xl">🛡️</div>
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Trauma & Recovery</h3>
@@ -292,7 +326,7 @@ export default function Home() {
 
             {/* Personal Growth */}
             <div className="bg-white p-6 rounded-xl therapy-shadow ring-1 ring-slate-200">
-              <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+              <div className="w-12 h-12 bg-therapeutic-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <div className="text-2xl">📈</div>
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Personal Growth</h3>
@@ -313,15 +347,15 @@ export default function Home() {
               our approach is tailored to meet you where you are in your journey.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/book-consultation">
-                <TherapyButton size="lg" className="bg-emerald-600 hover:bg-emerald-700">
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                <TherapyButton size="lg" className="bg-therapeutic-primary hover:bg-therapeutic-primary/90">
                   <Calendar className="mr-2 h-5 w-5" />
-                  Book Free Consultation
+                  Book a 30-minute consult
                 </TherapyButton>
-              </Link>
-              <Link href="/assessment/depression">
-                <TherapyButton size="lg" variant="outline" className="border-emerald-600 text-emerald-600 hover:bg-emerald-50">
-                  Take Self-Assessment
+              </a>
+              <Link href="/self-check">
+                <TherapyButton size="lg" variant="outline" className="border-therapeutic-primary text-therapeutic-primary hover:bg-therapeutic-primary/5">
+                  Take a free Self-Assessment
                 </TherapyButton>
               </Link>
             </div>
@@ -342,7 +376,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-emerald-50 rounded-2xl p-8 lg:p-12 therapy-shadow ring-1 ring-emerald-100">
+          <div className="bg-therapeutic-primary/5 rounded-2xl p-8 lg:p-12 therapy-shadow ring-1">
             <div className="mx-auto max-w-3xl">
               <h3 className="mb-8 text-2xl font-bold text-slate-900 lg:text-3xl">
                 Welcome — taking the first step requires courage
@@ -363,7 +397,7 @@ export default function Home() {
                   our evidence-based approach is tailored to help you develop practical strategies and
                   achieve meaningful change.
                 </p>
-                <p className="font-semibold text-emerald-700 text-lg">
+                <p className="font-semibold text-therapeutic-primary text-lg">
                   Reaching out is a sign of strength, not weakness.
                 </p>
               </div>
@@ -394,7 +428,7 @@ export default function Home() {
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
-              <Brain className="mb-4 h-12 w-12 text-emerald-600" />
+              <Brain className="mb-4 h-12 w-12 text-therapeutic-primary" />
               <h3 className="mb-3 text-xl font-semibold text-slate-900">You Feel Understood</h3>
               <p className="text-slate-600 leading-relaxed">
                 Finally work with someone who truly gets what you're going through as a man.
@@ -403,7 +437,7 @@ export default function Home() {
             </div>
 
             <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
-              <UserCheck className="mb-4 h-12 w-12 text-emerald-600" />
+              <UserCheck className="mb-4 h-12 w-12 text-therapeutic-primary" />
               <h3 className="mb-3 text-xl font-semibold text-slate-900">You Can Trust the Process</h3>
               <p className="text-slate-600 leading-relaxed">
                 Rest assured you're getting professional, ethical care from CRPO registered
@@ -412,7 +446,7 @@ export default function Home() {
             </div>
 
             <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
-              <Award className="mb-4 h-12 w-12 text-emerald-600" />
+              <Award className="mb-4 h-12 w-12 text-therapeutic-primary" />
               <h3 className="mb-3 text-xl font-semibold text-slate-900">You See Real Progress</h3>
               <p className="text-slate-600 leading-relaxed">
                 Experience meaningful change through proven methods like CBT, DBT, and EMDR
@@ -421,11 +455,10 @@ export default function Home() {
             </div>
 
             <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
-              <Heart className="mb-4 h-12 w-12 text-emerald-600" />
+              <Heart className="mb-4 h-12 w-12 text-therapeutic-primary" />
               <h3 className="mb-3 text-xl font-semibold text-slate-900">You Get Convenience</h3>
               <p className="text-slate-600 leading-relaxed">
-                Receive support on your terms - whether that's in our comfortable offices
-                or through secure virtual sessions from anywhere in Ontario.
+                Receive support on your terms with secure virtual sessions from anywhere in Ontario.
               </p>
             </div>
           </div>
@@ -458,15 +491,15 @@ export default function Home() {
 
               <ul className="mb-8 space-y-2">
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  <div className="h-1.5 w-1.5 rounded-full bg-therapeutic-primary/50"></div>
                   Personalized approach
                 </li>
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  <div className="h-1.5 w-1.5 rounded-full bg-therapeutic-primary/50"></div>
                   Flexible scheduling
                 </li>
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  <div className="h-1.5 w-1.5 rounded-full bg-therapeutic-primary/50"></div>
                   Evidence-based methods
                 </li>
               </ul>
@@ -474,7 +507,7 @@ export default function Home() {
               <Link href="/individual-therapy">
                 <TherapyButton
                   variant="outline"
-                  className="w-full group-hover:border-emerald-300 group-hover:text-emerald-700"
+                  className="w-full group-hover:border-therapeutic-primary group-hover:text-therapeutic-primary"
                 >
                   Learn More
                 </TherapyButton>
@@ -494,15 +527,15 @@ export default function Home() {
 
               <ul className="mb-8 space-y-2">
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  <div className="h-1.5 w-1.5 rounded-full bg-therapeutic-primary/50"></div>
                   Communication skills
                 </li>
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  <div className="h-1.5 w-1.5 rounded-full bg-therapeutic-primary/50"></div>
                   Conflict resolution
                 </li>
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  <div className="h-1.5 w-1.5 rounded-full bg-therapeutic-primary/50"></div>
                   Intimacy building
                 </li>
               </ul>
@@ -510,7 +543,7 @@ export default function Home() {
               <Link href="/couples-therapy">
                 <TherapyButton
                   variant="outline"
-                  className="w-full group-hover:border-emerald-300 group-hover:text-emerald-700"
+                  className="w-full group-hover:border-therapeutic-primary group-hover:text-therapeutic-primary"
                 >
                   Learn More
                 </TherapyButton>
@@ -530,15 +563,15 @@ export default function Home() {
 
               <ul className="mb-8 space-y-2">
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  <div className="h-1.5 w-1.5 rounded-full bg-therapeutic-primary/50"></div>
                   Peer support
                 </li>
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  <div className="h-1.5 w-1.5 rounded-full bg-therapeutic-primary/50"></div>
                   Shared experiences
                 </li>
                 <li className="flex items-center gap-2 text-sm text-slate-600">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                  <div className="h-1.5 w-1.5 rounded-full bg-therapeutic-primary/50"></div>
                   Cost-effective
                 </li>
               </ul>
@@ -546,7 +579,7 @@ export default function Home() {
               <Link href="/group-therapy">
                 <TherapyButton
                   variant="outline"
-                  className="w-full group-hover:border-emerald-300 group-hover:text-emerald-700"
+                  className="w-full group-hover:border-therapeutic-primary group-hover:text-therapeutic-primary"
                 >
                   Learn More
                 </TherapyButton>
@@ -570,7 +603,7 @@ export default function Home() {
             {specializations.map((spec, index) => (
               <Link key={index} href={spec.link}>
                 <div className="group rounded-xl bg-white p-4 text-center therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg hover:-translate-y-1 cursor-pointer">
-                  <p className="font-medium text-slate-900 group-hover:text-emerald-700 transition-colors">
+                  <p className="font-medium text-slate-900 group-hover:text-therapeutic-primary transition-colors">
                     {spec.name}
                   </p>
                 </div>
@@ -624,7 +657,7 @@ export default function Home() {
       <section className="py-20 bg-slate-50">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <Mail className="mx-auto mb-6 h-12 w-12 text-emerald-600" />
+            <Mail className="mx-auto mb-6 h-12 w-12 text-therapeutic-primary" />
             <h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">
               Stay Connected
             </h2>
@@ -651,7 +684,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-emerald-700 to-emerald-600">
+      <section className="py-20 therapeutic-gradient">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="mb-6 text-3xl font-bold text-white lg:text-4xl">
@@ -663,11 +696,11 @@ export default function Home() {
               and we're ready to walk alongside you.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-              <Link href="/book-consultation">
-                <TherapyButton size="lg" className="bg-white text-emerald-700 hover:bg-slate-100">
-                  Book a Free Consultation
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                <TherapyButton size="lg" className="bg-white text-therapeutic-primary hover:bg-slate-100">
+                  Book a 30-minute consult
                 </TherapyButton>
-              </Link>
+              </a>
               <Link href="/contact">
                 <TherapyButton size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
                   Ask Us a Question
@@ -682,35 +715,34 @@ export default function Home() {
       <section className="py-20 bg-slate-50">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center mb-16">
-            <MapPin className="mx-auto mb-6 h-12 w-12 text-emerald-600" />
+            <MapPin className="mx-auto mb-6 h-12 w-12 text-therapeutic-primary" />
             <h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">
               Our Locations
             </h2>
             <p className="text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
-              We offer in-person sessions in Toronto, Ottawa, and surrounding areas,
-              plus virtual services across Ontario.
+              We provide virtual therapy across Ontario, including Toronto and Ottawa.
             </p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
             <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
-              <h3 className="mb-3 text-xl font-semibold text-slate-900">Toronto Office</h3>
+              <h3 className="mb-3 text-xl font-semibold text-slate-900">Toronto (Virtual)</h3>
               <p className="mb-2 text-slate-600">Downtown Toronto Location</p>
               <p className="mb-6 text-sm text-slate-500">Available by appointment</p>
               <Link href="/contact">
                 <TherapyButton variant="outline" className="w-full">
-                  Get Directions
+                  Contact Us
                 </TherapyButton>
               </Link>
             </div>
 
             <div className="rounded-2xl bg-white p-6 therapy-shadow ring-1 ring-slate-200 transition-all duration-300 hover:therapy-shadow-lg">
-              <h3 className="mb-3 text-xl font-semibold text-slate-900">Ottawa Office</h3>
+              <h3 className="mb-3 text-xl font-semibold text-slate-900">Ottawa (Virtual)</h3>
               <p className="mb-2 text-slate-600">Central Ottawa Location</p>
               <p className="mb-6 text-sm text-slate-500">Available by appointment</p>
               <Link href="/contact">
                 <TherapyButton variant="outline" className="w-full">
-                  Get Directions
+                  Contact Us
                 </TherapyButton>
               </Link>
             </div>
@@ -718,11 +750,11 @@ export default function Home() {
 
           <div className="mt-12 rounded-2xl bg-white p-8 therapy-shadow ring-1 ring-slate-200">
             <div className="flex items-start space-x-4">
-              <Laptop className="mt-1 h-6 w-6 text-emerald-600" />
+              <Laptop className="mt-1 h-6 w-6 text-therapeutic-primary" />
               <div>
                 <h3 className="mb-3 text-lg font-semibold text-slate-900">Virtual Therapy Available</h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Can't make it to our offices? We offer secure video therapy sessions
+                  Prefer to meet from home? We offer secure video therapy sessions
                   for clients anywhere in Ontario. Same professional support, from the
                   comfort of your own space.
                 </p>

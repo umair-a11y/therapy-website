@@ -4,10 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { User, Target, CheckCircle, Calendar, MessageSquare } from "lucide-react";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { customProfessionalServiceJsonLd } from "@/lib/jsonld";
+import { SITE_URL } from "@/lib/seo";
 
 export default function IndividualTherapyPage() {
   return (
     <div className="min-h-screen bg-white">
+      <JsonLd data={customProfessionalServiceJsonLd({ serviceType: "Individual Therapy for Men", url: `${SITE_URL}/individual-therapy` })} />
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

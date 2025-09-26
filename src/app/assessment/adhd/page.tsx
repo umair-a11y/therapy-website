@@ -1,6 +1,7 @@
 "use client";
 
 import Layout from "@/components/Layout";
+import ConsentOptIn from "@/components/ConsentOptIn";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -187,29 +188,7 @@ export default function ADHDAssessmentPage() {
                   {interpretation.description}
                 </p>
 
-                <div className="space-y-4">
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Enter your email to receive your results and learn about next steps:
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-therapeutic-primary"
-                      placeholder="your.email@example.com"
-                      required
-                    />
-                  </div>
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={!email}
-                    className="w-full bg-therapeutic-primary hover:bg-therapeutic-primary/90"
-                  >
-                    Get My Results & Next Steps
-                  </Button>
-                </div>
+                <ConsentOptIn toolkitName="Focus Sprint Planner (ADHD)" />
               </div>
             </CardContent>
           </Card>

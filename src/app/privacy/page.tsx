@@ -2,10 +2,12 @@ import { Metadata } from "next";
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Lock, FileText, Phone } from "lucide-react";
+import { CONTACT_EMAIL, CONTACT_PHONE_DISPLAY } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | CRPO Compliant | MentalWell Therapy",
-  description: "Our privacy policy outlines how we protect your confidential information in accordance with CRPO guidelines and Ontario privacy laws.",
+  title: "Privacy Policy | CRPO Compliant | Resolve Men's Therapy",
+  description:
+    "Our privacy policy outlines how we protect your confidential information in accordance with CRPO guidelines and Ontario's PHIPA privacy law.",
 };
 
 export default function PrivacyPage() {
@@ -17,7 +19,7 @@ export default function PrivacyPage() {
           <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Your privacy and confidentiality are fundamental to our therapeutic practice.
-            We strictly adhere to CRPO guidelines and Ontario privacy legislation.
+            We strictly adhere to CRPO guidelines and Ontario's Personal Health Information Protection Act (PHIPA).
           </p>
         </div>
 
@@ -118,8 +120,8 @@ export default function PrivacyPage() {
                 <h4 className="font-semibold mb-2">Contact Information:</h4>
                 <p className="text-sm">
                   For privacy concerns or to exercise your rights: <br />
-                  Email: privacy@mentalwell.ca <br />
-                  Phone: (555) 123-4567 <br />
+                  Email: {CONTACT_EMAIL} <br />
+                  Phone: {CONTACT_PHONE_DISPLAY} <br />
                   CRPO: <a href="https://www.crpo.ca" className="text-therapeutic-primary underline">www.crpo.ca</a>
                 </p>
               </div>

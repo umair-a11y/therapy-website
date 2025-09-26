@@ -8,6 +8,11 @@ import {
   Calendar, ArrowRight, Target, BookOpen, Lightbulb
 } from "lucide-react";
 import Link from "next/link";
+import { HeroWithImage } from "@/components/sections/hero-with-image";
+import { THERAPY_IMAGES } from "@/lib/therapy-images";
+import { BOOKING_URL } from "@/lib/site-config";
+import Image from "next/image";
+import { getUnsplashImage } from "@/lib/therapy-images";
 
 export default function About() {
   const values = [
@@ -62,19 +67,19 @@ export default function About() {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-therapeutic-primary/5 to-white py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              About Resolve Men's Therapy
-            </h1>
-            <p className="text-xl text-gray-600">
-              Therapy designed for men, by someone who understands what you're going through
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section with Image */}
+      <HeroWithImage
+        title="Stop treating the symptoms. Start fixing the system."
+        subtitle="Our Approach"
+        description="We use systems thinking and measurement-based care. Learn how our practical, structured approach to men's therapy delivers clear results."
+        imageUrl={THERAPY_IMAGES.hero.about}
+        imageAlt="Professional therapy consultation"
+        primaryButtonText="Book a 30-minute consult"
+        primaryButtonHref={BOOKING_URL}
+        secondaryButtonText="Our Services"
+        secondaryButtonHref="/services"
+        height="medium"
+      />
 
       {/* Mission Section */}
       <section className="py-16 bg-white">
@@ -82,42 +87,58 @@ export default function About() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Our Mission
+                An Engineer's Mindset for Therapy
               </h2>
               <div className="space-y-4 text-gray-700">
                 <p>
-                  Resolve Men's Therapy was founded to provide a therapeutic environment tailored to the specific needs of men.
-                  We understand that men process emotions differently, need practical solutions,
-                  and require ongoing support - not just during sessions, but every day.
+                  You've been white-knuckling it for a long time. Pushing through the burnout, managing the anger, containing the anxiety. But that constant effort is exhausting, and it's not solving the underlying problem.
                 </p>
                 <p>
-                  Our team of CRPO registered psychotherapists specializes in men's mental health,
-                  offering evidence-based treatments tailored to address the specific psychological
-                  needs and communication styles of men.
+                  At Resolve, we believe burnout, anger, and anxiety aren't just random feelings. They are symptoms of a system under too much strain. Your work demands, family life, sleep patterns, and internal pressures are all connected. Our job is to help you see the whole map.
+                </p>
+                <p>
+                  We use an engineer's mindset to find the small levers that create the biggest shifts. Instead of just talking about the problem, we identify the feedback loops that keep you stuck and build practical strategies to break them.
                 </p>
               </div>
             </div>
-            <div className="bg-therapeutic-primary/5 rounded-lg p-8">
+            <div className="relative h-[400px] rounded-lg overflow-hidden">
+              <Image
+                src={getUnsplashImage(THERAPY_IMAGES.services.individualTherapy, { w: 600, h: 400 })}
+                alt="Professional therapy session"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Men's Mental Health Matters */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="order-2 lg:order-1 relative h-[400px] rounded-lg overflow-hidden">
+              <Image
+                src={getUnsplashImage(THERAPY_IMAGES.services.mensIssues, { w: 600, h: 400 })}
+                alt="Men's mental health support"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="order-1 lg:order-2 bg-white rounded-lg p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Why Men's Mental Health Matters
+                How Self-Assessments Steer Your Care
               </h3>
               <ul className="space-y-3">
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-gray-700">Men are less likely to seek mental health support despite experiencing similar rates of mental health challenges</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-gray-700">Traditional therapy approaches may not resonate with men's communication styles and needs</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-gray-700">Untreated mental health issues can impact relationships, work performance, and physical health</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-therapeutic-primary mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-gray-700">Early intervention and support can significantly improve quality of life and wellbeing</span>
-                </li>
+                <p className="text-gray-700 mb-4">
+                  We use simple, confidential check-ins to track your progress with real data. These on-device tools help us see what's improving—like sleep quality or focus—and where to adjust our plan.
+                </p>
+                <p className="text-gray-700 mb-4">
+                  It ensures your therapy is always targeted, efficient, and moving in the right direction.
+                </p>
+                <p className="text-gray-700 font-semibold">
+                  Therapy here is not a place to drift. It's a workshop to build a more resilient, intentional life.
+                </p>
               </ul>
             </div>
           </div>
@@ -130,25 +151,26 @@ export default function About() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Meet Your Therapist
+                From Engineer to Therapist
               </h2>
               <div className="space-y-4 text-gray-700">
                 <p>
-                  As a CRPO Registered Psychotherapist (Qualifying) specializing in men's mental health,
-                  I understand the unique challenges men face when seeking therapy. My approach combines
-                  evidence-based techniques with a deep understanding of male communication styles and
-                  the practical solutions men need.
+                  For over a decade, I designed complex systems as an engineer. My job was to find the single point of failure that could bring everything crashing down. I learned to see the world in feedback loops, inputs, and outputs—a way of thinking that values clarity and tangible results.
                 </p>
                 <p>
-                  I focus on building a practice that provides systematic approaches to men's mental health
-                  with measurable outcomes. My specialization in ADHD therapy for men comes from advanced
-                  training and experience working with men who struggle with attention, focus, and
-                  organization challenges.
+                  But in my own life, and in the lives of the men around me, I saw a different kind of system failure. Good men—smart, capable, and driven—were burning out, shutting down, or blowing up. They were trying to solve problems of the heart with brute force, and it was breaking them.
                 </p>
                 <p>
-                  My therapeutic approach is designed specifically for men who want practical solutions,
-                  not just talk. I use evidence-based techniques combined with continuous engagement
-                  systems to ensure you get the support you need, when you need it.
+                  I realized the tools I used to diagnose system failures in engineering were missing from the world of mental health. The desire for a clear plan, for measurable progress, and for practical, no-bullshit solutions wasn't being met.
+                </p>
+                <p>
+                  So I went back to school and became a therapist.
+                </p>
+                <p>
+                  I founded Resolve Men's Therapy to bridge that gap. This practice combines evidence-based therapeutic models like CBT, ACT, and IFS with the practical, systematic approach I honed as an engineer. We find the root cause, build a plan, and execute it.
+                </p>
+                <p className="font-semibold text-therapeutic-primary">
+                  My goal is to help you get unstuck. If you're ready for a practical, focused approach to therapy, let's talk.
                 </p>
               </div>
             </div>
@@ -332,7 +354,7 @@ export default function About() {
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="h-4 w-4 text-therapeutic-primary mt-0.5 mr-2 flex-shrink-0" />
-                  <span>Online or in-person sessions</span>
+                  <span>Secure virtual sessions across Ontario</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="h-4 w-4 text-therapeutic-primary mt-0.5 mr-2 flex-shrink-0" />
@@ -427,12 +449,12 @@ export default function About() {
             Book a free consultation to see how we can help.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/book-consultation">
+            <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="bg-white text-therapeutic-primary hover:bg-gray-100">
                 <Calendar className="mr-2 h-5 w-5" />
-                Book Free Consultation
+                Book a 30-minute consult
               </Button>
-            </Link>
+            </a>
             <Link href="/team">
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
                 Meet Our Team

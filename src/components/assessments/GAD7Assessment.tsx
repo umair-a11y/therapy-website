@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Progress } from "@/components/ui/progress";
 import { AlertCircle, CheckCircle2, Calendar } from "lucide-react";
+import { BOOKING_URL } from "@/lib/site-config";
+import ConsentOptIn from "@/components/ConsentOptIn";
 
 interface GAD7FormData {
   q1: string;
@@ -56,8 +58,8 @@ export default function GAD7Assessment() {
       level: "Minimal Anxiety",
       description: "Your responses suggest minimal anxiety symptoms.",
       recommendation: "Continue healthy stress management practices and regular self-care.",
-      color: "text-green-600",
-      bgColor: "bg-green-50"
+      color: "text-therapeutic-primary",
+      bgColor: "bg-therapeutic-primary/10"
     };
     if (score <= 9) return {
       level: "Mild Anxiety",
@@ -120,10 +122,13 @@ export default function GAD7Assessment() {
               </div>
             )}
 
+            {/* CASL-compliant opt-in: on-device only; no network calls */}
+            <ConsentOptIn toolkitName="2 a.m. Anxiety Loop Breaker" />
+
             <div className="flex flex-col sm:flex-row gap-3">
               <Button
                 className="therapeutic-gradient text-white hover:opacity-90 transition-opacity flex-1"
-                onClick={() => window.open('https://janeapp.com/', '_blank')}
+                onClick={() => window.open(BOOKING_URL, '_blank')}
               >
                 <Calendar className="mr-2 h-4 w-4" />
                 Book Consultation with JaneApp

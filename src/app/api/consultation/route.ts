@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { sendEmail } from "@/lib/email";
 import {
   checkRateLimit,
   validateConsultationInput,
@@ -126,9 +127,10 @@ async function sendSecureLeadNotification(leadData: any) {
   // TODO: Implement with actual email service (SendGrid, AWS SES, etc.)
   // For now, this creates a secure notification template
 
+  const toRecipient = process.env.EMAIL_TO || 'info@resolvemenstherapy.com';
   const notification = {
-    to: 'info@resolvemenstherapy.com', // Practice email
-    subject: `🏥 New Consultation Request - Lead ${leadData.leadId}`,
+    to: toRecipient, // Practice email
+    subject:  `New Consultation Request - Lead ${leadData.leadId}`, 
     body: `
 CONFIDENTIAL - New consultation request received:
 
@@ -153,18 +155,29 @@ This lead request does not constitute a therapeutic relationship.
 Follow CRPO guidelines for initial consultations and intake procedures.
 
 --- SECURITY NOTE ---
-This email contains personal information. Handle according to PIPEDA requirements.
+This email contains personal health information. Handle according to PHIPA requirements.
 Delete after lead is processed into secure CRM system.
     `
   };
 
   // Secure logging (no sensitive data in console)
-  console.log('📧 SECURE EMAIL NOTIFICATION PREPARED:', {
+  console.log('[consultation] Secure email notification prepared:', {
     leadId: leadData.leadId,
     timestamp: leadData.timestamp,
-    recipient: 'info@resolvemenstherapy.com'
+    recipient: notification.to
   });
 
-  // TODO: Replace with actual secure email sending logic
-  // await secureEmailService.send(notification);
+  // Attempt to send via Resend if configured
+  try {
+    const result = await sendEmail({
+      to: notification.to,
+      subject: notification.subject,
+      text: notification.body,
+    });
+    if (!(result as any).ok && !(result as any).skipped) {
+      throw new Error('Email provider reported failure');
+    }
+  } catch (e) {
+    console.error('[consultation] email send failed:', e);
+  }
 }

@@ -1,18 +1,18 @@
 "use client";
 
 import Layout from "@/components/Layout";
+import { BOOKING_URL } from "@/lib/site-config";
+import { CONTACT_EMAIL } from "@/lib/site-config";
 import { Button } from "@/components/ui/button";
 import { Calendar, Mail, Phone, MapPin, Clock, AlertCircle, CheckCircle, Shield } from "lucide-react";
 
 export default function ContactPage() {
   const handleBooking = () => {
-    // Replace with actual Jane App booking URL
-    window.open("https://resolve-mens-therapy.janeapp.com", "_blank");
+    window.open(BOOKING_URL, "_blank");
   };
 
   const handleEmailContact = (subject: string, body: string = "") => {
-    const email = "info@resolvemenstherapy.com";
-    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
   };
 
@@ -26,10 +26,10 @@ export default function ContactPage() {
             Ready to Get Started?
           </div>
           <h1 className="text-4xl lg:text-5xl font-bold leading-tight text-gray-900 mb-6">
-            Contact Resolve Men's Therapy
+            Take the first step
           </h1>
           <p className="text-xl text-gray-600 leading-relaxed mb-8">
-            Take the first step toward better mental health. Book your free consultation or get in touch with any questions.
+            Book your free consultation through our secure Jane App booking platform or send us a message with any questions.
           </p>
 
           {/* Primary CTAs */}
@@ -40,7 +40,7 @@ export default function ContactPage() {
               onClick={handleBooking}
             >
               <Calendar className="mr-2 h-5 w-5" />
-              Book Free Consultation
+              Book a 30-minute consult
             </Button>
             <Button
               size="lg"
@@ -67,13 +67,13 @@ export default function ContactPage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">Book Online</h3>
               <p className="text-gray-600 mb-6">
-                Schedule your free consultation or therapy session through our secure booking platform.
+                Schedule your free consultation through our secure Jane App booking platform.
               </p>
               <Button
                 className="w-full bg-therapeutic-primary hover:bg-therapeutic-primary/90 text-white"
                 onClick={handleBooking}
               >
-                Book Appointment
+                Book a 30-minute consult
               </Button>
             </div>
 
@@ -127,7 +127,7 @@ export default function ContactPage() {
               <div className="space-y-2 text-gray-600">
                 <p>Online sessions across Ontario</p>
                 <p>CRPO Registered Psychotherapist (Qualifying)</p>
-                <p>Secure, PIPEDA-compliant video platform</p>
+                <p>Secure, PHIPA-compliant video platform</p>
                 <p className="text-sm text-therapeutic-primary mt-4">
                   Professional liability insurance coverage
                 </p>
@@ -150,7 +150,7 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-4 gap-6">
             <div className="bg-white p-6 rounded-lg border-l-4 border-red-500">
               <h3 className="font-bold text-red-900 mb-2">Emergency</h3>
               <p className="text-2xl font-bold text-red-600 mb-2">911</p>
@@ -161,6 +161,12 @@ export default function ContactPage() {
               <h3 className="font-bold text-red-900 mb-2">Crisis Line</h3>
               <p className="text-2xl font-bold text-red-600 mb-2">9-8-8</p>
               <p className="text-sm text-red-700">Call or text 24/7</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg border-l-4 border-red-500">
+              <h3 className="font-bold text-red-900 mb-2">ConnexOntario</h3>
+              <p className="text-xl font-bold text-red-600 mb-2">1-866-531-2600</p>
+              <p className="text-sm text-red-700">Mental health & addiction support</p>
             </div>
 
             <div className="bg-white p-6 rounded-lg border-l-4 border-red-500">

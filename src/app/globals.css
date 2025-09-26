@@ -53,80 +53,81 @@
   --popover: #ffffff;
   --popover-foreground: #1a2332;
   
-  /* Primary: Deep Forest Green - trust & growth */
-  --primary: #2d5a3d;
+  /* Brand: Strong Men's Therapy Palette */
+  /* Primary: Deep Viridian (trust, strength) */
+  --primary: #1f6f54;
   --primary-foreground: #ffffff;
-  
-  /* Secondary: Warm Sage - calm & healing */
-  --secondary: #87a96b;
-  --secondary-foreground: #ffffff;
-  
-  /* Accent: Soft Gold - premium touch */
-  --accent: #e6b17a;
-  --accent-foreground: #1a2332;
+
+  /* Secondary: Sage Teal (calm balance) */
+  --secondary: #6faf97;
+  --secondary-foreground: #0f1419;
+
+  /* Accent: Warm Brass (premium touch) */
+  --accent: #d6a756;
+  --accent-foreground: #0f1419;
   
   /* Muted: Warm neutrals vs cold grays */
-  --muted: #f8f7f5;
-  --muted-foreground: #6b7280;
+  --muted: #f6f7f5;
+  --muted-foreground: #61707c;
   
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
   
   --border: #e8e6e1;
   --input: #f8f7f5;
-  --ring: #87a96b;
+  --ring: var(--primary);
   
   /* Chart colors - therapeutic palette */
-  --chart-1: #2d5a3d;
-  --chart-2: #87a96b;
-  --chart-3: #e6b17a;
-  --chart-4: #a7c4b1;
-  --chart-5: #deb887;
+  --chart-1: #1f6f54;
+  --chart-2: #6faf97;
+  --chart-3: #d6a756;
+  --chart-4: #8fb9a7;
+  --chart-5: #cfb07a;
   
   /* Sidebar */
   --sidebar: #fefefe;
   --sidebar-foreground: #1a2332;
-  --sidebar-primary: #2d5a3d;
+  --sidebar-primary: #1f6f54;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f8f7f5;
+  --sidebar-accent: #f6f7f5;
   --sidebar-accent-foreground: #1a2332;
   --sidebar-border: #e8e6e1;
-  --sidebar-ring: #87a96b;
+  --sidebar-ring: var(--primary);
 }
 
 .dark {
   --background: #0f1419;
   --foreground: #e8e6e1;
-  --card: #1a2332;
+  --card: #14202a;
   --card-foreground: #e8e6e1;
-  --popover: #1a2332;
+  --popover: #14202a;
   --popover-foreground: #e8e6e1;
-  --primary: #87a96b;
+  --primary: #6faf97;
   --primary-foreground: #0f1419;
-  --secondary: #2d5a3d;
+  --secondary: #1f6f54;
   --secondary-foreground: #e8e6e1;
-  --muted: #1a2332;
+  --muted: #16202a;
   --muted-foreground: #9ca3af;
-  --accent: #e6b17a;
+  --accent: #d6a756;
   --accent-foreground: #0f1419;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #374151;
-  --input: #374151;
-  --ring: #87a96b;
-  --chart-1: #87a96b;
-  --chart-2: #e6b17a;
-  --chart-3: #a7c4b1;
-  --chart-4: #2d5a3d;
-  --chart-5: #deb887;
+  --border: #2a3742;
+  --input: #2a3742;
+  --ring: #6faf97;
+  --chart-1: #6faf97;
+  --chart-2: #d6a756;
+  --chart-3: #8fb9a7;
+  --chart-4: #1f6f54;
+  --chart-5: #cfb07a;
   --sidebar: #0f1419;
   --sidebar-foreground: #e8e6e1;
-  --sidebar-primary: #87a96b;
+  --sidebar-primary: #6faf97;
   --sidebar-primary-foreground: #0f1419;
-  --sidebar-accent: #1a2332;
+  --sidebar-accent: #14202a;
   --sidebar-accent-foreground: #e8e6e1;
-  --sidebar-border: #374151;
-  --sidebar-ring: #87a96b;
+  --sidebar-border: #2a3742;
+  --sidebar-ring: #6faf97;
 }
 
 @layer base {
@@ -137,6 +138,21 @@
     @apply bg-background text-foreground font-sans;
     font-size: 16px; /* Better than First Step's 10px base */
     line-height: 1.6;
+  }
+
+  /* Accessible skip link */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #ffffff;
+    color: #000000;
+    padding: 8px 12px;
+    z-index: 1000;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 0;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -204,4 +220,8 @@
   .therapy-shadow-xl {
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   }
+
+  
 }
+
+

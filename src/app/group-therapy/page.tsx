@@ -4,6 +4,9 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Users, Shield, Heart, Calendar, CheckCircle, Clock } from "lucide-react";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { customProfessionalServiceJsonLd } from "@/lib/jsonld";
+import { SITE_URL } from "@/lib/seo";
 
 export default function GroupTherapy() {
   const benefits = [
@@ -40,6 +43,7 @@ export default function GroupTherapy() {
 
   return (
     <Layout>
+      <JsonLd data={customProfessionalServiceJsonLd({ serviceType: "Group Therapy", url: `${SITE_URL}/group-therapy` })} />
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Hero Section */}
         <section className="py-16 lg:py-24">

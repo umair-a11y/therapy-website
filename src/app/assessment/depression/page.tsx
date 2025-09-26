@@ -3,8 +3,9 @@ import PHQ9Assessment from "@/components/assessments/PHQ9Assessment";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Depression Assessment | PHQ-9 Screening | MentalWell Therapy",
-  description: "Take our confidential PHQ-9 depression screening. Professional mental health assessment for men with immediate results and recommendations.",
+  title: "Depression Assessment | PHQ-9 Screening | Resolve Men's Therapy",
+  description:
+    "Take our confidential PHQ-9 depression screening. Professional mental health assessment for men with immediate results and recommendations.",
 };
 
 export default function DepressionAssessmentPage() {

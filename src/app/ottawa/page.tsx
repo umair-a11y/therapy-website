@@ -4,52 +4,33 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin, Building2, Clock, Calendar, Users, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import { HeroWithImage } from "@/components/sections/hero-with-image";
+import { THERAPY_IMAGES } from "@/lib/therapy-images";
+import Layout from "@/components/Layout";
 
 export default function OttawaPage() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <Link href="/" className="flex items-center">
-              <div className="text-2xl lg:text-3xl font-bold text-gray-900">
-                <span className="text-therapeutic-primary">Resolve</span>
-                <span className="text-gray-700 ml-2">Men's Therapy</span>
-              </div>
-            </Link>
-            <nav className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Home</Link>
-              <Link href="/about" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">About</Link>
-              <Link href="/services" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Services</Link>
-              <Link href="/contact" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Contact</Link>
-            </nav>
-          </div>
+    <Layout>
+      <div className="max-w-4xl mx-auto px-4 pt-6">
+        <div className="rounded-md bg-therapeutic-primary/5 border border-therapeutic-primary/20 p-3 text-sm text-slate-700">
+          Virtual-only care across Ontario, including Ottawa and the National Capital Region.
         </div>
-      </header>
+      </div>
+      {/* Hero Section with Ottawa Image */}
+      <HeroWithImage
+        title="Men's Therapy in Ottawa (Virtual)"
+        subtitle="National Capital Region"
+        description="Professional, confidential support for men in Ottawa. Manage stress, improve relationships, and address mental health with specialized care."
+        imageUrl={THERAPY_IMAGES.locations.ottawa}
+        imageAlt="Ottawa Parliament and men's mental health services"
+        primaryButtonText="Book Free Consultation"
+        primaryButtonHref="/book-consultation"
+        secondaryButtonText="Try Quick Check-In"
+        secondaryButtonHref="/assessment/stress"
+        height="medium"
+      />
 
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <div className="w-16 h-16 bg-therapeutic-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-            <MapPin className="h-8 w-8 text-therapeutic-primary" />
-          </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Online Therapy for Men in Ottawa</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Professional, confidential support for men in the National Capital Region. Manage stress, improve relationships, and address mental health with a therapist who specializes in men's issues.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-            <Link href="/book-consultation">
-              <Button size="lg" className="bg-therapeutic-primary hover:bg-therapeutic-primary/90">
-                Book a Free Consultation
-              </Button>
-            </Link>
-            <Link href="/assessment/stress">
-              <Button size="lg" variant="outline">
-                Try a Quick Check-In
-              </Button>
-            </Link>
-          </div>
-        </div>
 
         {/* Support for Professionals in Ottawa */}
         <Card className="mb-8">
@@ -61,7 +42,7 @@ export default function OttawaPage() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-700 leading-relaxed mb-6">
-              We provide support for men navigating the unique pressures of careers in government, tech, and other demanding sectors in Ottawa.
+              We provide virtual-only therapy across Ontario, offering professional support for men navigating the unique pressures of careers in government, tech, and other demanding sectors in Ottawa. Our online sessions provide convenient access to mental health care from your home or office.
             </p>
             <div className="space-y-6">
               <div>
@@ -271,7 +252,7 @@ export default function OttawaPage() {
             </div>
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">Q: How do you ensure privacy for government employees?</h4>
-              <p className="text-gray-700">A: We use PIPEDA-compliant, secure platforms and maintain strict confidentiality. Your sessions are private and cannot impact your security clearance.</p>
+              <p className="text-gray-700">A: We use PHIPA-compliant, secure platforms and maintain strict confidentiality. Your sessions are private and cannot impact your security clearance.</p>
             </div>
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">Q: Can you accommodate shift workers or unusual schedules?</h4>
@@ -333,19 +314,6 @@ export default function OttawaPage() {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 mt-12">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="text-2xl font-bold mb-4">
-            <span className="text-therapeutic-accent">Resolve</span>
-            <span className="text-gray-300 ml-2">Men's Therapy</span>
-          </div>
-          <div className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Resolve Men's Therapy. All rights reserved.
-          </div>
-        </div>
-      </footer>
-    </div>
+    </Layout>
   );
 }

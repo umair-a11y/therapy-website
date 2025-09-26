@@ -34,9 +34,9 @@ export function TherapyButton({
 
         // Color variants
         {
-          'bg-emerald-700 text-white shadow-lg hover:bg-emerald-800 hover:shadow-xl focus:ring-emerald-500': variant === 'primary',
+          'bg-therapeutic-primary text-white shadow-lg hover:bg-therapeutic-primary/90 hover:shadow-xl focus:ring-therapeutic-primary': variant === 'primary',
           'bg-slate-100 text-slate-900 hover:bg-slate-200 focus:ring-slate-500': variant === 'secondary',
-          'border-2 border-slate-300 bg-transparent text-slate-700 hover:border-slate-400 hover:bg-slate-50 focus:ring-slate-500': variant === 'outline',
+          'border-2 border-therapeutic-primary bg-transparent text-therapeutic-primary hover:bg-therapeutic-primary/10 focus:ring-therapeutic-primary': variant === 'outline',
           'bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus:ring-slate-500': variant === 'ghost',
         },
 

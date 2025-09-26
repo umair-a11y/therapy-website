@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, Clock, Shield, CheckCircle, Phone } from "lucide-react";
 import Link from "next/link";
+import { BOOKING_URL } from "@/lib/site-config";
 
 export default function BookConsultationPage() {
   const [formData, setFormData] = useState({
@@ -58,7 +60,7 @@ export default function BookConsultationPage() {
       setIsSubmitted(true);
 
       // Immediate redirect to JaneApp for booking (no delay)
-      window.open("https://resolve-mens-therapy.janeapp.com", "_blank");
+      window.open(BOOKING_URL, "_blank");
 
     } catch (error) {
       console.error('❌ Lead capture failed:', error);
@@ -66,7 +68,7 @@ export default function BookConsultationPage() {
       // Even if API fails, still show success to user and redirect
       // This ensures user experience isn't broken
       setIsSubmitted(true);
-      window.open("https://resolve-mens-therapy.janeapp.com", "_blank");
+      window.open(BOOKING_URL, "_blank");
 
       // Log for debugging but don't show error to user
       alert("Your request has been submitted. If you experience any issues, please call us directly.");
@@ -75,21 +77,7 @@ export default function BookConsultationPage() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-white">
-        {/* Header */}
-        <header className="bg-white shadow-sm border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-20">
-              <Link href="/" className="flex items-center">
-                <div className="text-2xl lg:text-3xl font-bold text-gray-900">
-                  <span className="text-therapeutic-primary">Resolve</span>
-                  <span className="text-gray-700 ml-2">Men's Therapy</span>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </header>
-
+      <Layout>
         <div className="max-w-2xl mx-auto px-4 py-12">
           <div className="text-center">
             <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-6" />
@@ -105,7 +93,7 @@ export default function BookConsultationPage() {
             <div className="space-y-4">
               <Button
                 className="bg-therapeutic-primary hover:bg-therapeutic-primary/90 mr-4"
-                onClick={() => window.open("https://resolve-mens-therapy.janeapp.com", "_blank")}
+                onClick={() => window.open(BOOKING_URL, "_blank")}
               >
                 Book Now (if not redirected)
               </Button>
@@ -117,35 +105,19 @@ export default function BookConsultationPage() {
             </div>
           </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <Link href="/" className="flex items-center">
-              <div className="text-2xl lg:text-3xl font-bold text-gray-900">
-                <span className="text-therapeutic-primary">Resolve</span>
-                <span className="text-gray-700 ml-2">Men's Therapy</span>
-              </div>
-            </Link>
-            <nav className="hidden lg:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Home</Link>
-              <Link href="/about" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">About</Link>
-              <Link href="/services" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Services</Link>
-              <Link href="/contact" className="text-gray-700 hover:text-therapeutic-primary font-medium transition-colors">Contact</Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+    <Layout>
 
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Book Your Free Consultation</h1>
+          <p className="text-lg text-therapeutic-primary font-medium mb-4">
+            Virtual-only therapy across Ontario
+          </p>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Take the first step towards better mental health. No commitment required.
           </p>
@@ -401,19 +373,6 @@ export default function BookConsultationPage() {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 mt-12">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="text-2xl font-bold mb-4">
-            <span className="text-therapeutic-accent">Resolve</span>
-            <span className="text-gray-300 ml-2">Men's Therapy</span>
-          </div>
-          <div className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Resolve Men's Therapy. All rights reserved.
-          </div>
-        </div>
-      </footer>
-    </div>
+    </Layout>
   );
 }
