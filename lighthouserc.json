@@ -3,9 +3,9 @@
     "collect": {
       "staticDistDir": "",
       "url": [
-        "${LHCI_BASE_URL:-https://resolvemenstherapy.com}/",
-        "${LHCI_BASE_URL:-https://resolvemenstherapy.com}/services",
-        "${LHCI_BASE_URL:-https://resolvemenstherapy.com}/about"
+        "${LHCI_BASE_URL:-https://resolvemenstherapy.ca}/",
+        "${LHCI_BASE_URL:-https://resolvemenstherapy.ca}/services",
+        "${LHCI_BASE_URL:-https://resolvemenstherapy.ca}/about"
       ]
     },
     "assert": {
