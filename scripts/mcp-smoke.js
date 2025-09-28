@@ -4,7 +4,7 @@ import { spawn } from 'child_process';
 
 const [, , serverName, toolToCall, ...restArgs] = process.argv;
 if (!serverName) {
-  console.error('Usage: node scripts/mcp-smoke.js <content-audit|lighthouse-seo|zen|context7> [toolName] [jsonArgs]');
+  console.error('Usage: node scripts/mcp-smoke.js <content-audit|lighthouse-seo|zen|context7|vercel> [toolName] [jsonArgs]');
   process.exit(1);
 }
 
@@ -31,6 +31,7 @@ if (context7ApiKey) {
 }
 const isWindows = process.platform === 'win32';
 map['context7'] = isWindows ? ['cmd', '/c', 'npx', ...context7Args] : ['npx', ...context7Args];
+map['vercel'] = ['node', './scripts/run-vercel-mcp.js'];
 
 if (!map[serverName]) {
   console.error(`Unknown server: ${serverName}`);

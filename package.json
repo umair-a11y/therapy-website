@@ -27,7 +27,8 @@
     "mcp:zen": "node ./mcp-servers/zen-server.js",
     "mcp:test:zen": "node ./scripts/mcp-smoke.js zen generate_affirmation",
     "mcp:context7": "node ./scripts/run-context7.js",
-    "mcp:test:context7": "node ./scripts/mcp-smoke.js context7"
+    "mcp:test:context7": "node ./scripts/mcp-smoke.js context7",
+    "mcp:vercel": "node ./scripts/run-vercel-mcp.js"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",

@@ -32,7 +32,7 @@ Tools:
 - reframe_thought (cognitive reframing helper)
 
 ### context7 (external)
-Wraps Upstash’s `@upstash/context7-mcp` package to fetch up-to-date framework/library documentation for prompts.
+Wraps Upstash's `@upstash/context7-mcp` package to fetch up-to-date framework/library documentation for prompts.
 
 Tools:
 - resolve-library-id (map package name to Context7 ID)
@@ -40,12 +40,23 @@ Tools:
 
 Requires Node 18+. Set `CONTEXT7_API_KEY` for higher rate limits (see `.env.example`).
 
+### vercel (external)
+Wraps the community `vercel-mcp` package to inspect deployments, domains, and project configuration via the Vercel API.
+
+Sample tools:
+- getVercelDeployments (list recent deployments)
+- getVercelDeploymentFileContents (fetch built asset content)
+- filterVercelProjectEnvs (pull project env vars)
+
+Requires a personal API token (`VERCEL_MCP_API_KEY` or `VERCEL_API_KEY`) and optional team/project IDs (see `.env.example`).
+
 ## npm Scripts
-- `npm run mcp:content` – start the content audit server (stdio)
-- `npm run mcp:seo` – start the Lighthouse SEO server
-- `npm run mcp:zen` – start the mindfulness copy server
-- `npm run mcp:context7` – run the Context7 docs server via npx
-- `npm run mcp:test:<name>` – smoke test each server (`context7` lists tools only by default)
+- `npm run mcp:content` - start the content audit server (stdio)
+- `npm run mcp:seo` - start the Lighthouse SEO server
+- `npm run mcp:zen` - start the mindfulness copy server
+- `npm run mcp:context7` - run the Context7 docs server via npx
+- `npm run mcp:vercel` - start the Vercel API MCP server (requires Vercel API token)
+- `npm run mcp:test:<name>` - smoke test each server (`context7` lists tools only by default)
 
 ## Usage (Generic MCP Client)
 If using an MCP-capable AI client (e.g., Cursor, Windsurf, Claude Code), point it at the executable via a command config like:
@@ -70,6 +81,15 @@ If using an MCP-capable AI client (e.g., Cursor, Windsurf, Claude Code), point i
       "args": ["-y", "@upstash/context7-mcp"],
       "env": {
         "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
+      }
+    },
+    "vercel": {
+      "command": "node",
+      "args": ["./scripts/run-vercel-mcp.js"],
+      "env": {
+        "VERCEL_MCP_API_KEY": "${VERCEL_MCP_API_KEY}",
+        "VERCEL_MCP_TEAM_ID": "${VERCEL_MCP_TEAM_ID}",
+        "VERCEL_MCP_PROJECT_ID": "${VERCEL_MCP_PROJECT_ID}"
       }
     }
   }
