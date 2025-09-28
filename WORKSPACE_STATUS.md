@@ -78,3 +78,9 @@ px vercel deploy --prod --yes (deployment URL: https://therapy-website-ofsx1g48f
 - Watcher: No new alerts beyond prior verification backlog; noted alias update to latest deployment.
 - Pending Tests: Lint/build already validated during deploy; Playwright/CRPO/manual QA remain outstanding post-content changes.
 - Next Steps: Spot-check production content, then resume verification loop once the team confirms pages now reflect the intended copy.
+## Update - 2025-09-28 20:43 UTC
+- Author: Codex (GPT-5) | Branch: master | Sandbox: danger-full-access | Approvals: never | Network: enabled
+- Actions: Sanitized scripts/run-vercel-mcp.js so Vercel credentials are passed via env instead of command-line args (prevents secret leakage over ps and supports VERCEL_MCP_* fallbacks);
+- Watcher: No new alerts; deployment status unchanged.
+- Pending Tests: None run; no functional impact beyond MCP helper.
+- Next Steps: Continue verification backlog when ready (Playwright, CRPO, manual QA).

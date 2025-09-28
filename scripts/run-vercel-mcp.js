@@ -9,16 +9,17 @@ if (!apiKey) {
   process.exit(1);
 }
 
-const args = ["vercel-mcp", `VERCEL_API_KEY=${apiKey}`];
+const args = ["vercel-mcp"];
 
 const teamId = process.env.VERCEL_MCP_TEAM_ID?.trim() || process.env.VERCEL_TEAM_ID?.trim();
-if (teamId) {
-  args.push(`VERCEL_TEAM_ID=${teamId}`);
-}
-
 const projectId = process.env.VERCEL_MCP_PROJECT_ID?.trim();
+
+const childEnv = { ...process.env, VERCEL_API_KEY: apiKey };
+if (teamId) {
+  childEnv.VERCEL_TEAM_ID = teamId;
+}
 if (projectId) {
-  args.push(`VERCEL_PROJECT_ID=${projectId}`);
+  childEnv.VERCEL_PROJECT_ID = projectId;
 }
 
 const isWindows = process.platform === "win32";
@@ -27,7 +28,7 @@ const commandArgs = isWindows ? ["/c", "npx", ...args] : args;
 
 const child = spawn(command, commandArgs, {
   stdio: "inherit",
-  env: process.env,
+  env: childEnv,
 });
 
 child.on("exit", code => {
