@@ -18,6 +18,26 @@ export interface StockImage {
 // Unsplash: https://unsplash.com/developers
 // Pexels: https://www.pexels.com/api/
 
+type UnsplashPhoto = {
+  id: string;
+  urls: { regular: string; small: string };
+  user: { name: string; links: { html: string } };
+  description?: string | null;
+  alt_description?: string | null;
+  width: number;
+  height: number;
+};
+
+type PexelsPhoto = {
+  id: number;
+  src: { large: string; medium: string };
+  photographer: string;
+  photographer_url: string;
+  alt?: string | null;
+  width: number;
+  height: number;
+};
+
 const UNSPLASH_ACCESS_KEY = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY || ''
 const PEXELS_API_KEY = process.env.NEXT_PUBLIC_PEXELS_API_KEY || ''
 
@@ -88,7 +108,7 @@ export async function fetchUnsplashImages(
 
     const data = await response.json()
 
-    return data.results.map((photo: any) => ({
+    return data.results.map((photo: UnsplashPhoto) => ({
       id: photo.id,
       url: photo.urls.regular,
       thumbnailUrl: photo.urls.small,
@@ -133,7 +153,7 @@ export async function fetchPexelsImages(
 
     const data = await response.json()
 
-    return data.photos.map((photo: any) => ({
+    return data.photos.map((photo: PexelsPhoto) => ({
       id: photo.id.toString(),
       url: photo.src.large,
       thumbnailUrl: photo.src.medium,
@@ -207,3 +227,5 @@ export const PLACEHOLDER_IMAGES: StockImage[] = [
     height: 600
   }
 ]
+
+

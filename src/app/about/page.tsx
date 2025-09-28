@@ -38,33 +38,6 @@ export default function About() {
     }
   ];
 
-  const approaches = [
-    {
-      name: "Cognitive Behavioral Therapy (CBT)",
-      description: "Identify and change negative thought patterns and behaviors"
-    },
-    {
-      name: "Dialectical Behavior Therapy (DBT)",
-      description: "Develop emotional regulation and interpersonal effectiveness skills"
-    },
-    {
-      name: "Eye Movement Desensitization and Reprocessing (EMDR)",
-      description: "Process and heal from traumatic experiences"
-    },
-    {
-      name: "Acceptance and Commitment Therapy (ACT)",
-      description: "Build psychological flexibility and value-driven action"
-    },
-    {
-      name: "Mindfulness-Based Therapy",
-      description: "Cultivate present-moment awareness and reduce stress"
-    },
-    {
-      name: "Solution-Focused Therapy",
-      description: "Focus on solutions and goals rather than problems"
-    }
-  ];
-
   return (
     <Layout>
       {/* Hero Section with Image */}
@@ -467,3 +440,4 @@ export default function About() {
     </Layout>
   );
 }
+

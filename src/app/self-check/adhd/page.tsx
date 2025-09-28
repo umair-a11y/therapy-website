@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Brain, AlertCircle, CheckCircle } from "lucide-react";
 import Link from "next/link";
-import type { Metadata } from "next";
 
 const adhdQuestions = [
   "How often do you have trouble wrapping up the final details of a project, once the challenging parts have been done?",
@@ -232,3 +231,4 @@ export default function ADHDAssessmentPage() {
 }
 
 // Metadata is defined at the segment/layout level for client pages.
+

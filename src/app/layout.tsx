@@ -8,6 +8,8 @@ import {
   professionalServiceJsonLd,
   websiteJsonLd,
 } from "@/lib/jsonld";
+import { Providers } from "./providers";
+import { WebVitals } from "@/components/WebVitals";
 
 // Prefer static rendering where possible for better CWV
 
@@ -60,7 +62,10 @@ export default function RootLayout({
         <JsonLd data={websiteJsonLd()} />
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={professionalServiceJsonLd()} />
-        {children}
+        <Providers>
+          <WebVitals />
+          {children}
+        </Providers>
       </body>
     </html>
   );

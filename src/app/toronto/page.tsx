@@ -2,9 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Building, Clock, Calendar, Users, CheckCircle } from "lucide-react";
+import { Building, Clock, Calendar, Users, CheckCircle } from "lucide-react";
 import Link from "next/link";
-import { useEffect } from "react";
 import { HeroWithImage } from "@/components/sections/hero-with-image";
 import { THERAPY_IMAGES } from "@/lib/therapy-images";
 import Layout from "@/components/Layout";
@@ -310,3 +309,4 @@ export default function TorontoPage() {
     </Layout>
   );
 }
+

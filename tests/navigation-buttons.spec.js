@@ -1,14 +1,14 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 const mainPages = [
   { path: '/', name: 'Homepage', hasBookButton: true, hasCTA: true },
   { path: '/about', name: 'About Page', hasBookButton: true, hasCTA: false },
-  { path: '/services', name: 'Services Page', hasBookButton: true, hasCTA: false },
-  { path: '/individual-therapy', name: 'Individual Therapy', hasBookButton: true, hasCTA: true },
-  { path: '/couples-therapy', name: 'Couples Therapy', hasBookButton: true, hasCTA: true },
-  { path: '/group-therapy', name: 'Group Therapy', hasBookButton: true, hasCTA: true },
+  { path: '/services', name: 'Services Page', hasBookButton: true, hasCTA: true },
+  { path: '/anxiety-support', name: 'Anxiety Support', hasBookButton: true, hasCTA: true },
+  { path: '/depression-support', name: 'Depression Support', hasBookButton: true, hasCTA: true },
+  { path: '/adhd-support', name: 'ADHD Support', hasBookButton: true, hasCTA: true },
   { path: '/contact', name: 'Contact Page', hasBookButton: false, hasCTA: false },
-  { path: '/team', name: 'Team Page', hasBookButton: true, hasCTA: false }
+  { path: '/pricing', name: 'Pricing Page', hasBookButton: true, hasCTA: false }
 ];
 
 test.describe('Navigation and Button Tests', () => {
@@ -19,14 +19,16 @@ test.describe('Navigation and Button Tests', () => {
 
   mainPages.forEach(({ path, name, hasBookButton, hasCTA }) => {
     test(`Navigation and buttons on ${name}`, async ({ page }) => {
-      await page.goto(`https://therapy-website.vercel.app${path}`);
+      await page.goto(path);
       await page.waitForLoadState('networkidle');
 
       // Test main navigation links
       const navigationLinks = [
         { text: 'About', href: '/about' },
         { text: 'Services', href: '/services' },
-        { text: 'Team', href: '/team' },
+        { text: 'Pricing', href: '/pricing' },
+        { text: 'Resources', href: '/articles' },
+        { text: 'FAQ', href: '/faq' },
         { text: 'Contact', href: '/contact' }
       ];
 
@@ -150,7 +152,7 @@ test.describe('Navigation and Button Tests', () => {
 
   test('Cross-page navigation flow', async ({ page }) => {
     // Test navigation flow between pages
-    await page.goto('https://therapy-website.vercel.app');
+    await page.goto('/');
 
     // Homepage -> About
     const aboutLink = page.locator('a[href="/about"]').first();
@@ -170,12 +172,12 @@ test.describe('Navigation and Button Tests', () => {
       await expect(page.locator('h1, h2').first()).toBeVisible();
     }
 
-    // Services -> Individual Therapy
-    const individualTherapyLink = page.locator('a[href="/individual-therapy"]').first();
-    if (await individualTherapyLink.count() > 0) {
-      await individualTherapyLink.click();
+    // Services -> Anxiety Support
+    const anxietySupportLink = page.locator('a[href="/anxiety-support"]').first();
+    if (await anxietySupportLink.count() > 0) {
+      await anxietySupportLink.click();
       await page.waitForLoadState('networkidle');
-      await expect(page).toHaveURL(/\/individual-therapy/);
+      await expect(page).toHaveURL(/\/anxiety-support/);
       await expect(page.locator('h1, h2').first()).toBeVisible();
     }
 
@@ -184,7 +186,7 @@ test.describe('Navigation and Button Tests', () => {
     if (await logoLink.count() > 0) {
       await logoLink.click();
       await page.waitForLoadState('networkidle');
-      await expect(page).toHaveURL('https://therapy-website.vercel.app/');
+      await expect(page).toHaveURL(/\/$/); // Root URL
     }
   });
 });

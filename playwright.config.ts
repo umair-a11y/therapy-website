@@ -116,5 +116,5 @@ export default defineConfig({
   outputDir: 'test-results/',
 
   /* Global test setup and teardown */
-  globalSetup: require.resolve('./tests/global-setup.ts'),
+  globalSetup: './tests/global-setup.ts',
 });

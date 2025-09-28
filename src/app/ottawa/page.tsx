@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Building2, Clock, Calendar, Users, CheckCircle } from "lucide-react";
+import { Building2, Calendar, Users } from "lucide-react";
 import Link from "next/link";
 import { HeroWithImage } from "@/components/sections/hero-with-image";
 import { THERAPY_IMAGES } from "@/lib/therapy-images";
@@ -317,3 +317,4 @@ export default function OttawaPage() {
     </Layout>
   );
 }
+

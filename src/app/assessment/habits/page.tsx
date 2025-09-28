@@ -5,7 +5,7 @@ import ConsentOptIn from "@/components/ConsentOptIn";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Target, AlertCircle, CheckCircle } from "lucide-react";
+import { Target, AlertCircle } from "lucide-react";
 import Link from "next/link";
 
 const habitQuestions = [
@@ -61,8 +61,6 @@ const reverseScoreItems = [0, 2, 4, 5, 6, 8, 9, 10, 12, 14, 15, 17, 18, 19, 21, 
 export default function HabitsAssessmentPage() {
   const [answers, setAnswers] = useState<number[]>(new Array(habitQuestions.length).fill(-1));
   const [isComplete, setIsComplete] = useState(false);
-  const [email, setEmail] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleAnswer = (questionIndex: number, value: number) => {
     const newAnswers = [...answers];
@@ -114,45 +112,7 @@ export default function HabitsAssessmentPage() {
     }
   };
 
-  const handleSubmit = async () => {
-    if (!email) return;
 
-    // Here you would typically send to your backend
-    console.log('Habits Assessment submitted:', {
-      email,
-      score: calculateScore(),
-      answers,
-      timestamp: new Date().toISOString()
-    });
-
-    setIsSubmitted(true);
-  };
-
-  if (isSubmitted) {
-    return (
-      <Layout>
-        <div className="max-w-2xl mx-auto px-4 py-12">
-          <div className="text-center">
-            <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-6" />
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">Assessment Submitted</h1>
-            <p className="text-gray-600 mb-8">
-              Thank you for completing the self-control and habits assessment. Your results have been recorded and we'll be in touch soon to discuss habit formation strategies.
-            </p>
-            <div className="space-y-4">
-              <Link href="/contact">
-                <Button className="bg-therapeutic-primary hover:bg-therapeutic-primary/90">
-                  Book a Consultation
-                </Button>
-              </Link>
-              <Link href="/" className="block">
-                <Button variant="outline">Return to Home</Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </Layout>
-    );
-  }
 
   const score = isComplete ? calculateScore() : 0;
   const interpretation = isComplete ? getScoreInterpretation(score) : null;
@@ -250,3 +210,5 @@ export default function HabitsAssessmentPage() {
     </Layout>
   );
 }
+
+

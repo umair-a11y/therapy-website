@@ -38,7 +38,8 @@ export default function ConsentOptIn({ toolkitName, onSubmit }: ConsentOptInProp
         }
       }
       setSubmitted(true);
-    } catch (e) {
+    } catch (error) {
+      console.error('[consent-opt-in] submission failed:', error);
       setError("We couldn't process your request right now. Please try again later.");
     }
   };
@@ -103,3 +104,4 @@ export default function ConsentOptIn({ toolkitName, onSubmit }: ConsentOptInProp
     </div>
   );
 }
+

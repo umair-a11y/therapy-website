@@ -7,7 +7,6 @@ const routes = [
   { path: '/services', name: 'services' },
   { path: '/pricing', name: 'pricing' },
   { path: '/book-consultation', name: 'book-consultation' },
-  { path: '/group-therapy', name: 'group-therapy' },
   { path: '/anxiety-support', name: 'anxiety-support' },
   { path: '/depression-support', name: 'depression-support' },
   { path: '/adhd-support', name: 'adhd-support' },

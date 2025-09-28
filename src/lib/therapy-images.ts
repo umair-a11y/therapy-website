@@ -5,7 +5,7 @@ export const THERAPY_IMAGES = {
   // Hero images
   hero: {
     main: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0", // Professional therapy session (valid)
-    about: "https://images.unsplash.com/photo-1607827448387-a67db1383b59", // Supportive conversation
+    about: "https://images.pexels.com/photos/14583017/pexels-photo-14583017.jpeg", // Supportive conversation
     services: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e", // Professional male
     contact: "https://images.unsplash.com/photo-1423666639041-f56000c27a9a", // Office setting
   },

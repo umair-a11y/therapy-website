@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, Heart, CheckCircle, Clock, Calendar, AlertTriangle } from "lucide-react";
+import { Heart, CheckCircle, Clock, Calendar, AlertTriangle } from "lucide-react";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { customProfessionalServiceJsonLd } from "@/lib/jsonld";
@@ -376,3 +376,4 @@ export default function AnxietySupportPage() {
     </Layout>
   );
 }
+

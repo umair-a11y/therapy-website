@@ -4,7 +4,7 @@ import Layout from "@/components/Layout";
 import { BOOKING_URL } from "@/lib/site-config";
 import { CONTACT_EMAIL } from "@/lib/site-config";
 import { Button } from "@/components/ui/button";
-import { Calendar, Mail, Phone, MapPin, Clock, AlertCircle, CheckCircle, Shield } from "lucide-react";
+import { Calendar, Mail, MapPin, Clock, AlertCircle, CheckCircle } from "lucide-react";
 
 export default function ContactPage() {
   const handleBooking = () => {
@@ -180,3 +180,4 @@ export default function ContactPage() {
     </Layout>
   );
 }
+

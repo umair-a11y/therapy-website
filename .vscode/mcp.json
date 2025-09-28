@@ -1,0 +1,34 @@
+{
+  "mcpServers": {
+    "zen": {
+      "command": "docker",
+      "args": ["exec", "-i", "zen-mcp", "python", "server.py"],
+      "transport": "stdio"
+    },
+    "context7": {
+      "command": "docker",
+      "args": ["exec", "-i", "context7-mcp", "node", "dist/index.js"],
+      "transport": "stdio"
+    },
+    "semgrep": {
+      "command": "docker",
+      "args": ["exec", "-i", "semgrep-mcp", "semgrep-mcp", "-t", "stdio"],
+      "transport": "stdio"
+    },
+    "exa": {
+      "command": "docker",
+      "args": ["exec", "-i", "exa-mcp", "node", "build/index.js"],
+      "transport": "stdio"
+    },
+    "playwright": {
+      "command": "docker",
+      "args": ["exec", "-i", "playwright-mcp", "node", "cli.js", "--headless", "--browser", "chromium", "--no-sandbox"],
+      "transport": "stdio"
+    },
+    "filesystem": {
+      "command": "docker",
+      "args": ["exec", "-i", "filesystem-mcp", "mcp-server-filesystem", "/workspace/allowed"],
+      "transport": "stdio"
+    }
+  }
+}

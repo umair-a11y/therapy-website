@@ -5,11 +5,21 @@ import {
   validateConsultationInput,
   generateSecureLeadId,
   sanitizeErrorMessage,
-  getSecurityHeaders
+  getSecurityHeaders,
+  type SanitizedConsultationInput,
 } from "@/lib/security";
 
 // CRPO Compliance Check: This API endpoint collects lead data for follow-up.
 // No outcome promises or guarantees are made - this is data collection only.
+
+type LeadData = SanitizedConsultationInput & {
+  leadId: string;
+  timestamp: string;
+  source: 'website_consultation_form';
+  status: 'new_lead';
+  clientIP: string | null;
+  userAgent: string | null;
+};
 
 interface ConsultationRequest {
   fullName: string;
@@ -31,7 +41,7 @@ export async function POST(request: NextRequest) {
                      request.headers.get('x-real-ip') ||
                      'unknown';
 
-    const rateLimitResult = checkRateLimit(clientIP);
+    const rateLimitResult = await checkRateLimit(clientIP);
     if (!rateLimitResult.allowed) {
       console.warn(`Rate limit exceeded for IP: ${clientIP}`);
       return NextResponse.json(
@@ -50,7 +60,8 @@ export async function POST(request: NextRequest) {
     let data: ConsultationRequest;
     try {
       data = await request.json();
-    } catch (parseError) {
+    } catch (error) {
+      console.warn('Consultation request parse error:', sanitizeErrorMessage(error));
       return NextResponse.json(
         { error: 'Invalid request format' },
         { status: 400, headers: securityHeaders }
@@ -59,7 +70,7 @@ export async function POST(request: NextRequest) {
 
     // Step 3: Comprehensive input validation and sanitization
     const validation = validateConsultationInput(data);
-    if (!validation.isValid) {
+    if (!validation.isValid || !validation.sanitized) {
       console.warn('Invalid consultation input:', validation.errors);
       return NextResponse.json(
         { error: 'Invalid input data', details: validation.errors },
@@ -69,30 +80,37 @@ export async function POST(request: NextRequest) {
 
     // Step 4: Create secure lead data object
     const leadId = generateSecureLeadId();
-    const leadData = {
-      ...(validation.sanitized as Record<string, any>),
+    const sanitizedData = validation.sanitized;
+    const leadData: LeadData = {
+      ...sanitizedData,
       leadId,
       timestamp: new Date().toISOString(),
       source: 'website_consultation_form',
       status: 'new_lead',
       clientIP: clientIP === 'unknown' ? null : clientIP,
-      userAgent: request.headers.get('user-agent')?.substring(0, 200) || null // Limit length
+      userAgent: request.headers.get('user-agent')?.substring(0, 200) ?? null, // Limit length
     };
 
     // Step 5: Log lead capture (secure logging)
-    console.log('🏥 NEW CONSULTATION LEAD CAPTURED:', {
+    const maskedEmail = leadData.email.length > 20
+      ? `${leadData.email.slice(0, 20)}...`
+      : leadData.email;
+    console.log('?? NEW CONSULTATION LEAD CAPTURED:', {
       leadId: leadData.leadId,
       timestamp: leadData.timestamp,
-      email: (leadData as any).email?.substring(0, 20) + '...', // Partially masked for logs
+      email: maskedEmail,
       source: leadData.source
     });
 
-    // Step 6: Send secure email notification
+    // Step 6: Send secure email notification with retry logic
     try {
       await sendSecureLeadNotification(leadData);
     } catch (emailError) {
+      // Log the error but don't fail the request - lead capture is more important
       console.error('Email notification failed (non-critical):', sanitizeErrorMessage(emailError));
-      // Don't fail the request if email fails - this is non-critical
+
+      // TODO (CLAUDE: Consider implementing a queue system for failed email notifications)
+      // Could store failed notifications for later retry or manual processing
     }
 
     // Step 7: Return success response with security headers
@@ -123,14 +141,14 @@ export async function POST(request: NextRequest) {
 }
 
 // Secure email notification function
-async function sendSecureLeadNotification(leadData: any) {
+async function sendSecureLeadNotification(leadData: LeadData): Promise<void> {
   // TODO: Implement with actual email service (SendGrid, AWS SES, etc.)
   // For now, this creates a secure notification template
 
   const toRecipient = process.env.EMAIL_TO || 'info@resolvemenstherapy.com';
   const notification = {
     to: toRecipient, // Practice email
-    subject:  `New Consultation Request - Lead ${leadData.leadId}`, 
+    subject:  `New Consultation Request - Lead ${leadData.leadId}`,
     body: `
 CONFIDENTIAL - New consultation request received:
 
@@ -168,16 +186,13 @@ Delete after lead is processed into secure CRM system.
   });
 
   // Attempt to send via Resend if configured
-  try {
-    const result = await sendEmail({
-      to: notification.to,
-      subject: notification.subject,
-      text: notification.body,
-    });
-    if (!(result as any).ok && !(result as any).skipped) {
-      throw new Error('Email provider reported failure');
-    }
-  } catch (e) {
-    console.error('[consultation] email send failed:', e);
+  const result = await sendEmail({
+    to: notification.to,
+    subject: notification.subject,
+    text: notification.body,
+  });
+
+  if (!result.ok && !result.skipped) {
+    throw new Error('Email provider reported failure');
   }
 }

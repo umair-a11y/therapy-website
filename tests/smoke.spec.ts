@@ -132,7 +132,6 @@ test.describe('Smoke Tests', () => {
       '/depression-support',
       '/adhd-support',
       '/anger-management',
-      '/relationship-therapy'
     ];
 
     for (const servicePage of servicePages) {

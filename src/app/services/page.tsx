@@ -100,22 +100,6 @@ export default function ServicesPage() {
             </Link>
 
             {/* Relationships & Connection */}
-            <Link href="/relationship-therapy">
-              <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all cursor-pointer h-full">
-                <div className="w-16 h-16 bg-pink-50 rounded-lg flex items-center justify-center mx-auto mb-6">
-                  <Users className="h-8 w-8 text-pink-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Relationships & Connection</h3>
-                <p className="text-gray-600 text-center mb-4">
-                  Repair distance and communicate better.
-                </p>
-                <span className="text-therapeutic-primary font-medium flex items-center justify-center">
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </span>
-              </div>
-            </Link>
-
             {/* Depression & Low Mood */}
             <Link href="/depression-support">
               <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all cursor-pointer h-full">
@@ -130,6 +114,96 @@ export default function ServicesPage() {
                   Learn More
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </span>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Specialized Support Tracks */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-4">Specialized Support Tracks</h2>
+          <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Focused programs built for specific seasons of life. Each path blends practical skills with supportive accountability so you are never working alone.</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Link href="/mens-issues">
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all h-full">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Men's Issues Therapy</h3>
+                <p className="text-gray-600 mb-4">Identity, purpose, and relationships through a men's mental health lens.</p>
+                <span className="text-therapeutic-primary font-medium flex items-center">Explore Track<ArrowRight className="ml-2 h-4 w-4" /></span>
+              </div>
+            </Link>
+            <Link href="/for-partners">
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all h-full">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Support for Partners</h3>
+                <p className="text-gray-600 mb-4">Guidance for loved ones supporting someone through change or recovery.</p>
+                <span className="text-therapeutic-primary font-medium flex items-center">Explore Track<ArrowRight className="ml-2 h-4 w-4" /></span>
+              </div>
+            </Link>
+            <Link href="/performance-anxiety">
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all h-full">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Performance Anxiety</h3>
+                <p className="text-gray-600 mb-4">Build calm confidence for presentations, athletics, and high-stakes moments.</p>
+                <span className="text-therapeutic-primary font-medium flex items-center">Explore Track<ArrowRight className="ml-2 h-4 w-4" /></span>
+              </div>
+            </Link>
+            <Link href="/work-life-balance">
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all h-full">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Work-Life Balance Reset</h3>
+                <p className="text-gray-600 mb-4">Rebuild sustainable rhythms that protect your health, family, and career.</p>
+                <span className="text-therapeutic-primary font-medium flex items-center">Explore Track<ArrowRight className="ml-2 h-4 w-4" /></span>
+              </div>
+            </Link>
+            <Link href="/parenting-support">
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all h-full">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Parenting Support for Dads</h3>
+                <p className="text-gray-600 mb-4">Tools for nurturing connection with your kids while leading with patience.</p>
+                <span className="text-therapeutic-primary font-medium flex items-center">Explore Track<ArrowRight className="ml-2 h-4 w-4" /></span>
+              </div>
+            </Link>
+            <Link href="/grief-support">
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all h-full">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Grief & Loss Support</h3>
+                <p className="text-gray-600 mb-4">Compassionate space to process loss and find steadier ground.</p>
+                <span className="text-therapeutic-primary font-medium flex items-center">Explore Track<ArrowRight className="ml-2 h-4 w-4" /></span>
+              </div>
+            </Link>
+            <Link href="/first-responder-support">
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all h-full">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">First Responder Support</h3>
+                <p className="text-gray-600 mb-4">Trauma-informed support for police, fire, EMS, and frontline professionals.</p>
+                <span className="text-therapeutic-primary font-medium flex items-center">Explore Track<ArrowRight className="ml-2 h-4 w-4" /></span>
+              </div>
+            </Link>
+            <Link href="/emdr-therapy">
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all h-full">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">EMDR Therapy</h3>
+                <p className="text-gray-600 mb-4">Evidence-based trauma processing to reduce stuck memories and body responses.</p>
+                <span className="text-therapeutic-primary font-medium flex items-center">Explore Track<ArrowRight className="ml-2 h-4 w-4" /></span>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Care Wherever You Are */}
+      <section className="py-16 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Care Wherever You Are</h2>
+          <p className="text-gray-600 mb-8">We provide secure virtual therapy across Ontario, with focused regional hubs so you can get connected quickly.</p>
+          <div className="grid md:grid-cols-2 gap-6">
+            <Link href="/toronto">
+              <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:shadow-lg transition-all h-full">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Toronto (GTA)</h3>
+                <p className="text-gray-600">Virtual-first with limited in-person intensives. Evening availability for busy professionals.</p>
+                <span className="text-therapeutic-primary font-medium flex items-center justify-center mt-4">View Toronto Support<ArrowRight className="ml-2 h-4 w-4" /></span>
+              </div>
+            </Link>
+            <Link href="/ottawa">
+              <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 hover:shadow-lg transition-all h-full">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Ottawa + Eastern Ontario</h3>
+                <p className="text-gray-600">Dedicated team for military, public service, and bilingual households.</p>
+                <span className="text-therapeutic-primary font-medium flex items-center justify-center mt-4">View Ottawa Support<ArrowRight className="ml-2 h-4 w-4" /></span>
               </div>
             </Link>
           </div>

@@ -4,10 +4,9 @@ import Layout from "@/components/Layout";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { TherapyButton } from "@/components/ui/therapy-button";
 import {
-  CheckCircle, AlertCircle, Brain, Heart, Target, Clock,
+  AlertCircle, Brain, Heart, Target, Clock,
   Coffee, Moon, Compass, ArrowRight, AlertTriangle
 } from "lucide-react";
 import { BOOKING_URL } from "@/lib/site-config";
@@ -148,3 +147,5 @@ export const metadata: Metadata = {
   description:
     "Quick, confidential self-check tools for mood, anxiety, stress, focus, sleep, anger, and more. Results are shown on your device only.",
 };
+
+

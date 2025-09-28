@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Brain, Target, CheckCircle, Clock, Calendar, AlertTriangle } from "lucide-react";
+import { Target, CheckCircle, Clock, Calendar, AlertTriangle } from "lucide-react";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { customProfessionalServiceJsonLd } from "@/lib/jsonld";
@@ -117,7 +117,7 @@ export default function ADHDSupportPage() {
               </div>
               <div>
                 <h4 className="font-semibold text-gray-900 mb-2">Practical Systems & Tools</h4>
-                <p className="text-gray-700">We focus on building simple, sustainable systems that work with your ADHD brain, not against it.</p>
+                <p className="text-gray-700">We focus on building simple, sustainable systems that work with your ADHD not against it.</p>
               </div>
             </div>
             <div className="flex items-start space-x-4">
@@ -312,3 +312,4 @@ export default function ADHDSupportPage() {
     </Layout>
   );
 }
+

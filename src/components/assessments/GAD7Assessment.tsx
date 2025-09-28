@@ -42,7 +42,7 @@ export default function GAD7Assessment() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<GAD7FormData>();
+  const { register, handleSubmit, watch} = useForm<GAD7FormData>();
 
   const watchedValues = watch();
   const progress = (Object.keys(watchedValues).length / questions.length) * 100;
@@ -239,3 +239,4 @@ export default function GAD7Assessment() {
     </div>
   );
 }
+

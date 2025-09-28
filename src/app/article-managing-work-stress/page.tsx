@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Clock, Calendar, User, ArrowLeft } from "lucide-react";
+import { Clock, User, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Layout from "@/components/Layout";
 import JsonLd from "@/components/JsonLd";
@@ -259,3 +259,4 @@ export default function ManagingWorkStressArticle() {
     </Layout>
   );
 }
+

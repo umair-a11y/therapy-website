@@ -5,7 +5,7 @@ import ConsentOptIn from "@/components/ConsentOptIn";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Zap, AlertCircle, CheckCircle } from "lucide-react";
+import { Zap, AlertCircle } from "lucide-react";
 import Link from "next/link";
 
 const stressQuestions = [
@@ -35,8 +35,6 @@ const reverseScoreQuestions = [3, 4, 6, 7];
 export default function StressAssessmentPage() {
   const [answers, setAnswers] = useState<number[]>(new Array(stressQuestions.length).fill(-1));
   const [isComplete, setIsComplete] = useState(false);
-  const [email, setEmail] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleAnswer = (questionIndex: number, value: number) => {
     const newAnswers = [...answers];
@@ -85,45 +83,7 @@ export default function StressAssessmentPage() {
     }
   };
 
-  const handleSubmit = async () => {
-    if (!email) return;
 
-    // Here you would typically send to your backend
-    console.log('Stress Assessment submitted:', {
-      email,
-      score: calculateScore(),
-      answers,
-      timestamp: new Date().toISOString()
-    });
-
-    setIsSubmitted(true);
-  };
-
-  if (isSubmitted) {
-    return (
-      <Layout>
-        <div className="max-w-2xl mx-auto px-4 py-12">
-          <div className="text-center">
-            <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-6" />
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">Assessment Submitted</h1>
-            <p className="text-gray-600 mb-8">
-              Thank you for completing the stress assessment. Your results have been recorded and we'll be in touch soon to discuss stress management strategies.
-            </p>
-            <div className="space-y-4">
-              <Link href="/contact">
-                <Button className="bg-therapeutic-primary hover:bg-therapeutic-primary/90">
-                  Book a Consultation
-                </Button>
-              </Link>
-              <Link href="/" className="block">
-                <Button variant="outline">Return to Home</Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </Layout>
-    );
-  }
 
   const score = isComplete ? calculateScore() : 0;
   const interpretation = isComplete ? getScoreInterpretation(score) : null;
@@ -220,3 +180,4 @@ export default function StressAssessmentPage() {
     </Layout>
   );
 }
+

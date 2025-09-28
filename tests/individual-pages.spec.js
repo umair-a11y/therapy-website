@@ -1,19 +1,16 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 const allPages = [
   { path: '/', name: 'Homepage', expectedHeading: /Men's Mental Health Support|Premium Men's Therapy/ },
   { path: '/about', name: 'About Page', expectedHeading: /About|Our Story|Our Mission/ },
   { path: '/services', name: 'Services Page', expectedHeading: /Services|Our Services/ },
   { path: '/individual-therapy', name: 'Individual Therapy', expectedHeading: /Individual Therapy/ },
-  { path: '/couples-therapy', name: 'Couples Therapy', expectedHeading: /Couples Therapy/ },
-  { path: '/group-therapy', name: 'Group Therapy', expectedHeading: /Group Therapy/ },
   { path: '/adhd-support', name: 'ADHD Support', expectedHeading: /ADHD/ },
   { path: '/anxiety-support', name: 'Anxiety Support', expectedHeading: /Anxiety/ },
   { path: '/depression-support', name: 'Depression Support', expectedHeading: /Depression/ },
   { path: '/anger-management', name: 'Anger Management', expectedHeading: /Anger/ },
   { path: '/trauma-therapy', name: 'Trauma Therapy', expectedHeading: /Trauma|PTSD/ },
   { path: '/emdr-therapy', name: 'EMDR Therapy', expectedHeading: /EMDR/ },
-  { path: '/relationship-therapy', name: 'Relationship Therapy', expectedHeading: /Relationship/ },
   { path: '/grief-support', name: 'Grief Support', expectedHeading: /Grief/ },
   { path: '/addiction-therapy', name: 'Addiction Therapy', expectedHeading: /Addiction/ },
   { path: '/stress-burnout', name: 'Stress Burnout', expectedHeading: /Stress|Burnout/ },
@@ -103,8 +100,6 @@ test.describe('Individual Page Tests', () => {
   test('All service pages have consistent structure', async ({ page }) => {
     const servicePages = [
       '/individual-therapy',
-      '/couples-therapy',
-      '/group-therapy',
       '/adhd-support',
       '/anxiety-support',
       '/depression-support'

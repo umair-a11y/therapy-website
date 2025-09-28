@@ -46,7 +46,7 @@ export default function PHQ9Assessment() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<PHQ9FormData>();
+  const { register, handleSubmit, watch} = useForm<PHQ9FormData>();
 
   const watchedValues = watch();
   const progress = (Object.keys(watchedValues).length / questions.length) * 100;
@@ -250,3 +250,4 @@ export default function PHQ9Assessment() {
     </div>
   );
 }
+

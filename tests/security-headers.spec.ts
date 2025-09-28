@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Response } from '@playwright/test';
 
 /**
  * Security Headers Test Suite
@@ -22,7 +22,7 @@ test.describe('Security Headers Tests', () => {
   // Run tests for each critical route
   criticalRoutes.forEach(({ path, name }) => {
     test.describe(`${name} Page Security Headers`, () => {
-      let response: any;
+      let response: Response | null;
 
       test.beforeEach(async ({ page }) => {
         // Navigate to the route and capture the response

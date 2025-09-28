@@ -1,8 +1,8 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test.describe('Therapy Website Homepage', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://therapy-website.vercel.app');
+    await page.goto('/');
   });
 
   test('should have correct title and meta information', async ({ page }) => {
@@ -15,19 +15,19 @@ test.describe('Therapy Website Homepage', () => {
 
   test('should display hero section with call-to-action buttons', async ({ page }) => {
     // Check hero heading
-    await expect(page.locator('h1')).toContainText('Men\'s Mental Health Support');
+    await expect(page.locator('h1')).toContainText('Support for Men\'s Mental Health');
 
     // Check CTA buttons are visible and clickable
     await expect(page.locator('text=Book Free Consultation')).toBeVisible();
-    await expect(page.locator('text=Request Information')).toBeVisible();
+    await expect(page.locator('text=Learn Our Approach')).toBeVisible();
   });
 
-  test('should display service badges with key benefits', async ({ page }) => {
-    // Check for service badges
-    await expect(page.locator('text=Services Available')).toBeVisible();
-    await expect(page.locator('text=Online & In-Person')).toBeVisible();
-    await expect(page.locator('text=Insurance Coverage')).toBeVisible();
-    await expect(page.locator('text=Expert Team')).toBeVisible();
+  test('should display trust indicators with key benefits', async ({ page }) => {
+    // Check for trust indicators
+    await expect(page.locator('text=Safe Space')).toBeVisible();
+    await expect(page.locator('text=Qualified Therapists')).toBeVisible();
+    await expect(page.locator('text=Evidence-Based')).toBeVisible();
+    await expect(page.locator('text=Insurance')).toBeVisible();
   });
 
   test('should show emotional states section', async ({ page }) => {
@@ -37,56 +37,57 @@ test.describe('Therapy Website Homepage', () => {
     await expect(page.locator('text=Anxious')).toBeVisible();
     await expect(page.locator('text=Depressed')).toBeVisible();
     await expect(page.locator('text=Lost')).toBeVisible();
+    await expect(page.locator('text=Overwhelmed')).toBeVisible();
   });
 
-  test('should display therapy services', async ({ page }) => {
-    await expect(page.locator('text=Therapy Services')).toBeVisible();
-    await expect(page.locator('text=Individual Therapy')).toBeVisible();
-    await expect(page.locator('text=Couples Therapy')).toBeVisible();
-    await expect(page.locator('text=Group Therapy')).toBeVisible();
+  test('should display who we help section', async ({ page }) => {
+    await expect(page.locator('text=Who We Help')).toBeVisible();
+    await expect(page.locator('text=Working Professionals')).toBeVisible();
+    await expect(page.locator('text=Relationship Issues')).toBeVisible();
+    await expect(page.locator('text=Mental Health')).toBeVisible();
   });
 
-  test('should show specialization areas', async ({ page }) => {
-    await expect(page.locator('text=Areas of Support We Specialize In')).toBeVisible();
+  test('should show approach section', async ({ page }) => {
+    await expect(page.locator('text=Our Approach')).toBeVisible();
 
-    // Check for key specialization areas
-    await expect(page.locator('text=ADHD')).toBeVisible();
-    await expect(page.locator('text=Anxiety')).toBeVisible();
-    await expect(page.locator('text=Depression')).toBeVisible();
-    await expect(page.locator('text=Trauma & PTSD')).toBeVisible();
+    // Check for approach elements
+    await expect(page.locator('text=Understanding Approach')).toBeVisible();
+    await expect(page.locator('text=Evidence-Based Methods')).toBeVisible();
+    await expect(page.locator('text=Practical Strategies')).toBeVisible();
+    await expect(page.locator('text=Flexible Options')).toBeVisible();
   });
 
-  test('should display team carousel', async ({ page }) => {
-    await expect(page.locator('text=Find a therapist that\'s right for you')).toBeVisible();
+  test('should display contact section', async ({ page }) => {
+    await expect(page.locator('text=Get Started Today')).toBeVisible();
 
-    // Check for team members
-    await expect(page.locator('text=Dr. Michael Chen')).toBeVisible();
-    await expect(page.locator('text=Registered Psychotherapist')).toBeVisible();
+    // Check for contact options
+    await expect(page.locator('text=Call Us')).toBeVisible();
+    await expect(page.locator('text=Email Us')).toBeVisible();
+    await expect(page.locator('text=Visit Us')).toBeVisible();
   });
 
   test('should have working navigation links', async ({ page }) => {
-    // Test main navigation
-    const aboutLink = page.locator('text=Learn More About Our Approach');
-    await expect(aboutLink).toBeVisible();
+    // Test CTA section links
+    const ctaText = page.locator('text=Welcome — taking the first step requires courage');
+    await expect(ctaText).toBeVisible();
 
-    // Test service links
+    // Test footer service links
     const individualTherapyLink = page.locator('a[href="/individual-therapy"]').first();
     await expect(individualTherapyLink).toBeVisible();
   });
 
-  test('should show crisis support information', async ({ page }) => {
+  test('should show contact information in footer', async ({ page }) => {
     // Scroll to footer
     await page.locator('footer').scrollIntoViewIfNeeded();
 
-    await expect(page.locator('text=Crisis Support Available 24/7')).toBeVisible();
-    await expect(page.locator('text=Emergency:')).toBeVisible();
-    await expect(page.locator('text=911')).toBeVisible();
+    await expect(page.locator('text=(647) 370-7622')).toBeVisible();
+    await expect(page.locator('text=info@resolvemenstherapy.ca')).toBeVisible();
+    await expect(page.locator('text=Toronto, Ontario')).toBeVisible();
   });
 
   test('should have CRPO compliance indicators', async ({ page }) => {
-    // Check for CRPO registration mentions
-    await expect(page.locator('text=CRPO Registered')).toBeVisible();
-    await expect(page.locator('text=Registered Psychotherapist')).toBeVisible();
+    // Check for CRPO registration mentions in trust indicators
+    await expect(page.locator('text=CRPO registered professionals')).toBeVisible();
   });
 
   test('should be responsive on mobile', async ({ page }) => {
@@ -114,7 +115,7 @@ test.describe('Therapy Website Homepage', () => {
 
   test('should load quickly', async ({ page }) => {
     const startTime = Date.now();
-    await page.goto('https://therapy-website.vercel.app');
+    await page.goto('/');
     await page.waitForLoadState('networkidle');
     const loadTime = Date.now() - startTime;
 

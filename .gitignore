@@ -46,3 +46,15 @@ next-env.d.ts
 # Playwright & test artifacts
 playwright-report/
 test-results/
+
+# Claude workspace and MCP configs
+.claude/
+.playwright-mcp/
+*.mcp.json
+
+# Local workspace files
+workspace-notes.md
+
+# Backup files
+*.backup.tsx
+page1.tsx

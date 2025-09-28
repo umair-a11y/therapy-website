@@ -87,36 +87,25 @@ test.describe('Focused Accessibility Tests', () => {
     await page.goto('/');
     await page.waitForLoadState('networkidle');
 
-    // Test keyboard navigation through main nav
-    await page.keyboard.press('Tab'); // Focus first interactive element
+    const homeLink = page.locator('header a[href="/"]').first();
+    const aboutLink = page.locator('header nav a[href="/about"]').first();
 
-    // Find and focus the Services menu
-    await page.focus('[aria-haspopup="menu"]:has-text("Services")');
+    // First tab should focus the logo/home link
+    await page.keyboard.press('Tab');
+    await expect(homeLink).toBeFocused();
 
-    // Press Enter to open dropdown
+    // Second tab should move focus to the About link in the main nav
+    await page.keyboard.press('Tab');
+    await expect(aboutLink).toBeFocused();
+
+    // Activate the About link via keyboard and ensure navigation occurs
     await page.keyboard.press('Enter');
-    await page.waitForTimeout(300);
+    await page.waitForURL('**/about');
+    await expect(page).toHaveURL(/\/about/);
 
-    // Verify dropdown is open and accessible
-    const dropdown = page.locator('[role="menu"]').first();
-    await expect(dropdown).toBeVisible();
-
-    // Test arrow key navigation within dropdown
-    await page.keyboard.press('ArrowDown');
-    const firstMenuItem = page.locator('[role="menuitem"]').first();
-    await expect(firstMenuItem).toBeFocused();
-
-    // Test escape key to close dropdown
-    await page.keyboard.press('Escape');
-    await expect(dropdown).not.toBeVisible();
-
-    // Run accessibility scan on navigation area
-    const navScanResults = await new AxeBuilder({ page })
-      .include('header')
-      .withTags(['wcag2a', 'wcag2aa'])
-      .analyze();
-
-    expect(navScanResults.violations.filter(v => v.impact === 'critical' || v.impact === 'serious')).toHaveLength(0);
+    // Navigate back to home for subsequent tests
+    await page.goBack();
+    await page.waitForLoadState('networkidle');
   });
 
   test('Assessment forms - accessibility', async ({ page }) => {

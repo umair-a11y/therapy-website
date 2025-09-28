@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Zap, AlertCircle, CheckCircle } from "lucide-react";
 import Link from "next/link";
-import type { Metadata } from "next";
 
 const stressQuestions = [
   "In the last month, how often have you been upset because of something that happened unexpectedly?",
@@ -244,3 +243,4 @@ export default function StressAssessmentPage() {
 }
 
 // Metadata is defined at the segment/layout level for client pages.
+

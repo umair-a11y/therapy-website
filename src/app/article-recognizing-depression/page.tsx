@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Clock, Calendar, User, ArrowLeft, AlertTriangle } from "lucide-react";
+import { Clock, User, ArrowLeft, AlertTriangle } from "lucide-react";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/seo";
@@ -323,3 +323,4 @@ export default function RecognizingDepressionArticle() {
     </div>
   );
 }
+

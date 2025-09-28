@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Target, AlertCircle, CheckCircle } from "lucide-react";
 import Link from "next/link";
-import type { Metadata } from "next";
 
 const habitQuestions = [
   "I have trouble breaking bad habits.",
@@ -274,3 +273,4 @@ export default function HabitsAssessmentPage() {
 }
 
 // Metadata is defined at the segment/layout level for client pages.
+

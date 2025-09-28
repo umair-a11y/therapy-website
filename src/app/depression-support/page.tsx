@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Cloud, Sun, CheckCircle, Clock, Calendar, AlertTriangle } from "lucide-react";
+import { Cloud, CheckCircle, Clock, Calendar, AlertTriangle } from "lucide-react";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { customProfessionalServiceJsonLd } from "@/lib/jsonld";
@@ -389,3 +389,4 @@ export default function DepressionSupportPage() {
     </Layout>
   );
 }
+

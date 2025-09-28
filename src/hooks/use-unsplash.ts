@@ -23,12 +23,23 @@ interface UseUnsplashReturn {
 }
 
 export function useUnsplash(options: UseUnsplashOptions = {}): UseUnsplashReturn {
+  const {
+    query: initialQuery = "",
+    orientation,
+    perPage = 10,
+    autoLoad = true,
+  } = options;
+
   const [photos, setPhotos] = useState<UnsplashPhoto[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [currentQuery, setCurrentQuery] = useState(options.query || "");
+  const [currentQuery, setCurrentQuery] = useState(initialQuery);
+
+  useEffect(() => {
+    setCurrentQuery(initialQuery);
+  }, [initialQuery]);
 
   const searchPhotos = useCallback(async (query: string) => {
     setLoading(true);
@@ -41,11 +52,11 @@ export function useUnsplash(options: UseUnsplashOptions = {}): UseUnsplashReturn
         action: "search",
         query,
         page: "1",
-        perPage: (options.perPage || 10).toString(),
+        perPage: perPage.toString(),
       });
 
-      if (options.orientation) {
-        params.append("orientation", options.orientation);
+      if (orientation) {
+        params.append("orientation", orientation);
       }
 
       const response = await fetch(`/api/unsplash?${params}`);
@@ -63,10 +74,12 @@ export function useUnsplash(options: UseUnsplashOptions = {}): UseUnsplashReturn
     } finally {
       setLoading(false);
     }
-  }, [options.orientation, options.perPage]);
+  }, [orientation, perPage]);
 
   const loadMorePhotos = useCallback(async () => {
-    if (!currentQuery || loading || currentPage >= totalPages) return;
+    if (!currentQuery || loading || currentPage >= totalPages) {
+      return;
+    }
 
     setLoading(true);
     setError(null);
@@ -77,11 +90,11 @@ export function useUnsplash(options: UseUnsplashOptions = {}): UseUnsplashReturn
         action: "search",
         query: currentQuery,
         page: nextPage.toString(),
-        perPage: (options.perPage || 10).toString(),
+        perPage: perPage.toString(),
       });
 
-      if (options.orientation) {
-        params.append("orientation", options.orientation);
+      if (orientation) {
+        params.append("orientation", orientation);
       }
 
       const response = await fetch(`/api/unsplash?${params}`);
@@ -91,14 +104,14 @@ export function useUnsplash(options: UseUnsplashOptions = {}): UseUnsplashReturn
         throw new Error(data.error || "Failed to fetch photos");
       }
 
-      setPhotos(prev => [...prev, ...(data.results || [])]);
+      setPhotos((previous) => [...previous, ...(data.results || [])]);
       setCurrentPage(nextPage);
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setLoading(false);
     }
-  }, [currentQuery, currentPage, totalPages, loading, options.orientation, options.perPage]);
+  }, [currentQuery, currentPage, totalPages, loading, orientation, perPage]);
 
   const getRandomPhoto = useCallback(async () => {
     setLoading(true);
@@ -114,8 +127,8 @@ export function useUnsplash(options: UseUnsplashOptions = {}): UseUnsplashReturn
         params.append("query", currentQuery);
       }
 
-      if (options.orientation) {
-        params.append("orientation", options.orientation);
+      if (orientation) {
+        params.append("orientation", orientation);
       }
 
       const response = await fetch(`/api/unsplash?${params}`);
@@ -126,21 +139,20 @@ export function useUnsplash(options: UseUnsplashOptions = {}): UseUnsplashReturn
       }
 
       const randomPhoto = Array.isArray(data) ? data[0] : data;
-      setPhotos([randomPhoto]);
+      setPhotos(randomPhoto ? [randomPhoto] : []);
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
       setPhotos([]);
     } finally {
       setLoading(false);
     }
-  }, [currentQuery, options.orientation]);
+  }, [currentQuery, orientation]);
 
-  // Auto-load photos on mount if query is provided and autoLoad is true
   useEffect(() => {
-    if (options.query && options.autoLoad !== false) {
-      searchPhotos(options.query);
+    if (initialQuery && autoLoad) {
+      searchPhotos(initialQuery);
     }
-  }, []); // Only run on mount
+  }, [initialQuery, autoLoad, searchPhotos]);
 
   const hasMore = currentPage < totalPages;
 

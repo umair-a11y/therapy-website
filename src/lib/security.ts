@@ -2,9 +2,25 @@
 // CRPO Compliance: Implements security measures to protect client data
 
 import validator from 'validator';
+import { Redis } from '@upstash/redis';
 
-// Rate limiting store (in production, use Redis or database)
+// Persistent storage configuration
+// Uses Upstash Redis in production, in-memory Map for development
+const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
+const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+// Initialize Redis client if credentials are available
+const redis = REDIS_URL && REDIS_TOKEN
+  ? new Redis({ url: REDIS_URL, token: REDIS_TOKEN })
+  : null;
+
+// In-memory fallback for development or when Redis is unavailable
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+
+// Log storage mode on initialization
+if (typeof process !== 'undefined') {
+  console.log('[Security] Rate limiting storage:', redis ? 'Upstash Redis (persistent)' : 'In-memory (development)');
+}
 
 // Security configuration
 const SECURITY_CONFIG = {
@@ -20,156 +36,252 @@ const SECURITY_CONFIG = {
   }
 };
 
+type ConsultationInput = {
+  fullName?: unknown;
+  email?: unknown;
+  phone?: unknown;
+  ageRange?: unknown;
+  concerns?: unknown;
+  preferredTime?: unknown;
+  consent?: unknown;
+  privacyPolicy?: unknown;
+};
+
+export interface SanitizedConsultationInput {
+  fullName: string;
+  email: string;
+  phone: string;
+  ageRange: string;
+  concerns: string;
+  preferredTime: string;
+  consent: boolean;
+  privacyPolicy: boolean;
+}
+
 /**
- * Rate limiting middleware
+ * Rate limiting middleware with persistent storage
  * Prevents abuse of consultation endpoint
+ * Uses Upstash Redis in production, in-memory fallback for development
  */
-export function checkRateLimit(ip: string): { allowed: boolean; resetTime?: number } {
+export async function checkRateLimit(ip: string): Promise<{ allowed: boolean; resetTime?: number }> {
   const now = Date.now();
   const key = `rate_limit:${ip}`;
-  const record = rateLimitStore.get(key);
+  const windowMs = SECURITY_CONFIG.RATE_LIMIT.WINDOW_MS;
+  const maxRequests = SECURITY_CONFIG.RATE_LIMIT.MAX_REQUESTS;
 
-  // Clean up expired entries
-  if (record && now > record.resetTime) {
-    rateLimitStore.delete(key);
-  }
+  try {
+    if (redis) {
+      // Production: Use Upstash Redis for persistent rate limiting
+      const record = await redis.get<{ count: number; resetTime: number }>(key);
 
-  const currentRecord = rateLimitStore.get(key);
+      // Clean up expired entries
+      if (record && now > record.resetTime) {
+        await redis.del(key);
+        // Start fresh
+        await redis.setex(key, Math.floor(windowMs / 1000), {
+          count: 1,
+          resetTime: now + windowMs
+        });
+        return { allowed: true };
+      }
 
-  if (!currentRecord) {
-    // First request from this IP
-    rateLimitStore.set(key, {
-      count: 1,
-      resetTime: now + SECURITY_CONFIG.RATE_LIMIT.WINDOW_MS
-    });
+      if (!record) {
+        // First request from this IP
+        await redis.setex(key, Math.floor(windowMs / 1000), {
+          count: 1,
+          resetTime: now + windowMs
+        });
+        return { allowed: true };
+      }
+
+      if (record.count >= maxRequests) {
+        return {
+          allowed: false,
+          resetTime: record.resetTime
+        };
+      }
+
+      // Increment counter
+      record.count++;
+      await redis.setex(key, Math.floor((record.resetTime - now) / 1000), record);
+      return { allowed: true };
+
+    } else {
+      // Development fallback: Use in-memory store
+      const record = rateLimitStore.get(key);
+
+      // Clean up expired entries
+      if (record && now > record.resetTime) {
+        rateLimitStore.delete(key);
+      }
+
+      const currentRecord = rateLimitStore.get(key);
+
+      if (!currentRecord) {
+        // First request from this IP
+        rateLimitStore.set(key, {
+          count: 1,
+          resetTime: now + windowMs
+        });
+        return { allowed: true };
+      }
+
+      if (currentRecord.count >= maxRequests) {
+        return {
+          allowed: false,
+          resetTime: currentRecord.resetTime
+        };
+      }
+
+      // Increment counter
+      currentRecord.count++;
+      rateLimitStore.set(key, currentRecord);
+      return { allowed: true };
+    }
+  } catch (error) {
+    // If Redis fails, fall back to in-memory (fail-open for availability)
+    console.error('[Security] Redis rate limit check failed, using in-memory fallback:', error);
+
+    // Use in-memory fallback on Redis failure
+    const record = rateLimitStore.get(key);
+    if (!record) {
+      rateLimitStore.set(key, {
+        count: 1,
+        resetTime: now + windowMs
+      });
+      return { allowed: true };
+    }
+
+    if (record.count >= maxRequests) {
+      return { allowed: false, resetTime: record.resetTime };
+    }
+
+    record.count++;
     return { allowed: true };
   }
-
-  if (currentRecord.count >= SECURITY_CONFIG.RATE_LIMIT.MAX_REQUESTS) {
-    return {
-      allowed: false,
-      resetTime: currentRecord.resetTime
-    };
-  }
-
-  // Increment counter
-  currentRecord.count++;
-  rateLimitStore.set(key, currentRecord);
-
-  return { allowed: true };
 }
 
 /**
  * Input validation and sanitization
  * Protects against XSS and injection attacks
  */
-export function validateConsultationInput(data: any): {
+export function validateConsultationInput(data: unknown): {
   isValid: boolean;
   errors: string[];
-  sanitized?: unknown;
+  sanitized?: SanitizedConsultationInput;
 } {
   const errors: string[] = [];
+  const input: ConsultationInput =
+    typeof data === 'object' && data !== null ? (data as ConsultationInput) : {};
 
-  // Validate required fields
-  if (!data.fullName || typeof data.fullName !== 'string') {
+  const fullNameValue =
+    typeof input.fullName === 'string' ? input.fullName.trim() : undefined;
+  if (!fullNameValue) {
     errors.push('Full name is required');
   }
 
-  if (!data.email || typeof data.email !== 'string') {
+  const emailValue =
+    typeof input.email === 'string' ? input.email.trim() : undefined;
+  if (!emailValue) {
     errors.push('Email is required');
   }
 
-  if (typeof data.consent !== 'boolean' || !data.consent) {
+  const consentValue = input.consent;
+  if (typeof consentValue !== 'boolean' || !consentValue) {
     errors.push('Consent is required');
   }
 
-  if (typeof data.privacyPolicy !== 'boolean' || !data.privacyPolicy) {
+  const privacyPolicyValue = input.privacyPolicy;
+  if (typeof privacyPolicyValue !== 'boolean' || !privacyPolicyValue) {
     errors.push('Privacy policy acceptance is required');
   }
 
-  // If basic validation fails, return early
   if (errors.length > 0) {
     return { isValid: false, errors };
   }
 
-  // Advanced validation and sanitization
-  const sanitized = {
-    fullName: '',
-    email: '',
-    phone: '',
-    ageRange: '',
-    concerns: '',
-    preferredTime: '',
-    consent: data.consent,
-    privacyPolicy: data.privacyPolicy
-  };
-
-  // Sanitize and validate name
-  sanitized.fullName = validator.escape(data.fullName.trim());
-  if (sanitized.fullName.length === 0 || sanitized.fullName.length > SECURITY_CONFIG.INPUT_LIMITS.NAME_MAX_LENGTH) {
+  let sanitizedFullName = fullNameValue!;
+  if (sanitizedFullName.length === 0 || sanitizedFullName.length > SECURITY_CONFIG.INPUT_LIMITS.NAME_MAX_LENGTH) {
     errors.push('Full name must be between 1 and 100 characters');
   }
-  if (!validator.isAlpha(sanitized.fullName.replace(/\s+/g, ''), 'en-US', { ignore: '-\'\u00C0-\u017F' })) {
+  if (!validator.isAlpha(sanitizedFullName.replace(/\s+/g, ''), 'en-US', { ignore: '-\'\u00C0-\u017F' })) {
     errors.push('Full name contains invalid characters');
   }
+  sanitizedFullName = validator.escape(sanitizedFullName);
 
-  // Validate and normalize email
-  if (!validator.isEmail(data.email)) {
+  let sanitizedEmail = '';
+  if (!validator.isEmail(emailValue!)) {
     errors.push('Invalid email address');
   } else {
-    sanitized.email = validator.normalizeEmail(data.email, {
-      gmail_lowercase: true,
-      gmail_remove_dots: false,
-      outlookdotcom_lowercase: true,
-      yahoo_lowercase: true,
-      icloud_lowercase: true
-    }) || data.email.toLowerCase().trim();
+    sanitizedEmail =
+      validator.normalizeEmail(emailValue!, {
+        gmail_lowercase: true,
+        gmail_remove_dots: false,
+        outlookdotcom_lowercase: true,
+        yahoo_lowercase: true,
+        icloud_lowercase: true
+      }) || emailValue!.toLowerCase();
 
-    if (sanitized.email.length > SECURITY_CONFIG.INPUT_LIMITS.EMAIL_MAX_LENGTH) {
+    if (sanitizedEmail.length > SECURITY_CONFIG.INPUT_LIMITS.EMAIL_MAX_LENGTH) {
       errors.push('Email address is too long');
     }
   }
 
-  // Validate phone (optional)
-  if (data.phone && typeof data.phone === 'string') {
-    const phoneClean = data.phone.replace(/\D/g, ''); // Remove non-digits
+  let sanitizedPhone = '';
+  if (typeof input.phone === 'string') {
+    const phoneClean = input.phone.replace(/\D/g, '');
     if (phoneClean.length > 0) {
       if (phoneClean.length < 10 || phoneClean.length > 15) {
         errors.push('Phone number must be between 10 and 15 digits');
       } else {
-        sanitized.phone = phoneClean;
+        sanitizedPhone = phoneClean;
       }
     }
   }
 
-  // Validate age range
-  if (data.ageRange && typeof data.ageRange === 'string') {
+  let sanitizedAgeRange = '';
+  if (typeof input.ageRange === 'string') {
     const validAgeRanges = ['18-24', '25-34', '35-44', '45-54', '55-64', '65+'];
-    if (validAgeRanges.includes(data.ageRange)) {
-      sanitized.ageRange = data.ageRange;
+    if (validAgeRanges.includes(input.ageRange)) {
+      sanitizedAgeRange = input.ageRange;
     }
   }
 
-  // Sanitize concerns (optional)
-  if (data.concerns && typeof data.concerns === 'string') {
-    sanitized.concerns = validator.escape(data.concerns.trim());
-    if (sanitized.concerns.length > SECURITY_CONFIG.INPUT_LIMITS.CONCERNS_MAX_LENGTH) {
+  let sanitizedConcerns = '';
+  if (typeof input.concerns === 'string') {
+    sanitizedConcerns = validator.escape(input.concerns.trim());
+    if (sanitizedConcerns.length > SECURITY_CONFIG.INPUT_LIMITS.CONCERNS_MAX_LENGTH) {
       errors.push('Concerns text is too long (max 2000 characters)');
     }
   }
 
-  // Validate preferred time
-  if (data.preferredTime && typeof data.preferredTime === 'string') {
+  let sanitizedPreferredTime = '';
+  if (typeof input.preferredTime === 'string') {
     const validTimes = ['morning', 'afternoon', 'evening', 'flexible'];
-    if (validTimes.includes(data.preferredTime)) {
-      sanitized.preferredTime = data.preferredTime;
+    if (validTimes.includes(input.preferredTime)) {
+      sanitizedPreferredTime = input.preferredTime;
     }
   }
 
+  if (errors.length > 0) {
+    return { isValid: false, errors };
+  }
+
+  const sanitized: SanitizedConsultationInput = {
+    fullName: sanitizedFullName,
+    email: sanitizedEmail,
+    phone: sanitizedPhone,
+    ageRange: sanitizedAgeRange,
+    concerns: sanitizedConcerns,
+    preferredTime: sanitizedPreferredTime,
+    consent: consentValue as boolean,
+    privacyPolicy: privacyPolicyValue as boolean,
+  };
+
   return {
-    isValid: errors.length === 0,
+    isValid: true,
     errors,
-    sanitized: errors.length === 0 ? sanitized : undefined
+    sanitized,
   };
 }
 
@@ -187,18 +299,19 @@ export function generateSecureLeadId(): string {
  * Prevents information leakage
  */
 export function sanitizeErrorMessage(error: unknown): string {
-  // Generic error message to prevent information disclosure
   if (process.env.NODE_ENV === 'production') {
     return 'An error occurred processing your request. Please try again.';
   }
 
-  // In development, show more details
   if (typeof error === 'string') {
     return error;
   }
 
-  if ((error as any)?.message) {
-    return (error as any).message;
+  if (typeof error === 'object' && error !== null && 'message' in error) {
+    const message = (error as { message?: unknown }).message;
+    if (typeof message === 'string') {
+      return message;
+    }
   }
 
   return 'Unknown error occurred';
