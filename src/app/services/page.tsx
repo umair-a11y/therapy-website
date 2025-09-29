@@ -2,7 +2,7 @@
 
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
-import { Calendar, CheckCircle, Users, Award, AlertCircle, Clock, ArrowRight } from "lucide-react";
+import { Calendar, CheckCircle, Award, AlertCircle, Clock, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { BOOKING_URL } from "@/lib/site-config";
 

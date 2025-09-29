@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 const config: Config = {
   darkMode: "class",
@@ -120,9 +122,9 @@ const config: Config = {
     },
   },
   plugins: [
-    require("tailwindcss-animate"),
+    tailwindcssAnimate,
     // Performance optimization plugin
-    function({ addUtilities, theme }: { addUtilities: Function; theme: Function }) {
+    plugin(({ addUtilities, theme }) => {
       addUtilities({
         // Hardware-accelerated animations for better performance
         '.will-change-auto': {
@@ -152,7 +154,7 @@ const config: Config = {
           'padding-bottom': theme('spacing.16'),
         },
       })
-    },
+    }),
   ],
 
   // Future-proof configuration for Tailwind CSS v4
